@@ -1,0 +1,1983 @@
+﻿================ Training Started ================
+Data Split - Train: 48000, Val: 12000, Test: 10000
+==> AdamW 감지: Optimizer에서 Weight Decay(0.001)를 처리합니다.
+
+--- Epoch 01 / 25 ---
+================ Training Started ================
+Data Split - Train: 48000, Val: 12000, Test: 10000
+==> AdamW 감지: Optimizer에서 Weight Decay(0.001)를 처리합니다.
+
+--- Epoch 01 / 25 ---
+  [Iter 050/187] Current Batch Loss: 0.6832
+  [Iter 100/187] Current Batch Loss: 0.5638
+  [Iter 150/187] Current Batch Loss: 0.4988
+  [Iter 187/187] Current Batch Loss: 0.4319
+Epoch 01/25 | Loss: 0.7053 | TrainAcc: 0.8960 | ValAcc: 0.8835 | LR: 0.000500 | Time: 1751.74s
+
+--- Epoch 02 / 25 ---
+  [Iter 050/187] Current Batch Loss: 0.4435
+  [Iter 100/187] Current Batch Loss: 0.3878
+  [Iter 150/187] Current Batch Loss: 0.4190
+  [Iter 187/187] Current Batch Loss: 0.4807
+Epoch 02/25 | Loss: 0.4301 | TrainAcc: 0.8770 | ValAcc: 0.8609 | LR: 0.000500 | Time: 1868.02s
+
+--- Epoch 03 / 25 ---
+  [Iter 050/187] Current Batch Loss: 0.4684
+  [Iter 100/187] Current Batch Loss: 0.4739
+  [Iter 150/187] Current Batch Loss: 0.4630
+  [Iter 187/187] Current Batch Loss: 0.4574
+Epoch 03/25 | Loss: 0.4783 | TrainAcc: 0.8800 | ValAcc: 0.8585 | LR: 0.000500 | Time: 1867.17s
+
+--- Epoch 04 / 25 ---
+  [Iter 050/187] Current Batch Loss: 0.4819
+  [Iter 100/187] Current Batch Loss: 0.4736
+  [Iter 150/187] Current Batch Loss: 0.5347
+  [Iter 187/187] Current Batch Loss: 0.5946
+Epoch 04/25 | Loss: 0.5485 | TrainAcc: 0.8140 | ValAcc: 0.8027 | LR: 0.000500 | Time: 1870.13s
+  [Scheduler] Learning rate reduced to 0.00025
+
+--- Epoch 05 / 25 ---
+  [Iter 050/187] Current Batch Loss: 0.5023
+  [Iter 100/187] Current Batch Loss: 0.5258
+  [Iter 150/187] Current Batch Loss: 0.5264
+  [Iter 187/187] Current Batch Loss: 0.6487
+Epoch 05/25 | Loss: 0.5460 | TrainAcc: 0.8380 | ValAcc: 0.8488 | LR: 0.000250 | Time: 1859.50s
+
+--- Epoch 06 / 25 ---
+  [Iter 050/187] Current Batch Loss: 0.5008
+  [Iter 100/187] Current Batch Loss: 0.5126
+  [Iter 150/187] Current Batch Loss: 0.5844
+  [Iter 187/187] Current Batch Loss: 0.6545
+Epoch 06/25 | Loss: 0.5659 | TrainAcc: 0.7920 | ValAcc: 0.8026 | LR: 0.000250 | Time: 1859.66s
+
+--- Epoch 07 / 25 ---
+  [Iter 050/187] Current Batch Loss: 0.6096
+  [Iter 100/187] Current Batch Loss: 0.4481
+  [Iter 150/187] Current Batch Loss: 0.4778
+  [Iter 187/187] Current Batch Loss: 0.5090
+Epoch 07/25 | Loss: 0.5835 | TrainAcc: 0.8250 | ValAcc: 0.8267 | LR: 0.000250 | Time: 1856.69s
+
+--- Epoch 08 / 25 ---
+  [Iter 050/187] Current Batch Loss: 0.5662
+  [Iter 100/187] Current Batch Loss: 0.6139
+  [Iter 150/187] Current Batch Loss: 0.5424
+  [Iter 187/187] Current Batch Loss: 0.5461
+Epoch 08/25 | Loss: 0.5837 | TrainAcc: 0.8540 | ValAcc: 0.8528 | LR: 0.000250 | Time: 1853.81s
+  [Early Stopping] No improvement for 7 epochs. Training terminated.
+
+================ Training Finished ================
+
+========================================
+Final Loss: 0.5837
+Final Val Acc (Best): 0.8835
+Final Test Acc (Real): 0.8555
+========================================
+============================================================
+Total Elapsed Time: 10:21:06.850
+Saved best model to: C:\src(3-1)\ArtificialIntelligence\w99\flexconvnet_fashion_best.pkl
+============================================================
+================ Training Started ================
+Data Split - Train: 48000, Val: 12000, Test: 10000
+==> AdamW 감지: Optimizer에서 Weight Decay(0.001)를 처리합니다.
+
+--- Epoch 01 / 25 ---
+ [Clip] Exploding gradient capped. Max Norm: 4.06 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 2.62 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 1.83 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 2.27 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 1.76 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 1.72 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 1.55 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 1.57 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 1.77 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 1.57 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 1.73 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 1.75 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 1.74 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 1.53 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 1.73 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 1.74 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 1.78 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 1.62 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 2.16 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 2.03 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 1.54 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 1.73 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 1.75 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 1.46 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 1.97 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 1.58 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 1.62 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 1.89 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 1.74 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 1.64 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 1.60 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 1.64 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 1.56 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 1.80 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 1.43 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 1.62 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 1.59 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 1.56 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 1.37 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 1.32 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 1.68 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 1.75 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 2.07 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 1.59 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 1.84 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 1.65 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 1.47 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 1.55 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 1.77 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 1.60 -> 1.0
+  [Iter 050/187] Current Batch Loss: 0.7115
+ [Clip] Exploding gradient capped. Max Norm: 1.45 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 1.56 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 1.93 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 1.59 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 1.68 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 1.40 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 2.00 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 1.74 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 1.61 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 1.38 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 1.43 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 1.74 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 1.69 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 1.57 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 1.54 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 1.38 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 1.36 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 1.64 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 1.45 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 1.41 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 1.36 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 1.46 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 1.63 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 1.66 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 1.43 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 1.45 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 1.65 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 1.53 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 1.85 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 1.89 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 1.33 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 1.71 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 1.76 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 1.50 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 1.44 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 1.62 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 1.40 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 1.98 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 1.27 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 1.90 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 1.56 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 1.97 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 1.55 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 1.44 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 1.37 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 1.71 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 1.94 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 1.46 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 1.90 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 2.00 -> 1.0
+  [Iter 100/187] Current Batch Loss: 0.6004
+ [Clip] Exploding gradient capped. Max Norm: 2.15 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 1.85 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 1.64 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 2.01 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 1.93 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 2.05 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 1.63 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 1.78 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 1.49 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 2.00 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 2.04 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 2.08 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 2.00 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 1.76 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 1.96 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 1.63 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 2.53 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 1.85 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 1.91 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 1.58 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 1.60 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 2.09 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 1.99 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 1.62 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 1.57 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 1.72 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 1.85 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 1.68 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 1.60 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 1.55 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 1.24 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 1.50 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 1.96 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 1.59 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 1.39 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 1.21 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 1.59 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 1.56 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 1.94 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 1.49 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 1.86 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 1.57 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 1.37 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 1.97 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 2.00 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 1.84 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 2.13 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 1.58 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 2.34 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 1.87 -> 1.0
+  [Iter 150/187] Current Batch Loss: 0.5511
+ [Clip] Exploding gradient capped. Max Norm: 1.62 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 2.33 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 2.50 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 2.22 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 1.84 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 2.08 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 2.02 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 2.29 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 1.62 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 2.44 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 2.74 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 2.04 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 2.09 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 2.26 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 2.00 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 1.88 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 1.69 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 1.59 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 2.08 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 1.34 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 1.53 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 1.41 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 2.15 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 1.38 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 2.11 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 2.01 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 1.56 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 1.55 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 1.74 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 2.47 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 2.17 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 1.55 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 2.55 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 2.59 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 1.96 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 2.27 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 2.17 -> 1.0
+  [Iter 187/187] Current Batch Loss: 0.5041
+Epoch 01/25 | Loss: 0.7648 | TrainAcc: 0.8720 | ValAcc: 0.8419 | LR: 0.000500 | Time: 1252.01s
+
+--- Epoch 02 / 25 ---
+ [Clip] Exploding gradient capped. Max Norm: 2.06 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 2.63 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 2.43 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 2.09 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 1.85 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 1.75 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 2.15 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 3.07 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 2.31 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 2.21 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 1.77 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 2.04 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 2.41 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 2.18 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 2.21 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 2.53 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 1.72 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 1.92 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 2.51 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 2.43 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 1.66 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 2.24 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 2.50 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 2.68 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 2.16 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 1.85 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 1.63 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 2.44 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 1.71 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 2.47 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 1.80 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 1.66 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 3.21 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 2.25 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 2.07 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 2.38 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 2.25 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 2.34 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 2.18 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 2.85 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 2.38 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 3.40 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 2.75 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 2.04 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 3.09 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 2.26 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 2.38 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 2.37 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 1.88 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 2.30 -> 1.0
+  [Iter 050/187] Current Batch Loss: 0.5006
+ [Clip] Exploding gradient capped. Max Norm: 2.45 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 3.50 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 2.36 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 2.56 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 2.46 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 2.94 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 2.40 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 2.74 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 4.00 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 2.62 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 2.23 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 4.28 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 3.79 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 3.64 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 2.48 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 2.03 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 4.05 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 3.63 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 2.72 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 2.56 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 3.45 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 2.45 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 3.06 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 3.24 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 2.42 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 2.25 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 2.28 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 2.42 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 2.29 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 2.87 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 2.65 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 2.49 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 2.74 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 2.24 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 2.95 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 1.86 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 2.96 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 3.73 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 2.86 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 2.68 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 3.65 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 3.25 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 2.73 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 2.48 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 2.11 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 1.99 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 2.85 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 2.41 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 2.58 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 2.99 -> 1.0
+  [Iter 100/187] Current Batch Loss: 0.4927
+ [Clip] Exploding gradient capped. Max Norm: 3.33 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 2.51 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 2.82 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 2.67 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 2.02 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 2.32 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 2.48 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 1.85 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 2.24 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 3.85 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 3.26 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 2.99 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 3.12 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 3.32 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 2.95 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 2.33 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 3.14 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 2.99 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 2.13 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 2.62 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 2.67 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 3.28 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 3.37 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 2.32 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 2.74 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 3.12 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 2.20 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 2.63 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 6.11 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 5.07 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 2.28 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 2.61 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 4.00 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 3.59 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 2.53 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 2.67 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 2.54 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 3.62 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 2.81 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 3.47 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 3.78 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 3.54 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 2.34 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 2.74 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 4.10 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 3.93 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 3.06 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 3.72 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 3.46 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 5.02 -> 1.0
+  [Iter 150/187] Current Batch Loss: 0.6114
+ [Clip] Exploding gradient capped. Max Norm: 4.68 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 2.24 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 4.75 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 6.07 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 4.16 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 2.87 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 3.05 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 2.30 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 4.24 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 3.13 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 3.91 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 2.49 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 2.99 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 4.65 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 3.95 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 3.56 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 3.31 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 2.87 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 3.72 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 4.42 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 2.92 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 3.50 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 3.01 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 2.34 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 2.75 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 2.88 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 2.53 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 3.61 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 2.03 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 1.99 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 2.55 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 2.69 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 4.33 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 3.76 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 3.51 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 2.81 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 3.00 -> 1.0
+  [Iter 187/187] Current Batch Loss: 0.5511
+Epoch 02/25 | Loss: 0.5314 | TrainAcc: 0.8020 | ValAcc: 0.8216 | LR: 0.000500 | Time: 1274.71s
+
+--- Epoch 03 / 25 ---
+ [Clip] Exploding gradient capped. Max Norm: 2.42 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 3.57 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 4.23 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 3.76 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 3.14 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 4.43 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 2.59 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 2.62 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 4.31 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 3.67 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 3.08 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 4.68 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 6.16 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 4.45 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 2.95 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 4.43 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 4.13 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 3.93 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 4.86 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 6.38 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 4.88 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 2.95 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 3.33 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 5.57 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 4.20 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 4.90 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 3.66 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 3.64 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 5.22 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 3.07 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 2.88 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 3.13 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 5.01 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 3.64 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 2.67 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 4.81 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 4.11 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 4.24 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 3.47 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 2.85 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 2.97 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 3.13 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 3.10 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 3.82 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 4.79 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 3.98 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 3.48 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 5.08 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 3.62 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 4.62 -> 1.0
+  [Iter 050/187] Current Batch Loss: 0.6046
+ [Clip] Exploding gradient capped. Max Norm: 4.71 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 3.66 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 3.69 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 2.73 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 3.67 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 3.19 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 4.02 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 3.37 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 5.63 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 4.57 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 3.79 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 2.78 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 3.78 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 3.38 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 5.21 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 4.77 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 3.37 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 4.69 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 4.88 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 3.06 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 3.49 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 3.64 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 3.55 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 3.58 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 2.38 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 4.30 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 4.90 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 5.50 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 4.18 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 3.24 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 5.71 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 4.48 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 3.51 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 3.77 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 5.95 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 3.91 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 4.42 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 5.72 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 7.20 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 5.44 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 4.85 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 4.61 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 5.49 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 3.54 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 4.95 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 7.11 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 4.22 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 4.81 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 5.04 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 5.14 -> 1.0
+  [Iter 100/187] Current Batch Loss: 0.7052
+ [Clip] Exploding gradient capped. Max Norm: 5.04 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 4.21 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 5.40 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 5.62 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 5.24 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 3.15 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 5.96 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 3.88 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 3.29 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 6.37 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 4.10 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 3.88 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 5.39 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 3.39 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 3.07 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 2.95 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 3.63 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 4.27 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 4.79 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 3.78 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 5.50 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 3.17 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 6.97 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 7.05 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 3.31 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 2.25 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 4.27 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 4.77 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 5.57 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 4.33 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 4.35 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 7.47 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 5.80 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 5.21 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 6.82 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 5.98 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 4.74 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 5.00 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 4.09 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 3.55 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 3.82 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 6.84 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 4.96 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 3.58 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 4.01 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 4.48 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 4.99 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 3.66 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 3.72 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 5.37 -> 1.0
+  [Iter 150/187] Current Batch Loss: 0.7065
+ [Clip] Exploding gradient capped. Max Norm: 5.58 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 4.64 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 4.65 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 3.49 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 4.56 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 4.92 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 3.53 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 4.59 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 5.05 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 5.06 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 5.43 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 4.63 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 5.16 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 7.56 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 7.29 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 5.94 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 7.81 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 6.50 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 3.99 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 7.31 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 5.23 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 4.06 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 7.90 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 8.35 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 8.65 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 7.80 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 7.77 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 7.46 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 6.20 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 5.41 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 5.19 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 3.69 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 7.50 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 7.10 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 5.70 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 3.55 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 6.08 -> 1.0
+  [Iter 187/187] Current Batch Loss: 0.6144
+Epoch 03/25 | Loss: 0.6345 | TrainAcc: 0.7680 | ValAcc: 0.7623 | LR: 0.000500 | Time: 1177.71s
+
+--- Epoch 04 / 25 ---
+ [Clip] Exploding gradient capped. Max Norm: 7.43 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 5.14 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 4.74 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 8.65 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 8.14 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 7.20 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 6.73 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 9.65 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 5.89 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 5.26 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 4.99 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 6.39 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 6.77 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 5.11 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 5.44 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 5.36 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 6.88 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 5.22 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 3.11 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 5.73 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 7.27 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 5.64 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 4.87 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 5.06 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 3.64 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 5.64 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 9.14 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 6.81 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 5.92 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 8.85 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 5.95 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 6.38 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 4.02 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 4.94 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 4.68 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 6.83 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 7.61 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 5.08 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 4.84 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 6.98 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 8.14 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 10.47 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 8.39 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 4.24 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 6.57 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 7.16 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 6.96 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 5.66 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 5.86 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 7.19 -> 1.0
+  [Iter 050/187] Current Batch Loss: 0.7405
+ [Clip] Exploding gradient capped. Max Norm: 4.34 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 7.22 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 5.04 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 4.37 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 10.81 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 7.93 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 5.86 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 8.98 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 8.57 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 7.73 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 4.60 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 5.02 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 6.18 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 5.87 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 4.89 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 5.95 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 4.20 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 9.51 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 10.99 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 4.17 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 4.20 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 7.82 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 3.67 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 5.05 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 8.57 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 4.43 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 7.99 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 6.25 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 3.67 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 5.24 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 5.98 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 5.22 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 3.04 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 5.08 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 4.99 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 5.38 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 5.33 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 8.11 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 4.79 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 5.23 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 7.81 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 6.43 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 6.66 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 8.83 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 7.17 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 6.12 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 7.31 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 4.09 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 4.45 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 7.14 -> 1.0
+  [Iter 100/187] Current Batch Loss: 0.8660
+ [Clip] Exploding gradient capped. Max Norm: 7.74 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 6.32 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 8.74 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 6.16 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 5.55 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 6.54 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 9.34 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 6.34 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 4.88 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 8.03 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 7.56 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 6.35 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 8.53 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 14.57 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 8.07 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 7.28 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 7.71 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 8.08 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 6.07 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 8.14 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 12.59 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 6.00 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 9.84 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 7.19 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 4.34 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 7.03 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 9.33 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 5.71 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 6.91 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 9.75 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 5.99 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 5.26 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 8.93 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 6.69 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 5.38 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 7.94 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 6.14 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 7.12 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 9.63 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 6.02 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 7.44 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 8.76 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 6.45 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 5.17 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 7.55 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 9.16 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 6.33 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 8.10 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 8.18 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 5.01 -> 1.0
+  [Iter 150/187] Current Batch Loss: 0.6452
+ [Clip] Exploding gradient capped. Max Norm: 5.52 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 6.69 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 9.21 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 8.74 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 6.57 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 4.90 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 7.20 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 7.24 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 8.37 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 7.89 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 8.16 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 14.52 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 8.79 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 8.19 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 10.65 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 7.60 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 8.42 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 7.73 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 6.32 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 8.79 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 9.92 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 11.05 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 6.26 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 7.36 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 10.78 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 5.67 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 5.11 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 7.67 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 8.34 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 6.19 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 7.08 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 10.13 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 10.54 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 4.90 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 12.89 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 15.80 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 8.54 -> 1.0
+  [Iter 187/187] Current Batch Loss: 0.8002
+Epoch 04/25 | Loss: 0.7749 | TrainAcc: 0.7220 | ValAcc: 0.7247 | LR: 0.000500 | Time: 1196.69s
+  [Scheduler] Reduce LR → 0.00025
+
+--- Epoch 05 / 25 ---
+ [Clip] Exploding gradient capped. Max Norm: 5.90 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 12.12 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 6.51 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 10.19 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 10.40 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 9.84 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 6.18 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 12.38 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 11.89 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 6.61 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 5.07 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 11.19 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 8.15 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 5.99 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 7.91 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 7.62 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 8.58 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 13.58 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 11.05 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 8.25 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 5.94 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 8.37 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 14.24 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 5.49 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 7.57 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 7.48 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 5.14 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 7.08 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 7.02 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 6.59 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 7.03 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 7.71 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 7.97 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 6.52 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 3.95 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 7.66 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 8.85 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 5.86 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 9.93 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 11.66 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 7.31 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 6.93 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 12.58 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 7.70 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 7.92 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 6.08 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 5.73 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 4.08 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 5.62 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 4.32 -> 1.0
+  [Iter 050/187] Current Batch Loss: 0.6780
+ [Clip] Exploding gradient capped. Max Norm: 5.51 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 4.88 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 6.77 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 7.94 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 3.36 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 6.45 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 8.15 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 5.13 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 5.52 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 5.22 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 5.51 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 7.29 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 6.13 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 6.20 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 7.45 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 5.36 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 7.70 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 5.54 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 4.73 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 5.35 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 5.55 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 10.90 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 12.51 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 7.09 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 7.93 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 8.24 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 7.51 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 6.96 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 8.16 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 9.64 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 5.34 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 7.18 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 8.40 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 8.87 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 8.55 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 8.52 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 5.96 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 5.75 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 4.75 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 10.42 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 7.15 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 5.47 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 4.25 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 6.20 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 14.56 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 10.33 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 8.27 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 4.75 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 9.24 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 8.55 -> 1.0
+  [Iter 100/187] Current Batch Loss: 0.7559
+ [Clip] Exploding gradient capped. Max Norm: 7.15 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 6.93 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 9.05 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 5.62 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 7.80 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 8.08 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 3.38 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 6.46 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 9.05 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 6.44 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 6.14 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 7.66 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 7.68 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 6.36 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 6.35 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 5.96 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 5.37 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 8.47 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 9.74 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 4.84 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 5.61 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 3.62 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 5.19 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 5.94 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 7.78 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 13.02 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 9.55 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 7.33 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 6.85 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 8.60 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 5.99 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 4.76 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 6.03 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 4.40 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 6.46 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 6.57 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 5.47 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 8.07 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 5.93 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 8.91 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 13.60 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 10.40 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 6.68 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 8.59 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 12.08 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 12.11 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 6.91 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 5.36 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 12.55 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 9.64 -> 1.0
+  [Iter 150/187] Current Batch Loss: 0.8515
+ [Clip] Exploding gradient capped. Max Norm: 6.43 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 9.34 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 5.64 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 8.12 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 13.79 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 10.81 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 5.44 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 5.00 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 8.97 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 9.37 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 7.78 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 8.92 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 7.93 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 8.90 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 5.91 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 7.35 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 10.44 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 8.68 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 8.29 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 7.01 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 7.69 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 8.89 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 8.32 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 5.21 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 5.54 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 8.01 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 6.68 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 4.72 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 6.79 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 6.00 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 7.78 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 6.10 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 10.64 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 8.33 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 3.81 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 10.22 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 7.70 -> 1.0
+  [Iter 187/187] Current Batch Loss: 0.7081
+Epoch 05/25 | Loss: 0.8137 | TrainAcc: 0.7300 | ValAcc: 0.7373 | LR: 0.000250 | Time: 1116.46s
+
+--- Epoch 06 / 25 ---
+ [Clip] Exploding gradient capped. Max Norm: 7.54 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 6.50 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 6.25 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 6.36 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 8.67 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 6.18 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 9.53 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 9.27 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 5.53 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 9.22 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 8.66 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 7.75 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 6.99 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 9.10 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 6.90 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 3.56 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 11.95 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 16.31 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 4.11 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 7.25 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 6.81 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 6.75 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 8.96 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 9.11 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 8.09 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 9.38 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 7.33 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 6.25 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 10.33 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 8.81 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 6.66 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 6.79 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 8.25 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 4.83 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 6.55 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 5.66 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 5.28 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 6.37 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 5.65 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 6.63 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 3.99 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 9.72 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 8.14 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 12.83 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 6.66 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 5.34 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 5.28 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 6.00 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 5.52 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 4.53 -> 1.0
+  [Iter 050/187] Current Batch Loss: 0.8222
+ [Clip] Exploding gradient capped. Max Norm: 5.35 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 8.47 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 7.00 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 7.32 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 10.61 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 8.25 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 12.19 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 13.69 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 7.99 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 11.93 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 12.89 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 9.29 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 7.97 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 13.97 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 9.35 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 8.72 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 15.73 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 11.89 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 5.73 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 11.18 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 15.05 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 12.00 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 4.58 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 7.88 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 13.26 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 15.65 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 7.65 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 12.22 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 14.99 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 9.92 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 7.60 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 11.53 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 15.17 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 18.25 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 10.59 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 10.51 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 15.54 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 11.43 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 5.15 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 12.45 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 14.75 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 9.98 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 9.76 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 10.28 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 6.48 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 6.13 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 8.73 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 9.25 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 8.26 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 8.12 -> 1.0
+  [Iter 100/187] Current Batch Loss: 0.7807
+ [Clip] Exploding gradient capped. Max Norm: 5.78 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 10.72 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 5.21 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 5.77 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 7.30 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 6.19 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 6.55 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 5.29 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 4.73 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 6.58 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 7.45 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 8.79 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 6.21 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 5.29 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 7.73 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 11.45 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 8.46 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 9.17 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 9.34 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 9.50 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 10.21 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 13.99 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 8.78 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 7.08 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 5.02 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 5.91 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 7.77 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 6.62 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 5.87 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 10.72 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 9.73 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 8.64 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 8.31 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 5.23 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 13.29 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 11.85 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 8.87 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 10.38 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 6.44 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 6.81 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 13.46 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 6.93 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 11.02 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 10.56 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 8.10 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 8.51 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 6.81 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 9.65 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 5.92 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 8.31 -> 1.0
+  [Iter 150/187] Current Batch Loss: 0.7896
+ [Clip] Exploding gradient capped. Max Norm: 12.01 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 8.15 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 4.53 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 5.86 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 8.62 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 6.32 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 11.51 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 7.33 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 7.91 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 8.34 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 7.50 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 10.31 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 9.74 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 7.78 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 12.48 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 10.02 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 9.38 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 9.63 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 6.29 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 7.14 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 11.51 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 8.75 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 8.40 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 11.51 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 6.31 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 8.12 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 11.62 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 6.86 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 13.77 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 9.30 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 6.94 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 14.13 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 9.30 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 11.81 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 5.02 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 15.61 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 20.80 -> 1.0
+  [Iter 187/187] Current Batch Loss: 0.9335
+Epoch 06/25 | Loss: 0.7905 | TrainAcc: 0.6740 | ValAcc: 0.6897 | LR: 0.000250 | Time: 1183.11s
+
+--- Epoch 07 / 25 ---
+ [Clip] Exploding gradient capped. Max Norm: 16.79 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 8.75 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 15.08 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 15.11 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 11.57 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 8.48 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 11.00 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 10.85 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 8.88 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 8.23 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 9.39 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 6.62 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 5.91 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 11.12 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 8.34 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 10.23 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 7.24 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 8.52 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 11.14 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 13.09 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 11.99 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 8.01 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 12.63 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 11.55 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 9.40 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 7.26 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 11.41 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 8.52 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 10.68 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 11.38 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 5.45 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 10.20 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 10.44 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 8.03 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 4.37 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 6.83 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 14.57 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 16.72 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 10.37 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 6.36 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 12.22 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 12.55 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 17.85 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 6.80 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 6.45 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 11.01 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 9.87 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 9.10 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 10.08 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 10.02 -> 1.0
+  [Iter 050/187] Current Batch Loss: 0.8755
+ [Clip] Exploding gradient capped. Max Norm: 11.43 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 13.23 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 5.60 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 4.09 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 13.00 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 8.75 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 8.03 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 14.03 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 8.12 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 10.95 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 10.10 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 8.63 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 11.11 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 10.42 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 9.94 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 6.63 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 13.95 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 7.49 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 10.59 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 6.64 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 8.90 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 8.41 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 7.88 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 9.37 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 4.99 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 9.22 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 10.20 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 5.25 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 9.55 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 12.68 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 8.61 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 4.99 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 4.00 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 11.33 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 5.46 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 10.21 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 6.51 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 8.03 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 8.19 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 8.86 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 8.54 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 10.70 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 12.15 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 13.03 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 12.30 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 10.92 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 14.36 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 18.58 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 11.45 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 12.78 -> 1.0
+  [Iter 100/187] Current Batch Loss: 0.7913
+ [Clip] Exploding gradient capped. Max Norm: 8.19 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 12.08 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 10.57 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 11.09 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 12.38 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 11.52 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 10.12 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 8.85 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 11.65 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 8.17 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 10.77 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 7.64 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 9.21 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 6.27 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 4.20 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 5.80 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 8.84 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 5.65 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 8.01 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 9.12 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 12.92 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 12.28 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 6.80 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 7.60 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 13.25 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 6.38 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 6.79 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 10.06 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 8.64 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 5.67 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 7.44 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 5.64 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 10.30 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 19.49 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 10.91 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 7.16 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 11.86 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 6.95 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 12.03 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 8.22 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 5.14 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 9.77 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 13.25 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 10.62 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 4.67 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 9.10 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 7.56 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 9.54 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 13.19 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 10.08 -> 1.0
+  [Iter 150/187] Current Batch Loss: 0.8155
+ [Clip] Exploding gradient capped. Max Norm: 12.77 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 9.82 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 11.33 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 11.30 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 9.96 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 11.00 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 9.58 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 7.64 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 6.58 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 10.98 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 13.09 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 9.10 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 10.91 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 7.22 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 7.62 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 10.30 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 5.28 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 7.45 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 8.10 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 8.59 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 4.89 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 8.16 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 10.34 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 8.77 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 6.73 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 8.79 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 9.77 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 14.01 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 10.74 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 10.68 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 8.31 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 8.25 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 9.80 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 13.86 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 11.16 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 6.19 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 5.21 -> 1.0
+  [Iter 187/187] Current Batch Loss: 0.6248
+Epoch 07/25 | Loss: 0.7790 | TrainAcc: 0.7440 | ValAcc: 0.7420 | LR: 0.000250 | Time: 1020.14s
+
+--- Epoch 08 / 25 ---
+ [Clip] Exploding gradient capped. Max Norm: 9.11 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 9.15 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 10.88 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 9.30 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 13.62 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 8.86 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 6.32 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 9.64 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 12.45 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 8.70 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 12.58 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 17.05 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 12.23 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 14.88 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 20.78 -> 1.0
+ [Clip] Exploding gradient capped. Max Norm: 4.18 -> 1.0
+================ Training Started ================
+Data Split - Train: 48000, Val: 12000, Test: 10000
+==> AdamW 감지: Optimizer에서 Weight Decay(0.0001)를 처리합니다.
+
+==================================================
+                 [ HYPERPARAMETERS ]
+Optimizer: AdamW  , LR: 0.001  , Batch:  256, Epochs:  25, Iters: 4675, Depth(FC): 2, Act/Init: relu/he   , L2: 0.0001 , BN: T, Drop: T, Drop R: 0.3  
+
+  [ CNN Architecture Flow ]
+  -------------------------------------------------------
+  | Layer | Filter Num | Filter Size | Pad | Stride | Pool  |
+  -------------------------------------------------------
+  | C_1   |     32     |      3      |  1  |   1    |   F   |
+  | C_2   |     32     |      3      |  1  |   1    |   T   |
+  | C_3   |     64     |      3      |  1  |   1    |   F   |
+  | C_4   |     64     |      3      |  1  |   1    |   T   |
+  | C_5   |    128     |      3      |  1  |   1    |   F   |
+  | C_6   |    128     |      3      |  0  |   1    |   F   |
+  -------------------------------------------------------
+==================================================
+
+
+--- Epoch 01 / 25 ---
+  [Iter 050/187] Current Batch Loss: 0.9082
+================ Training Started ================
+Data Split - Train: 48000, Val: 12000, Test: 10000
+==> AdamW 감지: Optimizer에서 Weight Decay(0.0001)를 처리합니다.
+
+==================================================
+                 [ HYPERPARAMETERS ]
+Optimizer: AdamW  , LR: 0.001  , Batch:  256, Epochs:  25, Iters: 4675, Depth(FC): 2, Act/Init: relu/he   , L2: 0.0001 , BN: T, Drop: T, Drop R: 0.3  
+
+  [ CNN Architecture Flow ]
+  -------------------------------------------------------
+  | Layer | Filter Num | Filter Size | Pad | Stride | Pool  |
+  -------------------------------------------------------
+  | C_1   |     32     |      3      |  1  |   1    |   F   |
+  | C_2   |     32     |      3      |  1  |   1    |   T   |
+  | C_3   |     64     |      3      |  1  |   1    |   F   |
+  | C_4   |     64     |      3      |  1  |   1    |   T   |
+  | C_5   |    128     |      3      |  1  |   1    |   F   |
+  | C_6   |    128     |      3      |  0  |   1    |   F   |
+  -------------------------------------------------------
+==================================================
+
+
+--- Epoch 01 / 25 ---
+loss: 2.4774709140743503
+loss: 2.2726949446248708
+loss: 2.1576390938400754
+loss: 2.052270897848558
+loss: 1.9743254380882576
+loss: 1.9514968158587034
+loss: 1.8120418042940614
+loss: 1.766667761586468
+loss: 1.695778445128876
+loss: 1.7043588462195576
+loss: 1.6430851523328451
+loss: 1.503995114788655
+loss: 1.3814893320308437
+loss: 1.4076416938890661
+loss: 1.468904364264655
+loss: 1.307966063629377
+loss: 1.3430792785328514
+loss: 1.3443221333941149
+loss: 1.2527451143297046
+loss: 1.2029382908123374
+loss: 1.2628164838582736
+loss: 1.1189789153615766
+loss: 1.1638426847093595
+loss: 1.0350263398554551
+loss: 1.0469743006886927
+loss: 1.022162226376813
+loss: 1.0557282260667775
+loss: 1.071082372713227
+loss: 0.9179288540444701
+loss: 1.0439129916614949
+loss: 0.8914508066038912
+loss: 1.0202315996488704
+loss: 0.8514339093050155
+loss: 0.8807840090861768
+loss: 0.9229159319650067
+loss: 0.8847514088979622
+loss: 0.9038267225464558
+loss: 0.9266062385237951
+loss: 0.8539497926833481
+loss: 0.8838130350831532
+loss: 0.9232602481367667
+loss: 0.8459659635704876
+loss: 0.8337923871594837
+loss: 0.8392524727000605
+loss: 0.9018243285245234
+loss: 0.9583627640637176
+loss: 0.8963644027452249
+loss: 0.8748064422162587
+loss: 0.6720702551276139
+loss: 0.7684366454163614
+  [Iter 050/187] Current Batch Loss: 0.7684
+loss: 0.7004139042036559
+loss: 0.6956285494568945
+loss: 0.9098809646101234
+loss: 0.8418249808882112
+loss: 0.8526521122694173
+loss: 0.8787410119261204
+loss: 0.8207941215989469
+loss: 0.8702315043686935
+loss: 0.8957741932553984
+loss: 0.8489824795011865
+loss: 0.8339876961314203
+loss: 0.747486600183443
+loss: 0.6985537301705937
+loss: 0.7116101658919753
+loss: 0.7358627429400273
+loss: 0.7327886802739578
+loss: 0.7762107013658157
+loss: 0.8219384977002041
+loss: 0.775549773239095
+loss: 0.7499986724870972
+loss: 0.7674856981231625
+loss: 0.7199290879662974
+loss: 0.7668585610216578
+loss: 0.7497525874331474
+loss: 0.8306655617441601
+loss: 0.8076260152021529
+loss: 0.8245107993451466
+loss: 0.7450217032569726
+loss: 0.785419121558276
+loss: 0.8168378390793127
+loss: 0.7444400376751052
+loss: 0.8162683068005637
+loss: 0.7227396001864185
+loss: 0.8274218102748245
+loss: 0.8927316443666219
+loss: 0.7277053548796587
+loss: 0.799800560374291
+loss: 0.8881113781938718
+loss: 0.7911435040232313
+loss: 0.725995154745003
+loss: 0.8052794575803075
+loss: 0.7133294317018201
+loss: 0.724006799868291
+loss: 0.702874726521816
+loss: 0.6698052241812893
+loss: 0.851976410573563
+loss: 0.6981188503070824
+loss: 0.7536582655435906
+loss: 0.7884621219773256
+loss: 0.6373325119304538
+  [Iter 100/187] Current Batch Loss: 0.6373
+loss: 0.6748181452260147
+loss: 0.7679215209099532
+loss: 0.7413873444214436
+loss: 0.7398648885689394
+loss: 0.6664312441156011
+loss: 0.708979877971953
+loss: 0.8594987346152336
+loss: 0.8565319683421886
+loss: 0.7412923535410914
+loss: 0.7324311218202116
+loss: 0.7459885674641651
+loss: 0.8294383364674377
+loss: 0.7669632675298992
+loss: 0.7792098327221766
+loss: 0.7459001945260515
+loss: 0.6367131086632201
+loss: 0.8061197998398336
+loss: 0.7213952408391087
+loss: 0.7369002863666356
+loss: 0.703933550827624
+loss: 0.6953794803739894
+loss: 0.7463292538174411
+loss: 0.7530442830682755
+loss: 0.8210787984312409
+loss: 0.6770061483749282
+loss: 0.6508986623056318
+loss: 0.7469329151602412
+loss: 0.6605232844465181
+loss: 0.8486858875419003
+loss: 0.8603724561090513
+loss: 0.5667207084801602
+loss: 0.7195981721604732
+loss: 0.7884415968011385
+loss: 0.7263806999748006
+loss: 0.9152120063830558
+loss: 0.6696391770745873
+loss: 0.7817874531428252
+loss: 0.7986532728120006
+loss: 0.745484084205086
+loss: 0.8210760636206309
+loss: 0.7681798116623906
+loss: 0.6747533249724994
+loss: 0.7781544343638778
+loss: 0.7343258753484296
+loss: 0.7674400312288934
+loss: 0.8436397692000442
+loss: 0.7731151603652662
+loss: 0.8697366436234469
+loss: 0.7796193597614866
+loss: 0.8343833022774128
+  [Iter 150/187] Current Batch Loss: 0.8344
+loss: 0.67072419046966
+loss: 0.690449809806453
+loss: 0.8141542777192894
+loss: 0.8116021510704693
+loss: 0.7522463927765555
+loss: 0.7386682746681019
+loss: 0.6977088098395156
+loss: 0.7724050015202393
+loss: 0.8838592927229629
+loss: 0.8382860233644877
+loss: 0.8322189597163672
+loss: 0.8876688127131116
+loss: 0.8296604749641441
+loss: 0.8071308441666286
+loss: 0.8750624990902522
+loss: 1.0509101844275368
+loss: 0.7729199066126167
+loss: 0.8072661111609516
+loss: 0.9095685175016459
+loss: 0.7931859023697035
+loss: 0.8424753767956872
+loss: 0.9928391029829521
+loss: 0.7992704113746181
+loss: 0.8093752465232686
+loss: 0.9551077894246133
+loss: 0.8529254186638622
+loss: 0.7776970672998805
+loss: 0.753088534238874
+loss: 0.6993649087391511
+================ Training Started ================
+Data Split - Train: 48000, Val: 12000, Test: 10000
+==> AdamW 감지: Optimizer에서 Weight Decay(0.0001)를 처리합니다.
+
+==================================================
+                 [ HYPERPARAMETERS ]
+Optimizer: AdamW  , LR: 0.001  , Batch:  256, Epochs:  25, Iters: 4675, Depth(FC): 2, Act/Init: relu/he   , L2: 0.0001 , BN: T, Drop: T, Drop R: 0.3  
+
+  [ CNN Architecture Flow ]
+  -------------------------------------------------------
+  | Layer | Filter Num | Filter Size | Pad | Stride | Pool  |
+  -------------------------------------------------------
+  | C_1   |     32     |      3      |  1  |   1    |   F   |
+  | C_2   |     32     |      3      |  1  |   1    |   T   |
+  | C_3   |     64     |      3      |  1  |   1    |   F   |
+  | C_4   |     64     |      3      |  1  |   1    |   T   |
+  | C_5   |    128     |      3      |  1  |   1    |   F   |
+  | C_6   |    128     |      3      |  0  |   1    |   F   |
+  -------------------------------------------------------
+==================================================
+
+
+--- Epoch 01 / 25 ---
+loss: 2.4386921833288557
+loss: 2.4159608096587744
+loss: 2.34613231190275
+loss: 2.2127572796579287
+loss: 2.2009256565430086
+loss: 2.1222902420086065
+loss: 2.0091996424364744
+loss: 2.016164574676362
+loss: 1.8806471946365642
+loss: 2.0242190526653348
+loss: 1.8148836062226203
+loss: 1.8214617954278916
+loss: 1.7190934513018896
+loss: 1.7263490333768172
+loss: 1.585762860026959
+loss: 1.6083779921729509
+loss: 1.6499224782048552
+loss: 1.4981837568681988
+loss: 1.5110348685109938
+loss: 1.4445886492778834
+loss: 1.3395172656612804
+loss: 1.488281655124091
+loss: 1.3302903554645074
+loss: 1.23670166926669
+loss: 1.2541690347375438
+loss: 1.3175490531215992
+loss: 1.2200443660041604
+loss: 1.3025960300320818
+loss: 1.1846212156242477
+loss: 1.2591088241647799
+loss: 1.1198083088215736
+loss: 1.1295218799474287
+loss: 1.1091769516610168
+loss: 0.9958006571860893
+loss: 1.1451956433196864
+loss: 1.0304781229470705
+loss: 1.1390449984734698
+loss: 0.9878699981225363
+loss: 1.0518768920105022
+loss: 0.9517289321554449
+loss: 1.0454405334828247
+loss: 1.032537471255052
+loss: 1.0361774950076617
+loss: 0.9184220564789586
+loss: 1.0022043435971333
+loss: 0.9665197430239683
+loss: 0.916250652592422
+loss: 0.9412390740009289
+loss: 0.9726218616812567
+loss: 0.9793325211265381
+  [Iter 050/187] Current Batch Loss: 0.9793
+loss: 0.9134295716250621
+loss: 0.9122620562539645
+loss: 1.0103011506742559
+loss: 1.0335929736761134
+loss: 0.9214498635457624
+loss: 0.9746463403980277
+loss: 0.9207471540822965
+loss: 0.9271737129533852
+loss: 0.9468192759180034
+loss: 0.9540254871056395
+loss: 0.8481345055857192
+loss: 0.8858904390778701
+loss: 0.8608386494701612
+loss: 0.8909282502237861
+loss: 0.9609622270833998
+loss: 0.8934347928290802
+loss: 0.9897710620710888
+loss: 0.9500658814621953
+loss: 0.8744271624254984
+loss: 0.9120249214014494
+loss: 0.9464479759178289
+loss: 0.9468082371494069
+loss: 0.8993670183230837
+loss: 0.9344225817293612
+loss: 0.8536203390480585
+loss: 0.9414656978079281
+loss: 0.8729960431490629
+loss: 0.9947407338631915
+loss: 0.942836475697249
+loss: 0.9631436326067322
+loss: 0.8397529016090101
+loss: 0.9505334480615208
+loss: 0.8460423815866046
+loss: 0.9565055307895582
+loss: 0.8359953444483978
+loss: 1.0094295143478131
+loss: 1.0173148874405726
+loss: 0.9699808098405011
+loss: 0.9508469215155224
+loss: 0.9984838836469344
+loss: 0.9550032363681498
+loss: 0.9620314142173434
+loss: 0.835423548663506
+loss: 0.9829554395400186
+loss: 0.8532167164375972
+loss: 1.0069922438250583
+loss: 0.81951757214009
+loss: 0.9461659593120868
+loss: 0.9387959933950958
+loss: 0.8763531013783503
+  [Iter 100/187] Current Batch Loss: 0.8764
+loss: 0.9725947735963939
+loss: 0.9819399261600277
+loss: 0.934363429989767
+loss: 0.8246571729230708
+loss: 0.9516573382769833
+loss: 1.0561815861009314
+loss: 0.9382091935374819
+loss: 0.8280238361128319
+loss: 0.9069198523018553
+loss: 1.0061860457909246
+loss: 0.8951999694793422
+loss: 0.9200083663761685
+loss: 0.8899168114547245
+loss: 1.0569758739960118
+loss: 0.935195840601061
+loss: 0.9230463471427741
+loss: 0.9259174476538408
+loss: 1.0247912501778815
+loss: 0.9114753157950517
+loss: 1.017723938586634
+loss: 1.0094954349805834
+loss: 0.8362461028434283
+loss: 0.9291220946044397
+loss: 1.0053622225818213
+loss: 0.9962573271240424
+loss: 1.0182235866071183
+loss: 0.9849685773519109
+loss: 1.035171713896738
+loss: 0.9243751809151443
+loss: 0.8555339693024844
+loss: 0.9087661406749443
+loss: 1.0155281016115818
+loss: 0.9577195087480039
+loss: 1.0437172994921848
+loss: 0.9333762878695244
+loss: 0.9149374179253464
+loss: 1.121953468307436
+loss: 0.9382696934409864
+loss: 0.8573614287585856
+loss: 0.910196480553753
+loss: 0.9925907299022805
+loss: 0.9942046935756128
+loss: 0.9171691676035526
+loss: 0.9805400782539544
+loss: 0.95091948281782
+loss: 0.9129144218667226
+loss: 1.000282336916092
+loss: 0.9374312064337065
+loss: 0.8959826527000361
+loss: 0.9822637388747126
+  [Iter 150/187] Current Batch Loss: 0.9823
+loss: 0.8057246548650224
+loss: 0.9163923104003463
+loss: 0.8540262041438789
+loss: 0.9473576325703932
+loss: 1.0014271830065198
+loss: 0.9040967627592221
+loss: 0.8050857987263415
+loss: 0.8534136507570352
+loss: 0.9021312160197721
+loss: 0.9086433649132046
+loss: 0.925936695480848
+loss: 0.810250095339877
+loss: 0.8802904727451519
+loss: 0.7949216018198043
+loss: 0.932110612757181
+loss: 0.9208258417478694
+loss: 0.8518112157725438
+loss: 0.9632829135323083
+loss: 0.9954371566917796
+loss: 0.8626442193851962
+loss: 1.0584706237939798
+loss: 0.9916020947144041
+loss: 1.0362214371906049
+loss: 1.0784873682801606
+loss: 1.0365369144560435
+loss: 0.9149050341547714
+loss: 0.9111082410400635
+loss: 1.020523993767675
+loss: 0.8877093692961426
+loss: 0.8820582106620874
+loss: 0.8811377066893531
+loss: 0.9397378752026687
+loss: 0.9454194802909559
+loss: 0.8299479445314435
+loss: 0.9845928390166883
+loss: 0.8524567692186967
+loss: 1.0268389267839322
+  [Iter 187/187] Current Batch Loss: 1.0268
+Epoch 01/25 | Loss: 1.0677 | TrainAcc: 0.6730 | ValAcc: 0.7139 | LR: 0.000996 | Time: 1171.01s
+
+--- Epoch 02 / 25 ---
+loss: 1.05801227032029
+loss: 1.0209662496251144
+loss: 0.9394229591978962
+loss: 0.8823249719768606
+loss: 0.883459913885544
+loss: 0.884224079267929
+loss: 0.8454969438069384
+loss: 0.9392808933863684
+loss: 0.9238082629111242
+loss: 0.9819557686200845
+loss: 1.0277680740773958
+loss: 0.8243252679765602
+loss: 0.8593253164918604
+loss: 0.8270893776236238
+loss: 0.885214654010499
+loss: 0.8063993650367609
+loss: 0.8998468602359424
+loss: 1.0221564018611655
+loss: 0.9100185753690475
+loss: 0.9348506769635652
+loss: 0.8731128326394277
+loss: 0.8726013716651558
+loss: 0.9492287783544207
+loss: 0.8919813376381314
+loss: 1.0493758468913028
+loss: 0.8906504562540463
+loss: 0.9904081818595218
+loss: 0.9761684227885634
+loss: 0.9059148940310362
+loss: 1.053071023588816
+loss: 0.9361250399286708
+loss: 0.9444834685601594
+loss: 1.0014266472146987
+loss: 0.8572856325777116
+loss: 1.012376724225244
+loss: 1.0577109984738904
+loss: 0.9692143067245809
+loss: 1.0824881150935908
+loss: 1.0191562399688072
+loss: 1.0178196106094042
+loss: 1.0401376348726141
+loss: 0.9480109980013947
+loss: 0.985533264018732
+loss: 0.9393129591728774
+loss: 1.0835154657826316
+loss: 1.1116217759827118
+loss: 1.032076777025407
+loss: 1.0987440735757392
+loss: 1.0790209210213217
+loss: 1.0135275110589756
+  [Iter 050/187] Current Batch Loss: 1.0135
+loss: 1.021837136662829
+loss: 1.1113433344394705
+================ Training Started ================
+Data Split - Train: 48000, Val: 12000, Test: 10000
+==> AdamW 감지: Optimizer에서 Weight Decay(0.0001)를 처리합니다.
+
+==================================================
+                 [ HYPERPARAMETERS ]
+Optimizer: AdamW  , LR: 0.001  , Batch:  256, Epochs:  25, Iters: 4675, Depth(FC): 2, Act/Init: relu/he   , L2: 0.0001 , BN: T, Drop: T, Drop R: 0.3  
+
+  [ CNN Architecture Flow ]
+  -------------------------------------------------------
+  | Layer | Filter Num | Filter Size | Pad | Stride | Pool  |
+  -------------------------------------------------------
+  | C_1   |     32     |      3      |  1  |   1    |   F   |
+  | C_2   |     32     |      3      |  1  |   1    |   T   |
+  | C_3   |     64     |      3      |  1  |   1    |   F   |
+  | C_4   |     64     |      3      |  1  |   1    |   T   |
+  | C_5   |    128     |      3      |  1  |   1    |   F   |
+  | C_6   |    128     |      3      |  0  |   1    |   F   |
+  -------------------------------------------------------
+==================================================
+
+
+--- Epoch 01 / 25 ---
+  [Iter 050/187] Current Batch Loss: 0.9615
+  [Iter 100/187] Current Batch Loss: 0.9971
+  [Iter 150/187] Current Batch Loss: 0.9460
