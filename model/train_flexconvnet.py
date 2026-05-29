@@ -1,6 +1,3 @@
-"""
-nohup python train_flexconvnet.py > training.log 2>&1 &
-"""
 # coding: utf-8
 import sys, os
 sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
