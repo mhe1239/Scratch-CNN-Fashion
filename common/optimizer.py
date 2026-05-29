@@ -152,7 +152,7 @@ class AdamW:
             params[key] -= lr_t * self.m[key] / (np.sqrt(self.v[key]) + 1e-7)
 
 
-class FlexAdamW:
+class AdamWH:
     def __init__(self, lr=0.001, beta1=0.9, beta2=0.999, weight_decay=0.01):
         self.lr = lr
         self.beta1 = beta1
