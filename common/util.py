@@ -35,7 +35,7 @@ def shuffle_dataset(x, t):
 def conv_output_size(input_size, filter_size, stride=1, pad=0):
     return (input_size + 2*pad - filter_size) / stride + 1
 
-
+#forward시 사용
 def im2col(input_data, filter_h, filter_w, stride=1, pad=0):
     """다수의 이미지를 입력받아 2차원 배열로 변환한다(평탄화).
     
@@ -67,7 +67,7 @@ def im2col(input_data, filter_h, filter_w, stride=1, pad=0):
     col = col.transpose(0, 4, 5, 1, 2, 3).reshape(N*out_h*out_w, -1)
     return col
 
-
+#backword시 사용
 def col2im(col, input_shape, filter_h, filter_w, stride=1, pad=0):
     """(im2col과 반대) 2차원 배열을 입력받아 다수의 이미지 묶음으로 변환한다.
     
