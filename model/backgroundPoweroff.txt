@@ -1,0 +1,21 @@
+# 1. 혹시 돌고 있을지 모르는 기존 파이썬 종료
+Stop-Process -Name "python" -Force -ErrorAction SilentlyContinue
+
+# 2. 기존 새 경로 로그 비우기
+Clear-Content "C:\Scratch-CNN-Fashion\model\training.log" -ErrorAction SilentlyContinue
+
+# 3. 자동 종료 스크립트 내용 정의 (새 경로 적용)
+$scriptContent = @'
+cd "C:\Scratch-CNN-Fashion\model"
+python -u NoTrainerTrain.py *>&1 | Out-File -FilePath "C:\Scratch-CNN-Fashion\model\training.log" -Encoding utf8 -Append
+shutdown /s /f /t 60
+'@
+
+# 4. 스크립트 저장 및 백그라운드 실행
+$scriptPath = "C:\Scratch-CNN-Fashion\model\bg_run.ps1"
+Set-Content -Path $scriptPath -Value $scriptContent -Encoding utf8
+Start-Process powershell -ArgumentList "-NoProfile -ExecutionPolicy Bypass -File `"$scriptPath`"" -WindowStyle Hidden
+
+
+=====자동 종료 방지
+shutdown /a
