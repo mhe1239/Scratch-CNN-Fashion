@@ -1,0 +1,24 @@
+# 0. 로그를 저장할 폴더가 없다면 자동으로 생성합니다.
+$logFolder = "C:\Scratch-CNN-Fashion\log"
+if (-not (Test-Path $logFolder)) { New-Item -ItemType Directory -Path $logFolder | Out-Null }
+
+
+# 1. 첫 번째 학습 스크립트 (C:\Scratch-CNN-Fashion\model 에서 실행 -> log 폴더에 기록)
+$scriptContent1 = @'
+cd "C:\Scratch-CNN-Fashion\model"
+python -u NoTrainerTrain.py *>&1 | Out-File -FilePath "C:\Scratch-CNN-Fashion\log\training_1.log" -Encoding utf8 -Append
+'@
+$scriptPath1 = "C:\Scratch-CNN-Fashion\log\bg_run_1.ps1"
+Set-Content -Path $scriptPath1 -Value $scriptContent1 -Encoding utf8
+Start-Process powershell -ArgumentList "-NoProfile -ExecutionPolicy Bypass -File `"$scriptPath1`"" -WindowStyle Hidden
+
+
+# 2. 두 번째 학습 스크립트 (C:\src(3-1)\...\w13 에서 실행 -> log 폴더에 기록 + 완료 후 종료)
+$scriptContent2 = @'
+cd "C:\src(3-1)\ArtificialIntelligence\w13"
+python -u train_deepnet.py *>&1 | Out-File -FilePath "C:\Scratch-CNN-Fashion\log\training_2.log" -Encoding utf8 -Append
+shutdown /s /f /t 60
+'@ 
+$scriptPath2 = "C:\Scratch-CNN-Fashion\log\bg_run_2.ps1"
+Set-Content -Path $scriptPath2 -Value $scriptContent2 -Encoding utf8
+Start-Process powershell -ArgumentList "-NoProfile -ExecutionPolicy Bypass -File `"$scriptPath2`"" -WindowStyle Hidden
