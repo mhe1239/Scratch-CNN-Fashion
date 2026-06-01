@@ -1,2 +1,2 @@
-﻿cd "C:\src(3-1)\ArtificialIntelligence\w99"
-python -u NoTrainerTrain.py *>&1 | Out-File -FilePath "C:\src(3-1)\ArtificialIntelligence\w99\training.log" -Encoding utf8 -Append
+﻿cd "C:\pytorch_src\model\"
+python -u flexconvnet_pt.py *>&1 | Out-File -FilePath "C:\Scratch-CNN-Fashion\model\training.log" -Encoding utf8 -Append
