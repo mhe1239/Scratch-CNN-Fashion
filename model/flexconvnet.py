@@ -1,4 +1,7 @@
 """
+0. OrderedDict와 list를 쓰는 방식 중 고민하다가 OrderedDict로 채택
+DeepConvNet는 list를 쓰고 SimpleConvNet은 OrderedDict을 사용한
+list를 쓰면 추후 구조를 바꾸면 아에 바꿔야하기에 OrderedDict로 채택
 현재 발전 시킨 DynamicConvNet은 결국 SimpleConvNet기반임
 DynamicConvNet에 DeepConvNet의 장점을 흡수함>FlexConvNet
 아래는 기존 DynamicConvNet과 비교해 바뀐 점이다
