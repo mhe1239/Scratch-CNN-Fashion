@@ -32,16 +32,16 @@ class FlexConvNet:
                      {'filter_num':32, 'filter_size':3, 'pad':1, 'stride':1, 'pool':True}
                  ],
                  hidden_size_list=[100], output_size=10, 
-                 weight_init_std='he', use_batchnorm=True, use_dropout=True, dropout_ratio=0.5,
+                 weight_init_std='he', use_batchnorm=False, use_dropout=True, fc_dropout_ratio=0.3,conv_dropout_ratio=0.1,
                  weight_decay_lambda=0
-                 ):
+                 ):#
         
         self.params = {}
         self.layers = OrderedDict()
         self.conv_layer_num = len(conv_param_list)
         #self.hidden_layer_num = len(hidden_size_list)
         self.weight_decay_lambda = weight_decay_lambda
-
+        self.use_batchnorm=use_batchnorm
         # 1. 차원 추적 (DeepConvNet 방식)
         current_channels, current_h, current_w = input_dim
         
@@ -59,7 +59,7 @@ class FlexConvNet:
             self.layers['Conv' + str(idx)] = Convolution(self.params['W' + str(idx)], self.params['b' + str(idx)], prec['stride'], prec['pad'])
             
             # BatchNorm 선택적 흡수
-            if use_batchnorm:
+            if self.use_batchnorm:
                 self.params['gamma' + str(idx)] = np.ones(prec['filter_num'])
                 self.params['beta' + str(idx)] = np.zeros(prec['filter_num'])
                 self.layers['BatchNorm' + str(idx)] = BatchNormalization(self.params['gamma' + str(idx)], self.params['beta' + str(idx)])
@@ -76,6 +76,8 @@ class FlexConvNet:
                 self.layers['Pool' + str(idx)] = Pooling(pool_h=2, pool_w=2, stride=2)
                 current_h //= 2
                 current_w //= 2
+            if use_dropout and conv_dropout_ratio > 0:
+                self.layers['Dropout_conv' + str(idx)] = Dropout(conv_dropout_ratio)
         # 3. 완전연결계층(Affine) 생성 (DeepConvNet의 가변 은닉층 로직)
         pool_output_size = current_channels * current_h * current_w
         all_affine_sizes = [pool_output_size] + hidden_size_list + [output_size]
@@ -94,7 +96,7 @@ class FlexConvNet:
             if idx < self.total_weight_layers:
                 self.layers['Relu_affine' + str(idx)] = Relu()
                 if use_dropout:
-                    self.layers['Dropout' + str(idx)] = Dropout(dropout_ratio)
+                    self.layers['Dropout' + str(idx)] = Dropout(fc_dropout_ratio)
         
         self.last_layer = SoftmaxWithLoss()
     def __get_init_scale(self, weight_init_std, n):
@@ -171,9 +173,10 @@ class FlexConvNet:
                 grads['b' + str(i)] = layer.db
             
             # --- BatchNorm 파라미터(있는 경우만) 추출 (L2 적용x) ---
-            if 'BatchNorm' + str(i) in self.layers:
-                grads['gamma' + str(i)] = self.layers['BatchNorm' + str(i)].dgamma
-                grads['beta' + str(i)] = self.layers['BatchNorm' + str(i)].dbeta
+            bn_key = 'BatchNorm' + str(i)
+            if self.use_batchnorm and bn_key in self.layers:
+                grads['gamma' + str(i)] = self.layers[bn_key].dgamma
+                grads['beta' + str(i)] = self.layers[bn_key].dbeta
                 
         return grads, loss
     
@@ -213,3 +216,22 @@ class FlexConvNet:
             if 'BatchNorm' + str(i) in self.layers:
                 self.layers['BatchNorm' + str(i)].gamma = self.params['gamma' + str(i)]
                 self.layers['BatchNorm' + str(i)].beta = self.params['beta' + str(i)]
+    def load_params_from_dict(self, params_dict):
+        """딕셔너리로부터 가중치를 받아와 실제 레이어 객체들에 주입"""
+        for i in range(1, self.total_weight_layers + 1):
+            # 1. Conv 처리
+            if 'Conv' + str(i) in self.layers:
+                self.layers['Conv' + str(i)].W = params_dict['W' + str(i)]
+                self.layers['Conv' + str(i)].b = params_dict['b' + str(i)]
+                
+                # BN 처리: 레이어에도 있고, '불러온 데이터'에도 있을 때만!
+                bn_key = 'BatchNorm' + str(i)
+                gamma_key = 'gamma' + str(i)
+                if self.use_batchnorm and bn_key in self.layers and gamma_key in params_dict:
+                    self.layers[bn_key].gamma = params_dict[gamma_key]
+                    self.layers[bn_key].beta = params_dict['beta' + str(i)]
+            
+            # 2. Affine 처리 (이전과 동일)
+            elif 'Affine' + str(i) in self.layers:
+                self.layers['Affine' + str(i)].W = params_dict['W' + str(i)]
+                self.layers['Affine' + str(i)].b = params_dict['b' + str(i)]
