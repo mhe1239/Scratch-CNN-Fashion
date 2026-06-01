@@ -1,7 +1,4 @@
 """
-0. OrderedDict와 list를 쓰는 방식 중 고민하다가 OrderedDict로 채택
-DeepConvNet는 list를 쓰고 SimpleConvNet은 OrderedDict을 사용한
-list를 쓰면 추후 구조를 바꾸면 아에 바꿔야하기에 OrderedDict로 채택
 현재 발전 시킨 DynamicConvNet은 결국 SimpleConvNet기반임
 DynamicConvNet에 DeepConvNet의 장점을 흡수함>FlexConvNet
 아래는 기존 DynamicConvNet과 비교해 바뀐 점이다
@@ -16,21 +13,8 @@ DeepConvNet은 마지막 출력층 직전뿐만 아니라 은닉층 사이사이
 5. 추가, L2로직
 - 4.AdamW에 따라 AdamW과 L2로직이 작동시 이중으로 적용된다
 이에 따라 AdamW일때는 이 로직을 회피하도록 설계한다
-6. Norm 추가
-cnn용 batchNorm을 common.layers에 추가 및 사용
-8. gradient의 구조 변화
-return시 loss까지 함께 하면서 network.loss를 train시 따로 돌리지 않고 gradient의 리턴값을 쓰면서 더 빠른 학습 가능
-9. batchNorm 제외
-이태까지 보통 70%, 아무리 잘 나와도 80%임에 이상함을 느껴 FlexConvNet의 추가사항에 책의 deep_convnet의 기본 구조를 그대로 학습했으나 8 에폭에도  ValAcc: 0.6602임을 보고 Norm과 AdamW를 Adam으로 하고 L2=0으로 하고 돌리니 드디어 잘 나옴을 확인, 따로 구현한 batchNorm이 문제임을 확인함 이후 batchNorm를 제외하니 바로 7에폭때에  ValAcc: 0.9158임을 확인함
-10. 유지보수)predict의 isinstance 제외
-predict에서 dynamic_convnet구조에서 isinstance의 경우 predict함수에만 남은 로직인데,  SW설계와 유지보수 측면에서 심각한 오버헤드(비용)이 발생한다 이를 해결하기 위해  common.layers의 forward함수에 모두 train_flg=False를 추가하는 덕 타이핑(Duck Typing)방식을 사용해 해결했다
-11. 유지보수) accuracy에서 인수로 주어지는 모든 test는 모두 시험해봐야한다
-accuracy에서 모든 데이터를 평가하지 못하는 예외의 경우를 cell을 사용해 해소했음 이에 따라 x.shape[0]를 초과해 탐색하는 경우가 있지만 python은 이를 자동으로 해결한다 but, 보기 안좋으니 이 문제도 min(start_idx + batch_size, x.shape[0])으로 해결했다
-12. class FlexConvNet내의 Nrom=False로 해도 로직은 남기기로 결정
-but, Nrom=False로 해도 그대로 for를 도는 로직이 있기에 Nrom=False인 경우 넘어가도록 수정함
-13. checkpoint 로직 추가
-CNN을 스크래치로 돌리다보니 한 번 돌릴 때 오랜 시간이 걸림
-급한 일로 ^C후 다시 돌려도 돌아가도록 이에 따라 매 에폭마다 pkl파일을 저장하기로 결정함에 따라 load_params_from_dict를 추가함
+6. predict의 x값 수정
+x = layer.forward(x)을 x = layer.forward(x,train_flg)로 수정함으로써 추론 모드임을 명시한다
 """
 # coding: utf-8
 import sys, os
@@ -132,7 +116,7 @@ class FlexConvNet:
             #     x = layer.forward(x, train_flg)
             # else:
             #     x = layer.forward(x)
-            x = layer.forward(x)#common.layer의 forward에 나머지 ,train_flg=False룰 모두 추가해 해결
+            x = layer.forward(x,train_flg)#common.layer의 forward에 나머지 ,train_flg=False룰 모두 추가해 해결
         return x
 
     def loss(self, x, t, train_flg=False):
@@ -161,6 +145,7 @@ class FlexConvNet:
             y = np.argmax(y, axis=1)
             acc += np.sum(y == tt)
         return acc / x.shape[0]
+
     def gradient(self, x, t):
         # forward
         loss = self.loss(x, t, train_flg=True)
