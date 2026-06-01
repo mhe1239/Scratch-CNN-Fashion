@@ -1,28 +1,9 @@
-# 1. 실행할 명령 내용을 안전하게 문자열로 정의합니다 (특수문자 꼬임 없음)
-# -u는 실시간으로 바로바로 로그가 찍히게
 $scriptContent = @'
-cd "C:\src(3-1)\ArtificialIntelligence\w99"
-python -u NoTrainerTrain.py *>&1 | Out-File -FilePath "C:\src(3-1)\ArtificialIntelligence\w99\training.log" -Encoding utf8 -Append
+cd "C:\Scratch-CNN-Fashion\model"
+python -u NoTrainerTrain.py *>&1 | Out-File -FilePath "C:\Scratch-CNN-Fashion\model\training.log" -Encoding utf8 -Append
 '@
-
-# 2. 임시 스크립트 파일로 저장합니다
-$scriptPath = "C:\src(3-1)\ArtificialIntelligence\w99\bg_run.ps1"
-Set-Content -Path $scriptPath -Value $scriptContent -Encoding utf8
-
-# 3. 이 스크립트를 창을 완전히 숨겨서(Hidden) 독립된 프로세스로 실행합니다
-Start-Process powershell -ArgumentList "-NoProfile -ExecutionPolicy Bypass -File `"$scriptPath`"" -WindowStyle Hidden
-
-
-# ------------cmd창에 현재 output을 남긴다
-Get-Content "C:\src(3-1)\ArtificialIntelligence\w99\training.log" -Wait
-taskkill /F /IM python.exe
-#=====================
-
-$scriptContent = @'
-cd "C:\src(3-1)\ArtificialIntelligence\w99"
-python -u NoTrainerTrain.py *>&1 | Out-File -FilePath "C:\src(3-1)\ArtificialIntelligence\w99\training.log" -Encoding utf8 -Append
-'@
-$scriptPath = "C:\src(3-1)\ArtificialIntelligence\w99\bg_run.ps1"
+$scriptPath = "C:\Scratch-CNN-Fashion\model\bg_run.ps1"
 Set-Content -Path $scriptPath -Value $scriptContent -Encoding utf8
 Start-Process powershell -ArgumentList "-NoProfile -ExecutionPolicy Bypass -File `"$scriptPath`"" -WindowStyle Hidden
-Get-Content "C:\src(3-1)\ArtificialIntelligence\w99\training.log" -Wait
+
+Get-Content "C:\Scratch-CNN-Fashion\model\training.log" -Wait
