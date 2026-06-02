@@ -243,7 +243,7 @@ network = FlexConvNet(input_dim=(1, 28, 28),
                       weight_decay_lambda=net_weight_decay)
 # 옵티마이저를 먼저 생성 (로드하기 위해 객체가 필요함)
 if optimizer_type.lower() == 'adamw':
-    optimizer = FlexAdamW(lr=learning_rate, weight_decay=opt_weight_decay)
+    optimizer = AdamWH(lr=learning_rate, weight_decay=opt_weight_decay)
 else:
     optimizer = Adam(lr=learning_rate)
 # 학습 상태 변수 및 체크포인트 로드
