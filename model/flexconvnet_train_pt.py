@@ -14,6 +14,7 @@ Get-Content "C:\Scratch-CNN-Fashion\model\training.log" -Wait
 taskkill /F /IM python.exe
 """
 """
+시작시 하이퍼파라미터 상태 출력 추가
 Early Stopping 로직 추가
 """
 import torch
@@ -23,24 +24,25 @@ from torch.utils.data import DataLoader, Subset
 from torchvision import datasets, transforms
 import numpy as np
 import matplotlib.pyplot as plt
-import time
-import os, pickle
+import time, sys, os, pickle
 from datetime import timedelta
-
-# [유틸리티] 번호 관리 함수
-def _get_and_update_log_num(log_num_path):
+torch.cuda.empty_cache()
+def _get_current_log_num(log_num_path):
+    """현재 번호가 몇 번인지 읽어오기만 함 (업데이트 X)"""
     if os.path.exists(log_num_path):
         with open(log_num_path, 'r', encoding='utf-8') as f:
             try:
-                current_num = int(f.read().strip())
+                return int(f.read().strip())
             except ValueError:
-                current_num = 0
-    else:
-        current_num = 0
+                return 0
+    return 0
+def _increment_log_num(log_num_path):
+    """모든 과정이 성공했을 때만 실행하여 번호를 1 증가시킴"""
+    current_num = _get_current_log_num(log_num_path)
     next_num = current_num + 1
     with open(log_num_path, 'w', encoding='utf-8') as f:
         f.write(str(next_num))
-    return current_num
+    print(f"Log ID {current_num} finalized and updated to {next_num}.")
 
 # 1. 데이터 로드 및 전처리 (Fashion-MNIST)
 def get_data_loaders(batch_size=256, val_ratio=0.2):
@@ -48,7 +50,7 @@ def get_data_loaders(batch_size=256, val_ratio=0.2):
     t_train = transforms.Compose([
         transforms.RandomHorizontalFlip(),
         transforms.RandomRotation(10),
-        transforms.RandomAffine(degrees=0, translate=(0.1, 0.1)),
+        transforms.RandomAffine(degrees=0, translate=(0.1, 0.1)),# 평행 이동
         transforms.ToTensor(),
         transforms.Normalize((0.5,), (0.5,))
     ])
@@ -136,40 +138,41 @@ class FlexConvNet(nn.Module):
 
 def main():
     start_time = time.time()
-    log_num_path = os.path.join(os.path.dirname(__file__), '..', 'common', 'lognum_pt.txt')
-    log_num = _get_and_update_log_num(log_num_path)
     
-    print(f"================ Training Started (PyTorch) - ID: {log_num} ================")
+    
+    print(f"================ Training Started (PyTorch) ================")
 
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     train_loader, val_loader, test_loader, train_size = get_data_loaders(batch_size=256)
     
     conv_params = [
-        {'filter_num':64, 'filter_size':3, 'pad':1, 'stride':1, 'pool':False},
-        {'filter_num':64, 'filter_size':3, 'pad':1, 'stride':1, 'pool':True},  # 14x14
         {'filter_num':128, 'filter_size':3, 'pad':1, 'stride':1, 'pool':False},
-        {'filter_num':128, 'filter_size':3, 'pad':1, 'stride':1, 'pool':True}, # 7x7
+        {'filter_num':128, 'filter_size':3, 'pad':1, 'stride':1, 'pool':True},  # 14x14
         {'filter_num':256, 'filter_size':3, 'pad':1, 'stride':1, 'pool':False},
-        {'filter_num':256, 'filter_size':3, 'pad':1, 'stride':1, 'pool':True}  # 3x3
+        {'filter_num':256, 'filter_size':3, 'pad':1, 'stride':1, 'pool':True},  # 7x7
+        {'filter_num':512, 'filter_size':3, 'pad':1, 'stride':1, 'pool':False},
+        {'filter_num':512, 'filter_size':3, 'pad':1, 'stride':1, 'pool':True}   # 3x3
     ]
-    max_epochs = 100
+    max_epochs = 60
     lr = 0.003
-    wd = 0.05
+    wd = 0.1
     patience=25
+    hidden_size_list=[512]
     config = {
         'optimizer': 'AdamW', 'lr': lr, 'batch_size': 256, 'max_epochs': max_epochs,
-        'conv_param_list': conv_params, 'hidden_size_list': [256],
+        'conv_param_list': conv_params, 'hidden_size_list': hidden_size_list,
         'use_batchnorm': True, 'conv_dropout_ratio': 0.0, 'fc_dropout_ratio': 0.5, 'weight_decay': wd
     }
     print("\n" + "="*50 + "\n                 [ HYPERPARAMETERS ]\n" + summarize_results(config) + "\n" + "="*50 + "\n")
 
-    model = FlexConvNet(conv_param_list=conv_params, hidden_size_list=[256], fc_dropout_ratio=0.5).to(device)
+    model = FlexConvNet(conv_param_list=conv_params, hidden_size_list=hidden_size_list, fc_dropout_ratio=0.5).to(device)
     optimizer = optim.AdamW(model.parameters(), lr=lr, weight_decay=wd)
-    criterion = nn.CrossEntropyLoss()
+    criterion = nn.CrossEntropyLoss(label_smoothing=0.1)#모델이 정답을 100% 확신하지 못하게 살짝 깎아주는 기법
     scheduler = optim.lr_scheduler.OneCycleLR(optimizer, max_lr=lr, steps_per_epoch=len(train_loader), epochs=max_epochs)
-
     history = {'train_loss': [], 'train_acc': [], 'val_acc': [], 'lr': []}
     best_val_acc, prev_epoch_loss, loss_stagnant_cnt = 0, float('inf'), 0
+    log_num_path = os.path.join(os.path.dirname(__file__), '..', 'common', 'lognum_pt.txt')
+    log_num =_get_current_log_num(log_num_path)
     peak_reached, model_save_path = False, f'flex_best_model_pt({log_num}).pt'
 
     for epoch in range(max_epochs):
@@ -240,6 +243,7 @@ def main():
         if patience_counter >= patience:
             print(f"\n[ Early Stopping] {patience} 에폭 동안 개선이 없어 학습을 종료합니다.")
             break
+    log_num = _increment_log_num(log_num_path)
 
     print("\n" + "="*40 + "\n          Training Finished\n" + "="*40)
     model.load_state_dict(torch.load(model_save_path))
@@ -262,7 +266,12 @@ def main():
     plt.subplot(1, 2, 1); plt.plot(history['train_acc'], label='Train Acc'); plt.plot(history['val_acc'], label='Val Acc')
     plt.title(f'Accuracy History ({log_num})'); plt.legend(); plt.grid(True, alpha=0.3)
     plt.subplot(1, 2, 2); plt.plot(history['lr'], color='green'); plt.title('Learning Rate History'); plt.yscale('log'); plt.grid(True, alpha=0.3)
-    plt.savefig(f'my_plot_pt({log_num}).png', bbox_inches='tight')
+    plt.savefig(f'my_plot_pt({log_num}).png', bbox_inches='tight');
+    plt.close('all')
+    if torch.cuda.is_available():#GPU 캐시 지우기
+        torch.cuda.empty_cache()
 
 if __name__ == '__main__':
     main()
+    print("Learning and all tests have been completed.")
+    sys.exit(0)
