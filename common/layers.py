@@ -99,8 +99,9 @@ class SoftmaxWithLoss:
         
         return dx
 
-#test시에 더 빠른 속도로 연산
+#test시에 더 빠른 속도로 연산, 이전의 형식의 pkl가 와도 OK임
 class Dropout:
+    #Inverted Dropout
     def __init__(self, dropout_ratio=0.5):
         self.dropout_ratio = dropout_ratio
         self.mask = None
