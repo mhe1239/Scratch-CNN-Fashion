@@ -16,6 +16,8 @@ taskkill /F /IM python.exe
 """
 시작시 하이퍼파라미터 상태 출력 추가
 Early Stopping 로직 추가
+모두 학습 후 끝나지 않아서 끝나도록 캐시 비우기, plt.close('all');sys.exit(0) 추가
+log_num은 이 코드에선 코드 시작시 주는데 학습이 모두 끝난 후 부여하도록 변경
 """
 import torch
 import torch.nn as nn
@@ -43,6 +45,7 @@ def _increment_log_num(log_num_path):
     with open(log_num_path, 'w', encoding='utf-8') as f:
         f.write(str(next_num))
     print(f"Log ID {current_num} finalized and updated to {next_num}.")
+    return current_num
 
 # 1. 데이터 로드 및 전처리 (Fashion-MNIST)
 def get_data_loaders(batch_size=256, val_ratio=0.2):
@@ -141,7 +144,7 @@ def main():
     
     
     print(f"================ Training Started (PyTorch) ================")
-
+    print(f"{os.path.basename(__file__)}")
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     train_loader, val_loader, test_loader, train_size = get_data_loaders(batch_size=256)
     
@@ -163,7 +166,7 @@ def main():
         'conv_param_list': conv_params, 'hidden_size_list': hidden_size_list,
         'use_batchnorm': True, 'conv_dropout_ratio': 0.0, 'fc_dropout_ratio': 0.5, 'weight_decay': wd
     }
-    print("\n" + "="*50 + "\n                 [ HYPERPARAMETERS ]\n" + summarize_results(config) + "\n" + "="*50 + "\n")
+    print("="*50 + "\n                 [ HYPERPARAMETERS ]\n" + summarize_results(config) + "\n" + "="*50 + "\n")
 
     model = FlexConvNet(conv_param_list=conv_params, hidden_size_list=hidden_size_list, fc_dropout_ratio=0.5).to(device)
     optimizer = optim.AdamW(model.parameters(), lr=lr, weight_decay=wd)
@@ -256,7 +259,7 @@ def main():
             _, predicted = outputs.max(1)
             test_total += labels.size(0)
             test_correct += predicted.eq(labels).sum().item()
-
+    print(f"flex_history_pt({log_num}).pkl&flex_best_model_pt({log_num}).pt")
     print(f"Final Val Acc (Best): {best_val_acc:.4f}")
     print(f"Final Test Acc (Real): {test_correct / test_total:.4f}")
     elapsed = str(timedelta(seconds=time.time()-start_time))
@@ -266,7 +269,8 @@ def main():
     plt.subplot(1, 2, 1); plt.plot(history['train_acc'], label='Train Acc'); plt.plot(history['val_acc'], label='Val Acc')
     plt.title(f'Accuracy History ({log_num})'); plt.legend(); plt.grid(True, alpha=0.3)
     plt.subplot(1, 2, 2); plt.plot(history['lr'], color='green'); plt.title('Learning Rate History'); plt.yscale('log'); plt.grid(True, alpha=0.3)
-    plt.savefig(f'my_plot_pt({log_num}).png', bbox_inches='tight');
+    plt.savefig(f'my_plot_pt({log_num}).png', bbox_inches='tight')
+    
     plt.close('all')
     if torch.cuda.is_available():#GPU 캐시 지우기
         torch.cuda.empty_cache()
