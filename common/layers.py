@@ -314,17 +314,24 @@ class Convolution:
         # 가중치와 편향 매개변수의 기울기
         self.dW = None
         self.db = None
-    def forward(self, x,train_flg=False):
+    def forward(self, x,train_flg=False):#4차원 행렬을 일반적인 행렬곱(dot)을 위해 y=xw+b형태로 변환
+        #가중치 필터(w)에서 필터수,채널수,필터h,필터w 추출
         FN, C, FH, FW = self.W.shape
+        # 입력 데이터에서 배치 크기,채널수,높이,너비 추출
         N, C, H, W = x.shape
+        #out 크기 구함
         out_h = 1 + int((H + 2*self.pad - FH) / self.stride)
         out_w = 1 + int((W + 2*self.pad - FW) / self.stride)
+        # 이미지에서 필터가 마주치는 윈도우 영역인 3차원 영역(c,fn,fw)를 모두 1차원으로 펼쳐 2차원 행렬 만듦
         col = im2col(x, FH, FW, self.stride, self.pad)
+        # #4차원 필터도 하나당 1개의 열을 차지하도록 1차원으로 변형 후 곱을 위해 전치(.T)시킨다
         col_W = self.W.reshape(FN, -1).T
+        # 변형된 두 행렬을 np.dot으로 한 번에 내적 연산하고, 편향 b를 더함
         out = np.dot(col, col_W) + self.b
         # out은 (N × out_h × out_w, FN)구조의 2차원 메트릭스 이를 다음 layer로 넘기기 위해 4차원으로 변환해야함
         # (0:N, 1:H, 2:W, 3:C)을 (0, 3, 1, 2)로 뒤바꿔 (N, FN, out_h, out_w) format으로 만듦
         out = out.reshape(N, out_h, out_w, -1).transpose(0, 3, 1, 2)
+        #역전파를 위해 저장
         self.x = x
         self.col = col
         self.col_W = col_W
@@ -334,11 +341,16 @@ class Convolution:
         # 뒤에서 들어온 4차원을 가중치 미분(dW) 계산을 위해 다시 2차원으로 바꿈
         # (0:N, 1:FN, 2:out_h, 3:out_w) 구조를 (N*out_h*out_w, FN)구조의 2차원 형렬로 바꿔 self.col.T와 행렬 곱이 가능하게 함
         dout = dout.transpose(0,2,3,1).reshape(-1, FN)
+        # 변향과 가중치의 기울기를 계산한다
+        # dout을 세로축을 모두 더해 편향의 기울기인 db를 구함(b는 필터당 1개씩 존재해서)
         self.db = np.sum(dout, axis=0)
+        # 순반향때 전개했던 이미지 행렬인 col.T와 out을 곱해 가중치 기울기 dW를 구함
         self.dW = np.dot(self.col.T, dout)
         # 2차원 행렬로 구한 dW를 다시 4차원으로 복원, 모델의 실제 가중치 self.W는 (FN, C, FH, FW)의 4차원 구조이기에 (C*FH*FW, FN)구조를 다시 4차원으로 되돌림
         self.dW = self.dW.transpose(1, 0).reshape(FN, C, FH, FW)
+        # # dout에 순방향 행렬의 전치인 col_W.T를 곱해 펼쳐진 이미지 형태의 기울기인 dcol(이때 여전히 2차원 행렬 상태)을 계산함
         dcol = np.dot(dout, self.col_W.T)
+        # 2차원 형태인 dcol을 입력이미지 모형인 x.shape의 4차원 구조로 복원해 넘김
         dx = col2im(dcol, self.x.shape, FH, FW, self.stride, self.pad)
         return dx
 
@@ -352,26 +364,37 @@ class Pooling:
         self.x = None
         self.arg_max = None
     def forward(self, x,train_flg=False):
+        # 입력 데이터에서 배치 크기,채널수,높이,너비 추출
         N, C, H, W = x.shape
+        # out 크기 구함
         out_h = int(1 + (H - self.pool_h) / self.stride)
         out_w = int(1 + (W - self.pool_w) / self.stride)
+        # 4차원 이미지에서 풀링 윈도우가 지나가는 영역들을 한 줄짜리 1차원 배열로 펼쳐 2차원 행렬로 만듦
         col = im2col(x, self.pool_h, self.pool_w, self.stride, self.pad)
+        # 전개된 행렬을 [전체 윈도우 개수, 하나의 윈도우 안의 원소 개수] 모양의 2차원 행렬로 재정렬해 윈도우별로 Max값을 찾기 쉽게 한다
         col = col.reshape(-1, self.pool_h*self.pool_w)
+        # 윈도우 내의 가장 큰 값이 몇번째 열에 있었는지 그 index를 기록
         arg_max = np.argmax(col, axis=1)
         # 각 윈도우에서 대푯값 하나 뽑음 
         out = np.max(col, axis=1)
+        # 더 쉬운 연산을 위해 가져옴
         out = out.reshape(N, out_h, out_w, C).transpose(0, 3, 1, 2)
+        # 역전파를 위해 저장
         self.x = x
         self.arg_max = arg_max
         return out
     def backward(self, dout):
+        # forward로 바꿨기에 다시 transpose함 
         dout = dout.transpose(0, 2, 3, 1)
         pool_size = self.pool_h * self.pool_w
         # np.argmax로 윈도우에서 Max값(self.arg_max)을 제외하고 나머지 미분값은 0으로 채워 노이즈 없앰
         # 역전파 시 가중치 업데이트가 핵심 특징을 유발한 뉴런들에게만 집중되어 네트워크 전반에 희소성(Sparsity)이 확보
         dmax = np.zeros((dout.size, pool_size))
         dmax[np.arange(self.arg_max.size), self.arg_max.flatten()] = dout.flatten()
+        # 2차원 행렬이었던 dmax를 다시 4차원 형태에 가깝게 변형
         dmax = dmax.reshape(dout.shape + (pool_size,))
+        # 방금 만든 5차원 행렬을 다시 col2im가 인식 가능한 2차원 행렬로 변환
         dcol = dmax.reshape(dmax.shape[0] * dmax.shape[1] * dmax.shape[2], -1)
+        # 2차원으로 펼쳤던 기울기 행렬 dcol을 원래 이미지 형상인 4차원인 dx와 똑같게 조립함
         dx = col2im(dcol, self.x.shape, self.pool_h, self.pool_w, self.stride, self.pad)
         return dx
