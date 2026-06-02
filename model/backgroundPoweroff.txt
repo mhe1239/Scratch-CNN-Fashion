@@ -19,3 +19,19 @@ Start-Process powershell -ArgumentList "-NoProfile -ExecutionPolicy Bypass -File
 
 =====자동 종료 방지
 shutdown /a
+
+
+# --- 하이퍼파라미터 ---
+lr = 0.003             # 더 시원한 속도!
+weight_decay = 0.05    # 유지 (충분히 강력함)
+fc_dropout_ratio = 0.5 # 유지 (오버피팅 방벽)
+
+# --- 아키텍처: VGG 6층 (2-2-2 구조) ---
+conv_params = [
+    {'filter_num':64, 'filter_size':3, 'pad':1, 'stride':1, 'pool':False},
+    {'filter_num':64, 'filter_size':3, 'pad':1, 'stride':1, 'pool':True},  # 14x14
+    {'filter_num':128, 'filter_size':3, 'pad':1, 'stride':1, 'pool':False},
+    {'filter_num':128, 'filter_size':3, 'pad':1, 'stride':1, 'pool':True}, # 7x7
+    {'filter_num':256, 'filter_size':3, 'pad':1, 'stride':1, 'pool':False},
+    {'filter_num':256, 'filter_size':3, 'pad':1, 'stride':1, 'pool':True}  # 3x3
+]

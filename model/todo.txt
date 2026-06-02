@@ -8,3 +8,4 @@ lr과 Batch는 비례 관계이다
 전체 데이터를 배치 사이즈로 나눈 몫이 1에폭당 필요한 이터레이션(Iteration) 횟수가 되는데 이게 완전히 나눠 떨어져야한다 즉, train data의 갯수가 배치 사이즈로 나눠 떨어져야한다
 iter_per_epoch = max(train_size // batch_size==0이어야한다, 1)
 이에 따라 batchNorm도 문제가 생긴다 배치 사이즈가 256일 때 최적화되도록 가중치 감쇠(Weight Decay)나 배치 정규화(BatchNorm)를 세팅해 놨는데, 갑자기 마지막에 232개짜리 족보 없는 사이즈가 들어오면 그라디언트의 크기가 요동치거나 통계치가 왜곡되어 학습이 불안정해질 수 있기 때문 
+#DOTO: get_loss_in_batches을 .loss를 로직적으로 더 좋게 바꿀 순 없는가?
