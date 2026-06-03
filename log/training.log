@@ -8615,3 +8615,76 @@ Final Test Acc (Real): 0.9499
 Total Elapsed Time: 15:00:39.560
 ========================================
 Learning and all tests have been completed.
+Changes from the previous logic: 오차 문제를 해결하고 BatchNorm을 다시 적용해 돌림(conv_params가 3층인 이유는 이전 6층 로직이 Conv의 오차로 인해 더 안나왔던 전적 때문) 
+================ Training Started ================
+==> AdamW 감지: Optimizer에서 Weight Decay(0.01)를 처리합니다.
+Data Split - Train: 48000, Val: 12000, Test: 10000
+
+==================================================
+                 [ HYPERPARAMETERS ]
+Optimizer: AdamW  , LR: 0.0005 , Batch:  240, Epochs: 100, Iters: 20000, Depth(FC): 1, Act/Init: relu/he   , L2: 0.01   , BN: F, ConvDrop: 0.0  , FcDrop: 0.3  
+
+  [ CNN Architecture Flow ]
+  -------------------------------------------------------
+  | Layer | Filter Num | Filter Size | Pad | Stride | Pool  |
+  -------------------------------------------------------
+  | C_1   |     64     |      3      |  1  |   1    |   T   |
+  | C_2   |    128     |      3      |  1  |   1    |   T   |
+  | C_3   |    256     |      3      |  1  |   1    |   F   |
+  -------------------------------------------------------
+==================================================
+
+
+--- Epoch 01 / 100 ---
+  [Iter 050/200] Current Batch Loss: 0.8224
+  [Iter 100/200] Current Batch Loss: 0.5157
+  [Iter 150/200] Current Batch Loss: 0.6249
+  [Iter 200/200] Current Batch Loss: 0.7098
+Epoch 01/100 | Loss: 0.8126 | TrainAcc: 0.8190 | ValAcc: 0.7964 | LR: 0.000498 | Time: 734.03s
+
+--- Epoch 02 / 100 ---
+  [Iter 050/200] Current Batch Loss: 0.7062
+  [Iter 100/200] Current Batch Loss: 0.5945
+  [Iter 150/200] Current Batch Loss: 0.5560
+  [Iter 200/200] Current Batch Loss: 0.5829
+Epoch 02/100 | Loss: 0.5528 | TrainAcc: 0.7990 | ValAcc: 0.7977 | LR: 0.000500 | Time: 782.42s
+
+--- Epoch 03 / 100 ---
+  [Iter 050/200] Current Batch Loss: 0.5916
+  [Iter 100/200] Current Batch Loss: 0.6137
+  [Iter 150/200] Current Batch Loss: 0.5660
+  [Iter 200/200] Current Batch Loss: 0.7211
+Epoch 03/100 | Loss: 0.5864 | TrainAcc: 0.8400 | ValAcc: 0.8268 | LR: 0.000500 | Time: 888.75s
+
+--- Epoch 04 / 100 ---
+  [Iter 050/200] Current Batch Loss: 0.6990
+  [Iter 100/200] Current Batch Loss: 0.6476
+  [Iter 150/200] Current Batch Loss: 0.6533
+  [Iter 200/200] Current Batch Loss: 0.5930
+Epoch 04/100 | Loss: 0.6122 | TrainAcc: 0.8170 | ValAcc: 0.7961 | LR: 0.000499 | Time: 828.24s
+
+--- Epoch 05 / 100 ---
+  [Iter 050/200] Current Batch Loss: 0.6070
+  [Iter 100/200] Current Batch Loss: 0.6929
+  [Iter 150/200] Current Batch Loss: 0.6539
+  [Iter 200/200] Current Batch Loss: 0.7096
+  [Dynamic Scheduler] Loss 정체 3회 발생! Base LR 50% 삭감 → 0.000250
+Epoch 05/100 | Loss: 0.6774 | TrainAcc: 0.8000 | ValAcc: 0.7863 | LR: 0.000498 | Time: 712.63s
+
+--- Epoch 06 / 100 ---
+  [Iter 050/200] Current Batch Loss: 0.7025
+  [Iter 100/200] Current Batch Loss: 0.6348
+  [Iter 150/200] Current Batch Loss: 0.6515
+  [Iter 200/200] Current Batch Loss: 0.7157
+Epoch 06/100 | Loss: 0.6284 | TrainAcc: 0.8110 | ValAcc: 0.8073 | LR: 0.000248 | Time: 788.94s
+  [Scheduler] Reduce Base LR for Cosine → 0.000125
+
+--- Epoch 07 / 100 ---
+  [Iter 050/200] Current Batch Loss: 0.6029
+  [Iter 100/200] Current Batch Loss: 0.6173
+  [Iter 150/200] Current Batch Loss: 0.5717
+  [Iter 200/200] Current Batch Loss: 0.5650
+Epoch 07/100 | Loss: 0.5908 | TrainAcc: 0.8190 | ValAcc: 0.8174 | LR: 0.000124 | Time: 867.58s
+
+--- Epoch 08 / 100 ---
+  [Iter 050/200] Current Batch Loss: 0.6202

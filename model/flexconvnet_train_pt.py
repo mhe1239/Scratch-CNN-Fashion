@@ -3,14 +3,14 @@ pt파일을 실행하기 위한 인터프리터 파일 경로C:\pytorch_src\my_e
 ->여기서 python.exe선택
 $scriptContent = @'
 cd "C:\Scratch-CNN-Fashion\model"
-python -u flexconvnet_train_pt.py *>&1 | Out-File -FilePath "C:\Scratch-CNN-Fashion\model\training.log" -Encoding utf8 -Append
+python -u flexconvnet_train_pt.py *>&1 | Out-File -FilePath "C:\Scratch-CNN-Fashion\log\training.log" -Encoding utf8 -Append
 shutdown /s /f /t 60
 '@
 $scriptPath = "C:\Scratch-CNN-Fashion\model\bg_run.ps1"
 Set-Content -Path $scriptPath -Value $scriptContent -Encoding utf8
 Start-Process powershell -ArgumentList "-NoProfile -ExecutionPolicy Bypass -File `"$scriptPath`"" -WindowStyle Hidden
 
-Get-Content "C:\Scratch-CNN-Fashion\model\training.log" -Wait
+Get-Content "C:\Scratch-CNN-Fashion\log\training.log" -Wait
 
 taskkill /F /IM python.exe
 """
