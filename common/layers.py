@@ -217,6 +217,8 @@ class BatchNormalization:
 """
 #기존 common.layers의 BN은 Affine용(2dim)이기에 이미지의 H,W를 구분하지 못해 채널 수와 전체 크기를 맞추지 못함
 #->노이즈로 인해 사용하지않기로함
+# 원인: Scratch로 구현된 BatchNorm에서 /로 나눈 경우 부동 소수점을 모두 저장 할 수 없음(pi의 무한 소수를 담는 다면 float64까지가 최대이고 이후부터는 짤림) 이에 따라 오차가 발생함 이를 위해 __forward의 eps을 1e-7이 아닌 1e-5으로 바꿈 그리고 var와 std는 수학적으론 0이상이 나오지만 부동소수점 문제로 미세하게 작은 -값이 나올 수 있기에 np.maximum을 적용함
+# 또한 /연산이 많은 __backward을 간결하게 바꿈 
 class BatchNormalization:
     def __init__(self, gamma, beta, momentum=0.9, running_mean=None, running_var=None):
         self.gamma = gamma
@@ -244,6 +246,7 @@ class BatchNormalization:
         return out.reshape(*self.input_shape) # 다시 원래 형상으로 복원
             
     def __forward(self, x, train_flg):
+        eps = 1e-5 # 오차 상향 조정
         if self.running_mean is None:
             N, D = x.shape
             self.running_mean = np.zeros(D)
@@ -252,19 +255,18 @@ class BatchNormalization:
         if train_flg:
             mu = x.mean(axis=0)
             xc = x - mu
-            var = np.mean(xc**2, axis=0)
-            std = np.sqrt(var + 10e-5)
-            xn = xc / std
-            
+            var = np.maximum(np.mean(xc**2, axis=0), 0)#var = np.mean(xc**2, axis=0), 수학적으로 분산은 음수가 나올 수 없지만 x-mu과정에서 부동소수점 오차로 인해 var가 0보다 미세하게 작은 -1e-18같은 값이 나올 수 있음, np.sqrt은 음수 받으면 NaN을 반환하기에 이를 방지하는 것이 오류 누적을 막음
+            self.std = np.sqrt(var + eps)#std = np.sqrt(var + eps)
+            xn = xc / self.std#xn = xc / std
             self.batch_size = x.shape[0]
             self.xc = xc
             self.xn = xn
-            self.std = std
+            # self.std = std
             self.running_mean = self.momentum * self.running_mean + (1 - self.momentum) * mu
             self.running_var = self.momentum * self.running_var + (1 - self.momentum) * var            
         else:
             xc = x - self.running_mean
-            xn = xc / np.sqrt(self.running_var + 10e-7)
+            xn = xc / np.sqrt(self.running_var + eps)
             
         out = self.gamma * xn + self.beta 
         return out
@@ -277,12 +279,13 @@ class BatchNormalization:
         dx = self.__backward(dout)
         dx = dx.reshape(*self.input_shape)
         return dx
-
+    """
     def __backward(self, dout):
+        std = np.maximum(self.std, 1e-5)#var와 같은 혹시 모를 std 값의 소실 방지
         dbeta = dout.sum(axis=0)
         dgamma = np.sum(self.xn * dout, axis=0)
         dxn = self.gamma * dout
-        dxc = dxn / self.std
+        dxc = dxn / std#위에서 정의한 std사용
         dstd = -np.sum((dxn * self.xc) / (self.std**2), axis=0)
         dvar = 0.5 * dstd / self.std
         dxc += (2.0 / self.batch_size) * self.xc * dvar
@@ -292,9 +295,30 @@ class BatchNormalization:
         self.dgamma = dgamma
         self.dbeta = dbeta
         return dx
+    """
+    # https://arxiv.org/abs/1502.03167 __backward에서 사용 중인 수식은 사실 BatchNorm의 역전파를 수학적으로 가장 충실하게 구현한 방식이지만 /로 나누는 로직이 많기에 부동소수점 오차(Floating-point drift)가 쌓일 가능성이 있기에 이를 더 안정적이고 간결하게 바꿈
+    def __backward(self, dout):
+        self.dgamma = np.sum(self.xn * dout, axis=0)
+        self.dbeta = np.sum(dout, axis=0)
+        safe_std = np.maximum(self.std, 1e-5)#수치적 안정성을 위해 std 값을 하한선으로 고정 (eps와 동일한 1e-5 사용)
+        # 2. BatchNorm의 역전파 핵심 (간결화)
+        # 공식: dx = (gamma / std) * [dout - mean(dout) - xn * mean(dout * xn)]
+        # 이 방식은 중간 변수(dstd, dvar 등)를 많이 거치지 않아 오차 축적을 방지
+        N = self.batch_size
+        dxn = self.gamma * dout
+        # 여기서 mean() 연산을 효율적으로 사용, 이 한 줄이 위에서 쓰던 복잡한 4~5줄의 수식을 대체
+        dx = (1.0 / (N * safe_std)) * ( N * dxn - np.sum(dxn, axis=0) - self.xn * np.sum(dxn * self.xn, axis=0))
+        return dx
 
 
-
+# Scratch로 구현된 Conv는 BatchNrom과는 다른 문제가 있는데 이는 CNN의 깊은 층으로 갈수록 발생하는 '데이터의 분산 소실/폭주'와 관련이 깊음
+# 가장 큰 문제, 가중치 정규화(BatchNrom)가 없음: Convolution 레이어는 Affine 레이어보다 가중치 개수(Weight parameters)가 훨씬 많은데 BatchNormalization가 없으면 층이 5-6개만 넘어가도 입력 데이터의 분포가 레이어를 지날수록 0으로 수렴하거나 무한대로 발산한다
+# ->Convolution 연산은 가중치를 공유하는 행렬 곱의 연속인데 BatchNrom이 없으면 다음과 같은 문제가 발생함
+# - 1. Internal Covariate Shift: Conv 레이어를 통과할 때마다 출력값의 평균과 분산이 계속 변함, 뒤로 갈수록 분포가 극단적으로 쏠리게 됨
+# - 2. Activation Saturation: ReLU를 사용 중이면 분포가 음수 쪽으로 너무 많이 쏠릴 경우 모든 뉴런이 0을 출력하는 Dying ReLU 현상이 발생
+# - 3. 가중치 크기(Scale): Affine은 입력 차원이 고정적이지만, Conv는 Filter size * Filter size * Channel만큼의 입력을 받음. 이 때문에 He 초기화가 완벽하지 않으면 초반부터 학습이 꼬임
+# backward에서의 pad 복원: col2im은 이미지 패딩을 포함한 크기로 되돌리는데, 마지막에 슬라이싱([:, :, pad:H + pad, ...])을 할 때, 만약 stride가 1이 아니라면 col2im 내부의 img 생성 크기가 미세하게 달라질 수 있다
+# BatchNorm이 없다면 lr은 1e-3~1e-4로 잡아야하며 lr이 0.01 이상으로 높다면 BatchNorm이 없는 CNN은 수렴하기 어려움
 class Convolution:
     """
     W: NDArray[float64],
@@ -302,11 +326,12 @@ class Convolution:
     stride: int = 1,
     pad: int = 0
     """
-    def __init__(self, W, b, stride=1, pad=0):
+    def __init__(self, W, b, stride=1, pad=0, use_batchnorm=False):
         self.W = W
         self.b = b
         self.stride = stride
         self.pad = pad
+        self.use_batchnorm = use_batchnorm # BN 사용 여부 저장
         # 중간 데이터（backward 시 사용）
         self.x = None   
         self.col = None
@@ -330,6 +355,8 @@ class Convolution:
         out = np.dot(col, col_W) + self.b
         # out은 (N × out_h × out_w, FN)구조의 2차원 메트릭스 이를 다음 layer로 넘기기 위해 4차원으로 변환해야함
         # (0:N, 1:H, 2:W, 3:C)을 (0, 3, 1, 2)로 뒤바꿔 (N, FN, out_h, out_w) format으로 만듦
+        if not self.use_batchnorm:# out의 값은 0.1-0.5
+            out *= 0.5 # Activation Scaling BN을 쓰지 않는 경우 Conv의 출력을 강제로 일정 수준으로 맞춰주는 고정 스케일링
         out = out.reshape(N, out_h, out_w, -1).transpose(0, 3, 1, 2)
         #역전파를 위해 저장
         self.x = x
@@ -398,3 +425,85 @@ class Pooling:
         # 2차원으로 펼쳤던 기울기 행렬 dcol을 원래 이미지 형상인 4차원인 dx와 똑같게 조립함
         dx = col2im(dcol, self.x.shape, self.pool_h, self.pool_w, self.stride, self.pad)
         return dx
+
+# CNN에서는 채널 단위 정규화인 GroupNorm가 LayerNorm보다 좋다곤 함
+class LayerNormalization:
+    def __init__(self, gamma, beta, eps=1e-5):
+        self.gamma = gamma
+        self.beta = beta
+        self.eps = eps
+        self.xn = None
+        self.std = None
+        self.x_shape = None
+    def forward(self, x, train_flg=True):#LayerNorm에선 train_flg가 T/F이든 상관없음
+        self.x_shape = x.shape
+        # 마지막 차원을 기준으로 평균과 분산 계산
+        # x: (N, D) 또는 (N, C, H, W)에서 마지막 축을 기준으로 처리
+        mu = x.mean(axis=-1, keepdims=True)
+        var = x.var(axis=-1, keepdims=True)
+        
+        self.std = np.sqrt(var + self.eps)
+        self.xn = (x - mu) / self.std
+        
+        return self.gamma * self.xn + self.beta
+    def backward(self, dout):
+        # LayerNorm의 역전파는 BatchNorm보다 훨씬 깔끔
+        # D는 특징 차원(마지막 축의 크기)
+        N = dout.shape[-1]
+        # 가중치 미분
+        self.dgamma = np.sum(dout * self.xn, axis=0)
+        self.dbeta = np.sum(dout, axis=0)
+        # 입력에 대한 미분 (중간 변수 최소화로 오차 감소)
+        dx = (self.gamma / self.std) * ( dout - np.mean(dout, axis=-1, keepdims=True) - self.xn * np.mean(dout * self.xn, axis=-1, keepdims=True))
+        return dx
+
+class GroupNormalization:
+    #gamma는 np.ones(C), beta는 np.zeros(C)로 초기화하여 사용
+    # group=2 or group=4#채널 수 C가 작다면(예: 32) group=8 정도로 설정하여 그룹당 채널 수를 4개 정도로 유지하는 것이 성능이 좋음
+    def __init__(self, gamma, beta, group=2, eps=1e-5):
+        self.gamma = gamma # (C,)
+        self.beta = beta   # (C,)
+        self.group = group
+        self.eps = eps
+
+    def forward(self, x):
+        N, C, H, W = x.shape
+        G = self.group
+        
+        # 1. 데이터를 그룹화: (N, G, C//G, H, W)
+        x_reshaped = x.reshape(N, G, C // G, H, W)
+        
+        # 2. 각 그룹 내에서 평균과 분산 계산
+        # axis=(2, 3, 4)는 C//G, H, W를 의미
+        mu = x_reshaped.mean(axis=(2, 3, 4), keepdims=True)
+        var = x_reshaped.var(axis=(2, 3, 4), keepdims=True)
+        
+        # 3. 정규화
+        self.std = np.sqrt(var + self.eps)
+        self.xn = (x_reshaped - mu) / self.std
+        
+        # 4. 원래 차원으로 복원 후 감마/베타 적용
+        out = self.xn.reshape(N, C, H, W) * self.gamma.reshape(1, C, 1, 1) + self.beta.reshape(1, C, 1, 1)
+        return out
+
+    def backward(self, dout):
+        N, C, H, W = dout.shape
+        G = self.group
+        
+        # 1. 감마,베타 초기화
+        dgamma = np.sum(dout * self.xn.reshape(N, C, H, W), axis=(0, 2, 3))
+        dbeta = np.sum(dout, axis=(0, 2, 3))
+        # 2. dout을 그룹 형태로 변환하여 역전파 계산
+        dout_reshaped = dout.reshape(N, G, C // G, H, W)
+        dxn = dout_reshaped * self.gamma.reshape(1, G, C // G, 1, 1)
+        
+        # 3. GN 역전파 수식 (그룹 단위 통계량 제거)
+        # S: 그룹 내 원소 수 (C//G * H * W)
+        S = (C // G) * H * W
+        
+        dmu = -np.sum(dxn / self.std, axis=(2, 3, 4), keepdims=True)
+        dvar = -0.5 * np.sum(dxn * (self.xn / self.std), axis=(2, 3, 4), keepdims=True)
+        
+        dx = (dxn / self.std) + (dvar * 2 * (self.xn * self.std) / S) + (dmu / S)
+        
+        return dx.reshape(N, C, H, W)
