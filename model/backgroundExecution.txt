@@ -1,9 +1,9 @@
 $scriptContent = @'
 cd "C:\Scratch-CNN-Fashion\model"
-python -u NoTrainerTrain.py *>&1 | Out-File -FilePath "C:\Scratch-CNN-Fashion\model\training.log" -Encoding utf8 -Append
+python -u NoTrainerTrain.py *>&1 | Out-File -FilePath "C:\Scratch-CNN-Fashion\log\training.log" -Encoding utf8 -Append
 '@
 $scriptPath = "C:\Scratch-CNN-Fashion\model\bg_run.ps1"
 Set-Content -Path $scriptPath -Value $scriptContent -Encoding utf8
 Start-Process powershell -ArgumentList "-NoProfile -ExecutionPolicy Bypass -File `"$scriptPath`"" -WindowStyle Hidden
 
-Get-Content "C:\Scratch-CNN-Fashion\model\training.log" -Wait
+Get-Content "C:\Scratch-CNN-Fashion\log\training.log" -Wait

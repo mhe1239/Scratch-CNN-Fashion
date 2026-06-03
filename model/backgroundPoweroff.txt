@@ -2,12 +2,12 @@
 Stop-Process -Name "python" -Force -ErrorAction SilentlyContinue
 
 # 2. 기존 새 경로 로그 비우기
-Clear-Content "C:\Scratch-CNN-Fashion\model\training.log" -ErrorAction SilentlyContinue
+Clear-Content "C:\Scratch-CNN-Fashion\log\training.log" -ErrorAction SilentlyContinue
 
 # 3. 자동 종료 스크립트 내용 정의 (새 경로 적용)
 $scriptContent = @'
 cd "C:\Scratch-CNN-Fashion\model"
-python -u NoTrainerTrain.py *>&1 | Out-File -FilePath "C:\Scratch-CNN-Fashion\model\training.log" -Encoding utf8 -Append
+python -u NoTrainerTrain.py *>&1 | Out-File -FilePath "C:\Scratch-CNN-Fashion\log\training.log" -Encoding utf8 -Append
 shutdown /s /f /t 60
 '@
 
