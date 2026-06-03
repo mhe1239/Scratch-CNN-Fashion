@@ -1,6 +1,6 @@
 # coding: utf-8
 import numpy as np
-
+from numpy.lib.stride_tricks import as_strided# im2col에 사용
 
 def smooth_curve(x):
     """손실 함수의 그래프를 매끄럽게 하기 위해 사용
@@ -35,22 +35,71 @@ def shuffle_dataset(x, t):
 def conv_output_size(input_size, filter_size, stride=1, pad=0):
     return (input_size + 2*pad - filter_size) / stride + 1
 
+def im2col(input_data, filter_h, filter_w, stride=1, pad=0):# im2col_fast
+    N, C, H, W = input_data.shape
+    out_h = (H + 2*pad - filter_h) // stride + 1
+    out_w = (W + 2*pad - filter_w) // stride + 1
+
+    # 1. 패딩 적용
+    img = np.pad(input_data, [(0,0), (0,0), (pad, pad), (pad, pad)], 'constant')
+    
+    # 2. 스트라이드 정보 추출
+    # img.strides는 (배치, 채널, 높이, 너비) 방향으로 다음 원소까지의 메모리 거리를 가짐
+    sn, sc, sh, sw = img.strides
+    
+    # 3. 6차원 뷰 생성 (배치, 채널, 필터높이, 필터너비, 출력높이, 출력너비)
+    # for 루프 없이 메모리 주소 계산만으로 윈도우 전개를 수행함
+    shape = (N, C, filter_h, filter_w, out_h, out_w)
+    strides = (sn, sc, sh, sw, sh * stride, sw * stride)
+    
+    col = as_strided(img, shape=shape, strides=strides)
+    
+    # 4. 연산 효율을 위해 2차원으로 변환
+    # transpose와 reshape 과정에서만 실제 메모리 복사가 일어남
+    col = col.transpose(0, 4, 5, 1, 2, 3).reshape(N * out_h * out_w, -1)
+    return col
+def col2im(col, input_shape, filter_h, filter_w, stride=1, pad=0):# col2im_fast
+    """
+    im2col_fast와 짝을 이루는 고속 col2im
+    """
+    N, C, H, W = input_shape
+    out_h = (H + 2*pad - filter_h) // stride + 1
+    out_w = (W + 2*pad - filter_w) // stride + 1
+    
+    # 1. col을 다시 6차원으로 전개 (N, out_h, out_w, C, FH, FW)
+    col = col.reshape(N, out_h, out_w, C, filter_h, filter_w).transpose(0, 3, 4, 5, 1, 2)
+
+    # 2. 패딩이 포함된 결과용 배열 생성
+    img = np.zeros((N, C, H + 2*pad + stride - 1, W + 2*pad + stride - 1), dtype=col.dtype)
+    
+    # 3. 루프를 돌며 더해주기 (필터 크기만큼만 루프)
+    # filter_h * filter_w 번의 루프만 돌면 되므로 매우 빠름
+    for y in range(filter_h):
+        y_max = y + stride * out_h
+        for x in range(filter_w):
+            x_max = x + stride * out_w
+            # 겹치는 부분의 에너지를 더해야함
+            img[:, :, y:y_max:stride, x:x_max:stride] += col[:, :, y, x, :, :]
+
+    # 4. 패딩 영역 제외하고 원래 크기만 반환
+    return img[:, :, pad:H + pad, pad:W + pad]
+"""
 #forward시 사용
 def im2col(input_data, filter_h, filter_w, stride=1, pad=0):
-    """다수의 이미지를 입력받아 2차원 배열로 변환한다(평탄화).
+    # 다수의 이미지를 입력받아 2차원 배열로 변환한다(평탄화).
     
-    Parameters
-    ----------
-    input_data : 4차원 배열 형태의 입력 데이터(이미지 수, 채널 수, 높이, 너비)
-    filter_h : 필터의 높이
-    filter_w : 필터의 너비
-    stride : 스트라이드
-    pad : 패딩
+    # Parameters
+    # ----------
+    # input_data : 4차원 배열 형태의 입력 데이터(이미지 수, 채널 수, 높이, 너비)
+    # filter_h : 필터의 높이
+    # filter_w : 필터의 너비
+    # stride : 스트라이드
+    # pad : 패딩
     
-    Returns
-    -------
-    col : 2차원 배열
-    """
+    # Returns
+    # -------
+    # col : 2차원 배열
+    
     #이미지수,채널,이미지h,이미지w
     N, C, H, W = input_data.shape
     #out_h,out_w 가져옴
@@ -71,21 +120,21 @@ def im2col(input_data, filter_h, filter_w, stride=1, pad=0):
 
 #backword시 사용
 def col2im(col, input_shape, filter_h, filter_w, stride=1, pad=0):
-    """(im2col과 반대) 2차원 배열을 입력받아 다수의 이미지 묶음으로 변환한다.
+    # (im2col과 반대) 2차원 배열을 입력받아 다수의 이미지 묶음으로 변환한다.
     
-    Parameters
-    ----------
-    col : 2차원 배열(입력 데이터)
-    input_shape : 원래 이미지 데이터의 형상（예：(10, 1, 28, 28)）
-    filter_h : 필터의 높이
-    filter_w : 필터의 너비
-    stride : 스트라이드
-    pad : 패딩
+    # Parameters
+    # ----------
+    # col : 2차원 배열(입력 데이터)
+    # input_shape : 원래 이미지 데이터의 형상（예：(10, 1, 28, 28)）
+    # filter_h : 필터의 높이
+    # filter_w : 필터의 너비
+    # stride : 스트라이드
+    # pad : 패딩
     
-    Returns
-    -------
-    img : 변환된 이미지들
-    """
+    # Returns
+    # -------
+    # img : 변환된 이미지들
+    
     N, C, H, W = input_shape
     out_h = (H + 2*pad - filter_h)//stride + 1
     out_w = (W + 2*pad - filter_w)//stride + 1
@@ -99,3 +148,4 @@ def col2im(col, input_shape, filter_h, filter_w, stride=1, pad=0):
             img[:, :, y:y_max:stride, x:x_max:stride] += col[:, :, y, x, :, :]
 
     return img[:, :, pad:H + pad, pad:W + pad]
+"""
