@@ -56,8 +56,8 @@ def im2col(input_data, filter_h, filter_w, stride=1, pad=0):# im2col_fast
     
     # 4. 연산 효율을 위해 2차원으로 변환
     # transpose와 reshape 과정에서만 실제 메모리 복사가 일어남
-    col = col.transpose(0, 4, 5, 1, 2, 3).reshape(N * out_h * out_w, -1)
-    return col
+    # as_strided는 메모리 주소를 직접 건드리기에 드문 경우 반환된 col 행렬의 값을 직접 수정하면 원본 이미지 데이터(img)까지 같이 변할 수 있음 이를 방지하기 위해 .copy()를 붙임
+    return col.transpose(0, 4, 5, 1, 2, 3).reshape(N * out_h * out_w, -1).copy()
 def col2im(col, input_shape, filter_h, filter_w, stride=1, pad=0):# col2im_fast
     """
     im2col_fast와 짝을 이루는 고속 col2im
