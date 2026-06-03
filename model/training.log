@@ -8392,3 +8392,226 @@ Optimizer: AdamW  , Peak LR: 5e-05  , Batch:  256, Epochs:  40, Depth(FC): 1, BN
 ==> [flex_best_model_pt(5).pt] 로드 완료! 96%를 향한 Fine-tuning을 시작합니다.
 Epoch 01/40 | Loss: 0.5507 | Train: 0.9856 | Val: 0.9892 | LR: 0.000050 | Time: 394.20s
   [Best] New Record! Val Acc: 0.9892 (Previous: 0.0000)
+Epoch 02/40 | Loss: 0.5476 | Train: 0.9869 | Val: 0.9893 | LR: 0.000050 | Time: 427.78s
+  [Best] New Record! Val Acc: 0.9893 (Previous: 0.9892)
+Epoch 03/40 | Loss: 0.5475 | Train: 0.9867 | Val: 0.9887 | LR: 0.000050 | Time: 446.12s
+諛⑷툑??濡쒖쭅? train怨?val??紐낇솗???섎늻吏 紐삵븯??臾몄젣媛 ?덉쑝??泥섏쓬遺???ㅼ떆 ?뚮┝
+================ Training Started (PyTorch) ================
+flexconvnet_train_pt.py
+==================================================
+                 [ HYPERPARAMETERS ]
+Optimizer: AdamW  , Peak LR: 0.002  , Batch:  256, Epochs: 100, Depth(FC): 1, BN: T, ConvDrop: 0.0  , FcDrop: 0.5  , WD: 0.05   
+
+  [ CNN Architecture Flow (PyTorch) ]
+  -------------------------------------------------------
+  | Layer | Filter Num | Filter Size | Pad | Stride | Pool  |
+  -------------------------------------------------------
+  | C_1   |    128     |      3      |  1  |   1    |   F   |
+  | C_2   |    128     |      3      |  1  |   1    |   T   |
+  | C_3   |    256     |      3      |  1  |   1    |   F   |
+  | C_4   |    256     |      3      |  1  |   1    |   T   |
+  | C_5   |    512     |      3      |  1  |   1    |   F   |
+  | C_6   |    512     |      3      |  1  |   1    |   T   |
+  -------------------------------------------------------
+==================================================
+
+Restarting the training from scratch due to potential data leakage caused by an improper train-validation split.
+================ Training Started (PyTorch) ================
+flexconvnet_train_pt.py
+==================================================
+                 [ HYPERPARAMETERS ]
+Optimizer: AdamW  , Peak LR: 0.002  , Batch:  256, Epochs: 100, Depth(FC): 1, BN: T, ConvDrop: 0.0  , FcDrop: 0.5  , WD: 0.05   
+
+  [ CNN Architecture Flow (PyTorch) ]
+  -------------------------------------------------------
+  | Layer | Filter Num | Filter Size | Pad | Stride | Pool  |
+  -------------------------------------------------------
+  | C_1   |    128     |      3      |  1  |   1    |   F   |
+  | C_2   |    128     |      3      |  1  |   1    |   T   |
+  | C_3   |    256     |      3      |  1  |   1    |   F   |
+  | C_4   |    256     |      3      |  1  |   1    |   T   |
+  | C_5   |    512     |      3      |  1  |   1    |   F   |
+  | C_6   |    512     |      3      |  1  |   1    |   T   |
+  -------------------------------------------------------
+==================================================
+
+Epoch 01/100 | Loss: 0.9840 | Train: 0.7930 | Val: 0.8674 | LR: 0.000085 | Time: 457.39s
+  [Best] New Record! Val Acc: 0.8674 (Previous: 0.0000)
+Epoch 02/100 | Loss: 0.8368 | Train: 0.8597 | Val: 0.8883 | LR: 0.000101 | Time: 521.64s
+  [Best] New Record! Val Acc: 0.8883 (Previous: 0.8674)
+Epoch 03/100 | Loss: 0.7996 | Train: 0.8770 | Val: 0.8869 | LR: 0.000127 | Time: 602.19s
+Changes from the previous logic: Shuffle the dataset with a fixed seed (42) and cleanly split it into train and validation sets for consistent processing.
+================ Training Started (PyTorch) ================
+flexconvnet_train_pt.py
+==================================================
+                 [ HYPERPARAMETERS ]
+Optimizer: AdamW  , Peak LR: 0.002  , Batch:  256, Epochs: 100, Depth(FC): 1, BN: T, ConvDrop: 0.0  , FcDrop: 0.5  , WD: 0.05   
+
+  [ CNN Architecture Flow (PyTorch) ]
+  -------------------------------------------------------
+  | Layer | Filter Num | Filter Size | Pad | Stride | Pool  |
+  -------------------------------------------------------
+  | C_1   |    128     |      3      |  1  |   1    |   F   |
+  | C_2   |    128     |      3      |  1  |   1    |   T   |
+  | C_3   |    256     |      3      |  1  |   1    |   F   |
+  | C_4   |    256     |      3      |  1  |   1    |   T   |
+  | C_5   |    512     |      3      |  1  |   1    |   F   |
+  | C_6   |    512     |      3      |  1  |   1    |   T   |
+  -------------------------------------------------------
+==================================================
+
+Epoch 01/100 | Loss: 0.9900 | Train: 0.7879 | Val: 0.8611 | LR: 0.000085 | Time: 406.72s
+  [Best] New Record! Val Acc: 0.8611 (Previous: 0.0000)
+Epoch 02/100 | Loss: 0.8388 | Train: 0.8580 | Val: 0.8823 | LR: 0.000101 | Time: 505.33s
+  [Best] New Record! Val Acc: 0.8823 (Previous: 0.8611)
+Epoch 03/100 | Loss: 0.8029 | Train: 0.8754 | Val: 0.8960 | LR: 0.000127 | Time: 614.07s
+  [Best] New Record! Val Acc: 0.8960 (Previous: 0.8823)
+Epoch 04/100 | Loss: 0.7814 | Train: 0.8850 | Val: 0.8951 | LR: 0.000163 | Time: 923.24s
+Epoch 05/100 | Loss: 0.7646 | Train: 0.8918 | Val: 0.9043 | LR: 0.000208 | Time: 1042.80s
+  [Best] New Record! Val Acc: 0.9043 (Previous: 0.8960)
+Epoch 06/100 | Loss: 0.7573 | Train: 0.8945 | Val: 0.9093 | LR: 0.000263 | Time: 523.87s
+  [Best] New Record! Val Acc: 0.9093 (Previous: 0.9043)
+Epoch 07/100 | Loss: 0.7453 | Train: 0.8995 | Val: 0.9114 | LR: 0.000326 | Time: 563.27s
+  [Best] New Record! Val Acc: 0.9114 (Previous: 0.9093)
+Epoch 08/100 | Loss: 0.7399 | Train: 0.9015 | Val: 0.9133 | LR: 0.000397 | Time: 556.53s
+  [Best] New Record! Val Acc: 0.9133 (Previous: 0.9114)
+Epoch 09/100 | Loss: 0.7201 | Train: 0.9102 | Val: 0.9091 | LR: 0.000475 | Time: 579.51s
+Epoch 10/100 | Loss: 0.7132 | Train: 0.9139 | Val: 0.9073 | LR: 0.000560 | Time: 563.59s
+Epoch 11/100 | Loss: 0.7066 | Train: 0.9161 | Val: 0.9208 | LR: 0.000649 | Time: 489.83s
+  [Best] New Record! Val Acc: 0.9208 (Previous: 0.9133)
+Epoch 12/100 | Loss: 0.7019 | Train: 0.9180 | Val: 0.9199 | LR: 0.000743 | Time: 498.25s
+Epoch 13/100 | Loss: 0.6952 | Train: 0.9203 | Val: 0.9186 | LR: 0.000840 | Time: 503.00s
+Epoch 14/100 | Loss: 0.6907 | Train: 0.9221 | Val: 0.9131 | LR: 0.000939 | Time: 508.33s
+  [Early Stopping] No improvement for 3 epochs.
+Epoch 15/100 | Loss: 0.6859 | Train: 0.9255 | Val: 0.9138 | LR: 0.001040 | Time: 502.87s
+Epoch 16/100 | Loss: 0.6785 | Train: 0.9283 | Val: 0.9174 | LR: 0.001140 | Time: 508.68s
+Epoch 17/100 | Loss: 0.6769 | Train: 0.9293 | Val: 0.9324 | LR: 0.001239 | Time: 510.82s
+  [Best] New Record! Val Acc: 0.9324 (Previous: 0.9208)
+Epoch 18/100 | Loss: 0.6694 | Train: 0.9330 | Val: 0.9301 | LR: 0.001336 | Time: 516.50s
+Epoch 19/100 | Loss: 0.6698 | Train: 0.9321 | Val: 0.9341 | LR: 0.001430 | Time: 513.36s
+  [Best] New Record! Val Acc: 0.9341 (Previous: 0.9324)
+Epoch 20/100 | Loss: 0.6651 | Train: 0.9342 | Val: 0.9316 | LR: 0.001520 | Time: 514.76s
+Epoch 21/100 | Loss: 0.6607 | Train: 0.9362 | Val: 0.9314 | LR: 0.001604 | Time: 512.01s
+Epoch 22/100 | Loss: 0.6597 | Train: 0.9360 | Val: 0.9337 | LR: 0.001682 | Time: 511.68s
+  [Early Stopping] No improvement for 3 epochs.
+Epoch 23/100 | Loss: 0.6553 | Train: 0.9385 | Val: 0.9286 | LR: 0.001753 | Time: 510.05s
+Epoch 24/100 | Loss: 0.6531 | Train: 0.9397 | Val: 0.9403 | LR: 0.001817 | Time: 507.84s
+  [Best] New Record! Val Acc: 0.9403 (Previous: 0.9341)
+Epoch 25/100 | Loss: 0.6488 | Train: 0.9418 | Val: 0.9367 | LR: 0.001871 | Time: 511.11s
+  [ Scheduler] Peak LR (0.001900) reached! Starting Annealing...
+Epoch 26/100 | Loss: 0.6473 | Train: 0.9424 | Val: 0.9361 | LR: 0.001917 | Time: 515.87s
+Epoch 27/100 | Loss: 0.6423 | Train: 0.9442 | Val: 0.9391 | LR: 0.001953 | Time: 515.00s
+  [Early Stopping] No improvement for 3 epochs.
+Epoch 28/100 | Loss: 0.6407 | Train: 0.9435 | Val: 0.9334 | LR: 0.001979 | Time: 517.51s
+Epoch 29/100 | Loss: 0.6358 | Train: 0.9481 | Val: 0.9266 | LR: 0.001995 | Time: 514.65s
+Epoch 30/100 | Loss: 0.6347 | Train: 0.9476 | Val: 0.9376 | LR: 0.002000 | Time: 513.60s
+  [Early Stopping] No improvement for 6 epochs.
+Epoch 31/100 | Loss: 0.6280 | Train: 0.9511 | Val: 0.9276 | LR: 0.001999 | Time: 512.62s
+Epoch 32/100 | Loss: 0.6250 | Train: 0.9526 | Val: 0.9393 | LR: 0.001996 | Time: 513.78s
+Epoch 33/100 | Loss: 0.6234 | Train: 0.9536 | Val: 0.9379 | LR: 0.001991 | Time: 512.20s
+  [Early Stopping] No improvement for 9 epochs.
+Epoch 34/100 | Loss: 0.6199 | Train: 0.9547 | Val: 0.9372 | LR: 0.001984 | Time: 509.70s
+Epoch 35/100 | Loss: 0.6179 | Train: 0.9554 | Val: 0.9424 | LR: 0.001975 | Time: 507.32s
+  [Best] New Record! Val Acc: 0.9424 (Previous: 0.9403)
+Epoch 36/100 | Loss: 0.6127 | Train: 0.9579 | Val: 0.9342 | LR: 0.001964 | Time: 509.80s
+Epoch 37/100 | Loss: 0.6089 | Train: 0.9594 | Val: 0.9357 | LR: 0.001951 | Time: 508.46s
+Epoch 38/100 | Loss: 0.6076 | Train: 0.9598 | Val: 0.9410 | LR: 0.001936 | Time: 505.15s
+  [Early Stopping] No improvement for 3 epochs.
+Epoch 39/100 | Loss: 0.6066 | Train: 0.9604 | Val: 0.9423 | LR: 0.001920 | Time: 508.80s
+Epoch 40/100 | Loss: 0.6004 | Train: 0.9641 | Val: 0.9431 | LR: 0.001901 | Time: 507.69s
+  [Best] New Record! Val Acc: 0.9431 (Previous: 0.9424)
+Epoch 41/100 | Loss: 0.5974 | Train: 0.9642 | Val: 0.9416 | LR: 0.001881 | Time: 508.76s
+Epoch 42/100 | Loss: 0.5962 | Train: 0.9658 | Val: 0.9437 | LR: 0.001858 | Time: 507.16s
+  [Best] New Record! Val Acc: 0.9437 (Previous: 0.9431)
+Epoch 43/100 | Loss: 0.5916 | Train: 0.9673 | Val: 0.9417 | LR: 0.001835 | Time: 509.44s
+Epoch 44/100 | Loss: 0.5906 | Train: 0.9679 | Val: 0.9434 | LR: 0.001809 | Time: 505.83s
+Epoch 45/100 | Loss: 0.5864 | Train: 0.9692 | Val: 0.9413 | LR: 0.001782 | Time: 508.81s
+  [Early Stopping] No improvement for 3 epochs.
+Epoch 46/100 | Loss: 0.5856 | Train: 0.9707 | Val: 0.9439 | LR: 0.001753 | Time: 512.00s
+  [Best] New Record! Val Acc: 0.9439 (Previous: 0.9437)
+Epoch 47/100 | Loss: 0.5801 | Train: 0.9725 | Val: 0.9403 | LR: 0.001723 | Time: 507.03s
+Epoch 48/100 | Loss: 0.5774 | Train: 0.9744 | Val: 0.9437 | LR: 0.001691 | Time: 503.08s
+Epoch 49/100 | Loss: 0.5757 | Train: 0.9750 | Val: 0.9389 | LR: 0.001658 | Time: 505.40s
+  [Early Stopping] No improvement for 3 epochs.
+Epoch 50/100 | Loss: 0.5746 | Train: 0.9753 | Val: 0.9419 | LR: 0.001623 | Time: 500.18s
+Epoch 51/100 | Loss: 0.5714 | Train: 0.9764 | Val: 0.9429 | LR: 0.001588 | Time: 504.66s
+Epoch 52/100 | Loss: 0.5702 | Train: 0.9774 | Val: 0.9438 | LR: 0.001551 | Time: 502.17s
+  [Early Stopping] No improvement for 6 epochs.
+Epoch 53/100 | Loss: 0.5654 | Train: 0.9794 | Val: 0.9453 | LR: 0.001513 | Time: 501.81s
+  [Best] New Record! Val Acc: 0.9453 (Previous: 0.9439)
+Epoch 54/100 | Loss: 0.5638 | Train: 0.9802 | Val: 0.9447 | LR: 0.001474 | Time: 501.65s
+Epoch 55/100 | Loss: 0.5620 | Train: 0.9809 | Val: 0.9437 | LR: 0.001434 | Time: 500.00s
+Epoch 56/100 | Loss: 0.5568 | Train: 0.9836 | Val: 0.9437 | LR: 0.001393 | Time: 501.49s
+  [Early Stopping] No improvement for 3 epochs.
+Epoch 57/100 | Loss: 0.5562 | Train: 0.9838 | Val: 0.9461 | LR: 0.001351 | Time: 498.87s
+  [Best] New Record! Val Acc: 0.9461 (Previous: 0.9453)
+Epoch 58/100 | Loss: 0.5530 | Train: 0.9855 | Val: 0.9468 | LR: 0.001309 | Time: 505.39s
+  [Best] New Record! Val Acc: 0.9468 (Previous: 0.9461)
+Epoch 59/100 | Loss: 0.5514 | Train: 0.9857 | Val: 0.9468 | LR: 0.001266 | Time: 502.72s
+Epoch 60/100 | Loss: 0.5500 | Train: 0.9861 | Val: 0.9498 | LR: 0.001223 | Time: 523.54s
+  [Best] New Record! Val Acc: 0.9498 (Previous: 0.9468)
+Epoch 61/100 | Loss: 0.5466 | Train: 0.9882 | Val: 0.9477 | LR: 0.001179 | Time: 569.11s
+Epoch 62/100 | Loss: 0.5440 | Train: 0.9889 | Val: 0.9477 | LR: 0.001134 | Time: 536.37s
+Epoch 63/100 | Loss: 0.5433 | Train: 0.9891 | Val: 0.9464 | LR: 0.001090 | Time: 530.93s
+  [Early Stopping] No improvement for 3 epochs.
+Epoch 64/100 | Loss: 0.5414 | Train: 0.9899 | Val: 0.9482 | LR: 0.001045 | Time: 541.03s
+Epoch 65/100 | Loss: 0.5395 | Train: 0.9914 | Val: 0.9483 | LR: 0.001000 | Time: 542.35s
+Epoch 66/100 | Loss: 0.5379 | Train: 0.9912 | Val: 0.9477 | LR: 0.000955 | Time: 552.52s
+  [Early Stopping] No improvement for 6 epochs.
+Epoch 67/100 | Loss: 0.5381 | Train: 0.9916 | Val: 0.9488 | LR: 0.000910 | Time: 556.06s
+Epoch 68/100 | Loss: 0.5334 | Train: 0.9941 | Val: 0.9489 | LR: 0.000866 | Time: 552.57s
+Epoch 69/100 | Loss: 0.5320 | Train: 0.9937 | Val: 0.9500 | LR: 0.000821 | Time: 558.42s
+  [Best] New Record! Val Acc: 0.9500 (Previous: 0.9498)
+Epoch 70/100 | Loss: 0.5327 | Train: 0.9933 | Val: 0.9495 | LR: 0.000777 | Time: 577.88s
+Epoch 71/100 | Loss: 0.5298 | Train: 0.9947 | Val: 0.9502 | LR: 0.000734 | Time: 534.18s
+  [Best] New Record! Val Acc: 0.9502 (Previous: 0.9500)
+Epoch 72/100 | Loss: 0.5284 | Train: 0.9950 | Val: 0.9491 | LR: 0.000691 | Time: 517.69s
+Epoch 73/100 | Loss: 0.5273 | Train: 0.9956 | Val: 0.9484 | LR: 0.000649 | Time: 520.71s
+Epoch 74/100 | Loss: 0.5252 | Train: 0.9964 | Val: 0.9479 | LR: 0.000607 | Time: 502.45s
+  [Early Stopping] No improvement for 3 epochs.
+Epoch 75/100 | Loss: 0.5250 | Train: 0.9965 | Val: 0.9494 | LR: 0.000566 | Time: 518.84s
+Epoch 76/100 | Loss: 0.5243 | Train: 0.9966 | Val: 0.9497 | LR: 0.000526 | Time: 500.41s
+Epoch 77/100 | Loss: 0.5228 | Train: 0.9971 | Val: 0.9497 | LR: 0.000487 | Time: 503.26s
+  [Early Stopping] No improvement for 6 epochs.
+Epoch 78/100 | Loss: 0.5216 | Train: 0.9975 | Val: 0.9501 | LR: 0.000449 | Time: 607.00s
+Epoch 79/100 | Loss: 0.5207 | Train: 0.9978 | Val: 0.9497 | LR: 0.000412 | Time: 639.81s
+Epoch 80/100 | Loss: 0.5206 | Train: 0.9979 | Val: 0.9501 | LR: 0.000377 | Time: 669.12s
+  [Early Stopping] No improvement for 9 epochs.
+Epoch 81/100 | Loss: 0.5196 | Train: 0.9981 | Val: 0.9494 | LR: 0.000342 | Time: 666.52s
+Epoch 82/100 | Loss: 0.5189 | Train: 0.9983 | Val: 0.9487 | LR: 0.000309 | Time: 748.46s
+Epoch 83/100 | Loss: 0.5181 | Train: 0.9984 | Val: 0.9523 | LR: 0.000277 | Time: 789.48s
+  [Best] New Record! Val Acc: 0.9523 (Previous: 0.9502)
+Epoch 84/100 | Loss: 0.5182 | Train: 0.9987 | Val: 0.9487 | LR: 0.000247 | Time: 511.33s
+Epoch 85/100 | Loss: 0.5179 | Train: 0.9984 | Val: 0.9505 | LR: 0.000218 | Time: 537.81s
+Epoch 86/100 | Loss: 0.5169 | Train: 0.9988 | Val: 0.9510 | LR: 0.000191 | Time: 551.53s
+  [Early Stopping] No improvement for 3 epochs.
+Epoch 87/100 | Loss: 0.5170 | Train: 0.9987 | Val: 0.9507 | LR: 0.000165 | Time: 552.00s
+Epoch 88/100 | Loss: 0.5167 | Train: 0.9988 | Val: 0.9516 | LR: 0.000142 | Time: 549.24s
+Epoch 89/100 | Loss: 0.5162 | Train: 0.9990 | Val: 0.9509 | LR: 0.000119 | Time: 543.78s
+  [Early Stopping] No improvement for 6 epochs.
+Epoch 90/100 | Loss: 0.5159 | Train: 0.9990 | Val: 0.9511 | LR: 0.000099 | Time: 537.90s
+Epoch 91/100 | Loss: 0.5155 | Train: 0.9990 | Val: 0.9515 | LR: 0.000080 | Time: 558.04s
+Epoch 92/100 | Loss: 0.5151 | Train: 0.9993 | Val: 0.9518 | LR: 0.000064 | Time: 575.41s
+  [Early Stopping] No improvement for 9 epochs.
+Epoch 93/100 | Loss: 0.5151 | Train: 0.9992 | Val: 0.9523 | LR: 0.000049 | Time: 562.79s
+Epoch 94/100 | Loss: 0.5151 | Train: 0.9992 | Val: 0.9526 | LR: 0.000036 | Time: 549.63s
+  [Best] New Record! Val Acc: 0.9526 (Previous: 0.9523)
+Epoch 95/100 | Loss: 0.5148 | Train: 0.9995 | Val: 0.9515 | LR: 0.000025 | Time: 480.49s
+Epoch 96/100 | Loss: 0.5148 | Train: 0.9994 | Val: 0.9523 | LR: 0.000016 | Time: 499.52s
+Epoch 97/100 | Loss: 0.5147 | Train: 0.9994 | Val: 0.9524 | LR: 0.000009 | Time: 516.23s
+  [Early Stopping] No improvement for 3 epochs.
+Epoch 98/100 | Loss: 0.5145 | Train: 0.9995 | Val: 0.9525 | LR: 0.000004 | Time: 524.97s
+Epoch 99/100 | Loss: 0.5144 | Train: 0.9994 | Val: 0.9528 | LR: 0.000001 | Time: 524.83s
+  [Best] New Record! Val Acc: 0.9528 (Previous: 0.9526)
+Epoch 100/100 | Loss: 0.5150 | Train: 0.9993 | Val: 0.9523 | LR: 0.000000 | Time: 514.86s
+Log ID 6 finalized and updated to 7.
+
+========================================
+          Training Finished
+========================================
+flex_history_pt(6).pkl&flex_best_model_pt(6).pt
+Final Val Acc (Best): 0.9528
+Final Test Acc (Real): 0.9499
+Total Elapsed Time: 15:00:39.560
+========================================
+Learning and all tests have been completed.
