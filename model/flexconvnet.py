@@ -58,7 +58,7 @@ class FlexConvNet:
             self.params['b' + str(idx)] = np.zeros(prec['filter_num'])
             
             # 계층 추가
-            self.layers['Conv' + str(idx)] = Convolution(self.params['W' + str(idx)], self.params['b' + str(idx)], prec['stride'], prec['pad'])
+            self.layers['Conv' + str(idx)] = Convolution(self.params['W' + str(idx)], self.params['b' + str(idx)], prec['stride'], prec['pad'], use_batchnorm=self.use_batchnorm)
             
             # BatchNorm 선택적 흡수
             if self.use_batchnorm:
