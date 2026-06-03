@@ -114,6 +114,9 @@ class Dropout:
         else:
             # [Inverted] 테스트 때는 아무 연산 없이 통과! (속도 향상)
             return x
+
+    def backward(self, dout):
+        return dout * self.mask / (1.0 - self.dropout_ratio)
 """
 class Dropout:
     #http://arxiv.org/abs/1207.0580
