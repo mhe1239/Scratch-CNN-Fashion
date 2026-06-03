@@ -14,10 +14,8 @@ Get-Content "C:\Scratch-CNN-Fashion\model\training.log" -Wait
 taskkill /F /IM python.exe
 """
 """
-시작시 하이퍼파라미터 상태 출력 추가
-Early Stopping 로직 추가
-모두 학습 후 끝나지 않아서 끝나도록 캐시 비우기, plt.close('all');sys.exit(0) 추가
-log_num은 이 코드에선 코드 시작시 주는데 학습이 모두 끝난 후 부여하도록 변경
+.pt파일을 기준으로 하도록 설정
+
 """
 import torch
 import torch.nn as nn
@@ -66,19 +64,24 @@ def get_data_loaders(batch_size=256, val_ratio=0.2):
     full_train_data = datasets.FashionMNIST(root='./data', train=True, download=True, transform=t_train)
     full_val_data = datasets.FashionMNIST(root='./data', train=True, download=True, transform=t_test)
     test_set = datasets.FashionMNIST(root='./data', train=False, download=True, transform=t_test)
-
-    indices = list(range(len(full_train_data)))
-    np.random.seed(42) #이거 안하면 test와 train섞임
+    # 기존에는 train전체를 셔플 후 val를 나눴음: 수정, 셔플하지 않고 그냥 딱 잘라서 나눔
+    num_train_all = len(full_train_data)
+    num_val = int(num_train_all * val_ratio)
+    num_train = num_train_all - num_val
+    indices = np.arange(num_train_all)
+    np.random.seed(42) 
     np.random.shuffle(indices)
-    split = int(len(full_train_data) * val_ratio)
-    train_idx, val_idx = indices[split:], indices[:split]
+    indices = indices.tolist() # 안전하게 파이썬 리스트로 변환
+    # 섞인 인덱스를 기준으로 8:2 영구 고정 분할
+    train_idx = indices[:num_train]
+    val_idx = indices[num_train:]
 
+    # 데이터 로더 생성 (훈련셋만 shuffle=True, 검증/테스트는 False)
     train_loader = DataLoader(Subset(full_train_data, train_idx), batch_size=batch_size, shuffle=True, num_workers=0)
     val_loader = DataLoader(Subset(full_val_data, val_idx), batch_size=batch_size, shuffle=False, num_workers=0)
     test_loader = DataLoader(test_set, batch_size=batch_size, shuffle=False, num_workers=0)
 
     return train_loader, val_loader, test_loader, len(train_idx)
-
 # 하이퍼파라미터 요약 로직
 def summarize_results(params):
     use_bn = params.get('use_batchnorm', True)

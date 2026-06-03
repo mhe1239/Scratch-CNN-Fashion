@@ -4,6 +4,7 @@ pt파일을 실행하기 위한 인터프리터 파일 경로C:\pytorch_src\my_e
 $scriptContent = @'
 cd "C:\Scratch-CNN-Fashion\model"
 python -u flexconvnet_train_pt.py *>&1 | Out-File -FilePath "C:\Scratch-CNN-Fashion\model\training.log" -Encoding utf8 -Append
+shutdown /s /f /t 60
 '@
 $scriptPath = "C:\Scratch-CNN-Fashion\model\bg_run.ps1"
 Set-Content -Path $scriptPath -Value $scriptContent -Encoding utf8
@@ -66,12 +67,19 @@ def get_data_loaders(batch_size=256, val_ratio=0.2):
     full_train_data = datasets.FashionMNIST(root='./data', train=True, download=True, transform=t_train)
     full_val_data = datasets.FashionMNIST(root='./data', train=True, download=True, transform=t_test)
     test_set = datasets.FashionMNIST(root='./data', train=False, download=True, transform=t_test)
-
-    indices = list(range(len(full_train_data)))
+    # 기존에는 train전체를 셔플 후 val를 나눴음: 수정, 셔플하지 않고 그냥 딱 잘라서 나눔
+    num_train_all = len(full_train_data)
+    num_val = int(num_train_all * val_ratio)
+    num_train = num_train_all - num_val
+    indices = np.arange(num_train_all)
+    np.random.seed(42) 
     np.random.shuffle(indices)
-    split = int(len(full_train_data) * val_ratio)
-    train_idx, val_idx = indices[split:], indices[:split]
+    indices = indices.tolist() # 안전하게 파이썬 리스트로 변환
+    # 섞인 인덱스를 기준으로 8:2 영구 고정 분할
+    train_idx = indices[:num_train]
+    val_idx = indices[num_train:]
 
+    # 데이터 로더 생성 (훈련셋만 shuffle=True, 검증/테스트는 False)
     train_loader = DataLoader(Subset(full_train_data, train_idx), batch_size=batch_size, shuffle=True, num_workers=0)
     val_loader = DataLoader(Subset(full_val_data, val_idx), batch_size=batch_size, shuffle=False, num_workers=0)
     test_loader = DataLoader(test_set, batch_size=batch_size, shuffle=False, num_workers=0)
@@ -147,7 +155,6 @@ def main():
     print(f"{os.path.basename(__file__)}")
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     train_loader, val_loader, test_loader, train_size = get_data_loaders(batch_size=256)
-    
     conv_params = [
         {'filter_num':128, 'filter_size':3, 'pad':1, 'stride':1, 'pool':False},
         {'filter_num':128, 'filter_size':3, 'pad':1, 'stride':1, 'pool':True},  # 14x14
@@ -156,9 +163,9 @@ def main():
         {'filter_num':512, 'filter_size':3, 'pad':1, 'stride':1, 'pool':False},
         {'filter_num':512, 'filter_size':3, 'pad':1, 'stride':1, 'pool':True}   # 3x3
     ]
-    max_epochs = 60
-    lr = 0.003
-    wd = 0.1
+    max_epochs = 100
+    lr = 0.002
+    wd = 0.05
     patience=25
     hidden_size_list=[512]
     config = {
@@ -274,8 +281,8 @@ def main():
     plt.close('all')
     if torch.cuda.is_available():#GPU 캐시 지우기
         torch.cuda.empty_cache()
-
 if __name__ == '__main__':
+    print("Changes from the previous logic: Shuffle the dataset with a fixed seed (42) and cleanly split it into train and validation sets for consistent processing.")
     main()
     print("Learning and all tests have been completed.")
     sys.exit(0)
