@@ -1,5 +1,5 @@
 # 👕 Fashion-MNIST CNN Classification Project
-> **2026학년도 1학기 인공지능개론 기말 팀 프로젝트**
+> **2026-1 신경망 팀 프로젝트**
 > 본 프로젝트는 PyTorch 프레임워크와 밑바닥부터 구현하는 Scratch 방식을 통해 Fashion-MNIST 데이터셋을 정교하게 분류하는 CNN 모델을 구축하는 것을 목표로 합니다.
 
 ---
