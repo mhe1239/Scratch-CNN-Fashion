@@ -87,27 +87,25 @@ from data.mnist import load_mnist
 from flexconvnet import FlexConvNet 
 from common.optimizer import *
 from common.util import shuffle_dataset
-
+print("Changes from the previous logic: 오버피팅에 대한 대책(1.0이면 break)과 train 0.96 이상부턴 매 에폭마다 저장함 ")
 ## 시스템 설정 및 유틸리티 함수
-def _get_and_update_log_num(log_num_path):
-        """pkl,png 파일 번호 매기는 함수"""
-        # 1. 파일이 존재하면 읽고, 없으면 0으로 시작
-        if os.path.exists(log_num_path):
-            with open(log_num_path, 'r', encoding='utf-8') as f:
-                try:
-                    current_num = int(f.read().strip())
-                except ValueError:
-                    current_num = 0  # 파일 내용이 비어있거나 숫자가 아니면 0으로 초기화
-        else:
-            current_num = 0
-
-        # 2. 다음 실행을 위해 번호를 1 증가시켜 파일에 저장
-        next_num = current_num + 1
-        with open(log_num_path, 'w', encoding='utf-8') as f:
-            f.write(str(next_num))
-            
-        # 3. 현재 실행에서 사용할 번호(n) 반환
-        return current_num
+def _get_current_log_num(log_num_path):
+    """현재 번호가 몇 번인지 읽어오기만 함 (업데이트 X)"""
+    if os.path.exists(log_num_path):
+        with open(log_num_path, 'r', encoding='utf-8') as f:
+            try:
+                return int(f.read().strip())
+            except ValueError:
+                return 0
+    return 0
+def _increment_log_num(log_num_path):
+    """모든 과정이 성공했을 때만 실행하여 번호를 1 증가시킴"""
+    current_num = _get_current_log_num(log_num_path)
+    next_num = current_num + 1
+    with open(log_num_path, 'w', encoding='utf-8') as f:
+        f.write(str(next_num))
+    print(f"Log ID {current_num} finalized and updated to {next_num}.")
+    return current_num
 
 def get_warmup_cosine_lr(current_iter, total_iters, base_lr, warmup_iters=500, min_lr=1e-6):
     """코사인 그래프에 따라 학습률을 계산하는 함수, warmup"""
@@ -179,7 +177,6 @@ def get_loss_in_batches(network, x, t, batch_size=128):
 
 ## 시간 측정
 start_time = time.time()
-print("Changes from the previous logic: GN쓴 후 checkpoint를 써봤는데 val와 train이 다시 실행시 랜덤적으로 섞이기에 seed함수를 통해 구분하도록 함 ")
 print("================ Training Started ================")
 
 
@@ -309,28 +306,30 @@ if os.path.exists(checkpoint_path):
     
     print(f"==> 체크포인트를 발견했습니다! Epoch {start_epoch}부터 학습을 재개합니다.(정체 카운트: {loss_stagnant_cnt}")
 #하이퍼파라미터 요약 출력
+else: 
+    current_config = {#code 시작시 Hyperparameter 요약용
+        'optimizer': optimizer_type,
+        'lr': current_base_lr,
+        'batch_size': batch_size,
+        'max_epochs': max_epochs,
+        'max_iterations': iter_per_epoch * max_epochs,
+        'conv_param_list': conv_params,
+        'hidden_size_list': hidden_size_list,
+        'activation': 'relu',          
+        'weight_init_std': 'he',        
+        'weight_decay_lambda': weight_decay,
+        'use_batchnorm': groupnorm,
+        'conv_dropout_ratio': conv_dropout_ratio,
+        'fc_dropout_ratio': fc_dropout_ratio,
+    }
+    print("\n" + "="*50)
+    print("                 [ HYPERPARAMETERS ]")
+    print(summarize_results(current_config))
+    print("="*50 + "\n")
 
-current_config = {#code 시작시 Hyperparameter 요약용
-    'optimizer': optimizer_type,
-    'lr': current_base_lr,
-    'batch_size': batch_size,
-    'max_epochs': max_epochs,
-    'max_iterations': iter_per_epoch * max_epochs,
-    'conv_param_list': conv_params,
-    'hidden_size_list': hidden_size_list,
-    'activation': 'relu',          
-    'weight_init_std': 'he',        
-    'weight_decay_lambda': weight_decay,
-    'use_batchnorm': groupnorm,
-    'conv_dropout_ratio': conv_dropout_ratio,
-    'fc_dropout_ratio': fc_dropout_ratio,
-}
-print("\n" + "="*50)
-print("                 [ HYPERPARAMETERS ]")
-print(summarize_results(current_config))
-print("="*50 + "\n")
 
-
+log_num_path = os.path.join(os.path.dirname(__file__), '..', 'common', 'lognum.txt')
+log_num = _get_current_log_num(log_num_path)
 # 6. 학습 루프 시작
 for epoch in range(start_epoch, max_epochs):
     epoch_start_time = time.time()
@@ -361,11 +360,11 @@ for epoch in range(start_epoch, max_epochs):
 
         #lr전략1) Loss Spike 감지 (학습 도중 갑자기 튀는 경우)
         if len(epoch_batch_losses) > 10: # 초반 10번은 통계 확보를 위해 대기
-            avg_recent_loss = np.mean(epoch_batch_losses[-10:])
+            avg_recent_loss = np.mean(epoch_batch_losses[-10:])#10동안
             if loss > avg_recent_loss * 2.0: # 최근 평균보다 2배 이상 튀면
                 current_base_lr = max(current_base_lr * 0.8, min_lr) # 전체 기준점 하향
                 optimizer.lr *= 0.5 # 현재 보폭 즉시 반토막
-                print(f"  [Spike Brake] Iter {i}: Loss {loss:.4f} 튀어오름! LR 긴급 제어")
+                print(f"  [Spike Brake] Iter {i}: Loss {loss:.4f} 튀어오름! LR 긴급 제어 {optimizer.lr*2}->{optimizer.lr}")
 
         # https://dhhwang89.tistory.com/90 https://nmarkou.blogspot.com/2017/07/deep-learning-why-you-should-use.html
         # Gradient Clipping: 기울기 폭주 방지, 비선형 함수에서 미분 값이 매우 크거나 작아지면 마치 가파른 언덕임, 이 결과는 여러개의 큰 가중치값을 곱할때 생기며 이에 다다르면 역전파시에 파라미터들이 크게 움직일 수 있으며 학습을 망침
@@ -443,12 +442,14 @@ for epoch in range(start_epoch, max_epochs):
         if patience_counter >= patience:
             print(f"  [Early Stopping] No improvement for {patience} epochs. Training terminated.")
             break
-        if 0.96 <= train_acc:
-            snap_name = f"snapshot_epoch_{epoch+1}_acc_{train_acc:.4f}.pkl"
-            network.save_params(snap_name)
-            if train_acc>=1:
-                print(f"  [Perfect overfitting] {patience} epoch, The model has learned to account for both noise and bias.")
-                break
+    if 0.96 <= train_acc:
+        snap_name = f"snapshot_epoch_{epoch+1}_tacc_{train_acc:.3f}_vacc_{val_acc:.3f}_log_({log_num}).pkl"
+        network.save_params(snap_name)
+        if train_acc>=1:
+            print(f"  [Perfect overfitting] {patience} epoch, The model has learned to account for both noise and bias.")
+            break
+        if (train_acc - val_acc) >= 0.08:
+            print(f"  [Overfitting] The difference in accuracy has widened to more than {0.08*100}.")
     #96-99부터는 매번 pkl저장, 100은 끝냄
     # --- [ 에폭 루프 끝자락에 추가 ] ---
     # 체크포인트 저장 (모든 동적 변수 포함)
@@ -491,10 +492,9 @@ else:
 print("============================================================")
 print(f"Total Elapsed Time: {time_str}")
 
+log_num=_increment_log_num(log_num)
 
 
-log_num_path = os.path.join(os.path.dirname(__file__), '..', 'common', 'lognum.txt')
-log_num = _get_and_update_log_num(log_num_path)
 # 8. 시각화 (정확도 & 학습률)
 plt.figure(figsize=(12, 5))
 # 정확도 그래프
