@@ -139,7 +139,7 @@ def summarize_results(params, final_loss=None, final_acc=None):
         f"Depth(FC): {len(params.get('hidden_size_list', [])):>1}",
         f"Act/Init: {activation}/{weight_init:<5}",
         f"L2: {params.get('weight_decay_lambda', 0):<7}",
-        f"BN: {bn_status}",
+        f"GN: {bn_status}",
         f"ConvDrop: {conv_dropout_ratio:<5.1f}",
         f"FcDrop: {fc_dropout_ratio:<5.1f}"
     ]
@@ -179,7 +179,7 @@ def get_loss_in_batches(network, x, t, batch_size=128):
 
 ## 시간 측정
 start_time = time.time()
-print("Changes from the previous logic: 오차 문제를 해결하고 BatchNorm을 다시 적용해 돌림(conv_params가 3층인 이유는 이전 6층 로직이 Conv의 오차로 인해 더 안나왔던 전적 때문) ")
+print("Changes from the previous logic: 바꾼 BatchNrom을 적용해도 제대로 나오지 않음 그래서 GroupNormalization 적용해봄 ")
 print("================ Training Started ================")
 
 
@@ -211,7 +211,7 @@ max_epochs = 100
 optimizer_type = 'AdamW'
 weight_decay = 0.01
 min_lr = 1e-6
-batchnorm=True
+groupnorm=True
 fc_dropout_ratio=0.3;conv_dropout_ratio=0
 # Optimizer 가중치 감쇠(Weight Decay) 처리 분기
 if optimizer_type.lower() == 'adamw':
@@ -228,6 +228,7 @@ else:
 
 (x_train_all, t_train_all), (x_test, t_test) = load_mnist(normalize=True, flatten=False, one_hot_label=False)
 # 데이터 셔플 및 검증 데이터(20%) 분리
+np.random.seed(42)
 x_train_all, t_train_all = shuffle_dataset(x_train_all, t_train_all)
 va_rate = 0.2;va_num = int(x_train_all.shape[0] * va_rate)
 x_val = x_train_all[:va_num];t_val = t_train_all[:va_num]
@@ -244,7 +245,7 @@ network = FlexConvNet(input_dim=(1, 28, 28),
                       hidden_size_list=hidden_size_list, 
                       output_size=10,
                       weight_init_std='he',
-                      use_batchnorm=batchnorm, 
+                      use_groupnorm=groupnorm, 
                       use_dropout=True,
                       conv_dropout_ratio=conv_dropout_ratio,
                       fc_dropout_ratio=fc_dropout_ratio,
@@ -320,7 +321,7 @@ current_config = {#code 시작시 Hyperparameter 요약용
     'activation': 'relu',          
     'weight_init_std': 'he',        
     'weight_decay_lambda': weight_decay,
-    'use_batchnorm': False,
+    'use_batchnorm': groupnorm,
     'conv_dropout_ratio': conv_dropout_ratio,
     'fc_dropout_ratio': fc_dropout_ratio,
 }
