@@ -1,3 +1,4 @@
+# deep_convnet의 todo 주석 내용 해결
 # coding: utf-8
 import sys, os
 sys.path.append(os.path.join(os.path.dirname(__file__), '..'))

@@ -68,7 +68,7 @@ network = FlexConvNet(input_dim=(1, 28, 28),
                          hidden_size_list=hidden_size_list, 
                          output_size=10,
                          weight_init_std='he',
-                         use_batchnorm=True, 
+                         use_groupnorm=True, 
                          use_dropout=True,
                          dropout_ratio=dropout_ratio,
                          weight_decay_lambda=net_weight_decay)
