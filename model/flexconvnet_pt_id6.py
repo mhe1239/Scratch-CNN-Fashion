@@ -5,7 +5,7 @@ $scriptContent = @'
 cd "C:\Scratch-CNN-Fashion\model"
 python -u flexconvnet_pt_id6.py *>&1 | Out-File -FilePath "C:\Scratch-CNN-Fashion\log\training.log" -Encoding utf8 -Append
 '@
-$scriptPath = "C:\Scratch-CNN-Fashion\model\bg_run.ps1"
+$scriptPath = "C:\Scratch-CNN-Fashion\log\bg_run.ps1"
 Set-Content -Path $scriptPath -Value $scriptContent -Encoding utf8
 Start-Process powershell -ArgumentList "-NoProfile -ExecutionPolicy Bypass -File `"$scriptPath`"" -WindowStyle Hidden
 
