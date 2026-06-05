@@ -3,7 +3,6 @@ Final Loss: 0.0393
 Final Val Acc (Best): 0.9307
 Final Test Acc (Real): 0.9260는 flexconvnet_fashion_best(7).pkl
 Optimizer: AdamW  , LR: 0.0003 , Batch:  240, Epochs: 1000, Iters: 200000, FC Hidden: 1 [256]     , Act/Init: relu/he   , L2: 0.01   , GN: T, ConvDrop: 0.0  , FcDrop: 0.4  
-
   [ CNN Architecture Flow ]
   -------------------------------------------------------
   | Layer | Filter Num | Filter Size | Pad | Stride | Pool  |
@@ -12,6 +11,8 @@ Optimizer: AdamW  , LR: 0.0003 , Batch:  240, Epochs: 1000, Iters: 200000, FC Hi
   | C_2   |    128     |      3      |  1  |   1    |   T   |
   | C_3   |    256     |      3      |  1  |   1    |   F   |
   -------------------------------------------------------
+
+
 Final Loss: 0.0320
 Final Val Acc (Best): 0.9315
 Final Test Acc (Real): 0.9259는 flexconvnet_fashion_best(6).pkl
@@ -26,6 +27,8 @@ Optimizer: AdamW  , LR: 0.00025, Batch:  240, Epochs: 100, Iters: 20000, Depth(F
   | C_3   |    256     |      3      |  1  |   1    |   F   |
   -------------------------------------------------------
 ==================================================
+
+
 Final Loss: 0.0506
 Final Val Acc (Best): 0.9257
 Final Test Acc (Real): 0.9186는 flexconvnet_fashion_best(5).pkl
@@ -58,6 +61,8 @@ Optimizer: AdamW  , LR: 0.0003 , Batch:  256, Epochs: 100, Iters: 18700, Depth(F
   | C_3   |    256     |      3      |  1  |   1    |   F   |
   -------------------------------------------------------
 ==================================================
+
+
 Final Loss: 0.0081
 Final Val Acc (Best): 0.9297
 Final Test Acc (Real): 0.9239는 flexconvnet_fashion_best(3).pkl
@@ -72,4 +77,55 @@ Optimizer: Adam   , LR: 0.0002 , Batch:  256, Epochs: 100, Iters: 18700, Depth(F
   | C_3   |    256     |      3      |  1  |   1    |   F   |
   -------------------------------------------------------
 ==================================================
+
 # Pytroch
+Final Val Acc (Best): 0.9528
+Final Test Acc (Real): 0.9499는 flex_best_model_pt(6).pt
+Optimizer: AdamW  , Peak LR: 0.002  , Batch:  256, Epochs: 100, Depth(FC): 1, BN: T, ConvDrop: 0.0  , FcDrop: 0.5  , WD: 0.05   
+
+  [ CNN Architecture Flow (PyTorch) ]
+  -------------------------------------------------------
+  | Layer | Filter Num | Filter Size | Pad | Stride | Pool  |
+  -------------------------------------------------------
+  | C_1   |    128     |      3      |  1  |   1    |   F   |
+  | C_2   |    128     |      3      |  1  |   1    |   T   |
+  | C_3   |    256     |      3      |  1  |   1    |   F   |
+  | C_4   |    256     |      3      |  1  |   1    |   T   |
+  | C_5   |    512     |      3      |  1  |   1    |   F   |
+  | C_6   |    512     |      3      |  1  |   1    |   T   |
+  -------------------------------------------------------
+==================================================
+
+
+Final Val Acc (Best): 0.9534
+Final Test Acc (Real): 0.9489는 flex_best_model_pt(5).pt
+Optimizer: AdamW  , Peak LR: 0.003  , Batch:  256, Epochs:  60, Depth(FC): 1, BN: T, ConvDrop: 0.0  , FcDrop: 0.5  , WD: 0.1    
+
+  [ CNN Architecture Flow (PyTorch) ]
+  -------------------------------------------------------
+  | Layer | Filter Num | Filter Size | Pad | Stride | Pool  |
+  -------------------------------------------------------
+  | C_1   |    128     |      3      |  1  |   1    |   F   |
+  | C_2   |    128     |      3      |  1  |   1    |   T   |
+  | C_3   |    256     |      3      |  1  |   1    |   F   |
+  | C_4   |    256     |      3      |  1  |   1    |   T   |
+  | C_5   |    512     |      3      |  1  |   1    |   F   |
+  | C_6   |    512     |      3      |  1  |   1    |   T   |
+  -------------------------------------------------------
+==================================================
+
+Final Val Acc (Best): 0.9496
+Final Test Acc (Real): 0.9441는 flex_best_model_pt(4).pt
+Optimizer: AdamW  , Peak LR: 0.003  , Batch:  256, Epochs: 100, Depth(FC): 1, BN: T, ConvDrop: 0.0  , FcDrop: 0.5  , WD: 0.05   
+
+  [ CNN Architecture Flow (PyTorch) ]
+  -------------------------------------------------------
+  | Layer | Filter Num | Filter Size | Pad | Stride | Pool  |
+  -------------------------------------------------------
+  | C_1   |     64     |      3      |  1  |   1    |   F   |
+  | C_2   |     64     |      3      |  1  |   1    |   T   |
+  | C_3   |    128     |      3      |  1  |   1    |   F   |
+  | C_4   |    128     |      3      |  1  |   1    |   T   |
+  | C_5   |    256     |      3      |  1  |   1    |   F   |
+  | C_6   |    256     |      3      |  1  |   1    |   T   |
+  -------------------------------------------------------
