@@ -12,7 +12,7 @@ shutdown /s /f /t 60
 '@
 
 # 4. 스크립트 저장 및 백그라운드 실행
-$scriptPath = "C:\Scratch-CNN-Fashion\model\bg_run.ps1"
+$scriptPath = "C:\Scratch-CNN-Fashion\log\bg_run.ps1"
 Set-Content -Path $scriptPath -Value $scriptContent -Encoding utf8
 Start-Process powershell -ArgumentList "-NoProfile -ExecutionPolicy Bypass -File `"$scriptPath`"" -WindowStyle Hidden
 
