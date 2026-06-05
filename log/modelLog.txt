@@ -79,6 +79,7 @@ Optimizer: Adam   , LR: 0.0002 , Batch:  256, Epochs: 100, Iters: 18700, Depth(F
 ==================================================
 
 # Pytroch
+Test Acc: 0.9994
 Final Val Acc (Best): 0.9528
 Final Test Acc (Real): 0.9499는 flex_best_model_pt(6).pt
 Optimizer: AdamW  , Peak LR: 0.002  , Batch:  256, Epochs: 100, Depth(FC): 1, BN: T, ConvDrop: 0.0  , FcDrop: 0.5  , WD: 0.05   
