@@ -71,7 +71,7 @@ $scriptContent = @'
 cd "C:\Scratch-CNN-Fashion\model"
 python -u NoTrainerTrain-Test.py *>&1 | Out-File -FilePath "C:\Scratch-CNN-Fashion\log\training.log" -Encoding utf8 -Append
 '@
-$scriptPath = "C:\Scratch-CNN-Fashion\model\bg_run.ps1"
+$scriptPath = "C:\Scratch-CNN-Fashion\log\bg_run.ps1"
 Set-Content -Path $scriptPath -Value $scriptContent -Encoding utf8
 Start-Process powershell -ArgumentList "-NoProfile -ExecutionPolicy Bypass -File `"$scriptPath`""-WindowStyle Hidden
 Get-Content "C:\Scratch-CNN-Fashion\log\training.log" -Wait
@@ -87,7 +87,7 @@ from data.mnist import load_mnist
 from flexconvnet import FlexConvNet 
 from common.optimizer import *
 from common.util import shuffle_dataset
-print("Changes from the previous logic: 오버피팅에 대한 대책(1.0이면 break)과 train 0.96 이상부턴 매 에폭마다 저장함 ")
+print("Changes from the previous logic: val과 train의 차이의 마진을 더 줌 ")
 ## 시스템 설정 및 유틸리티 함수
 def _get_current_log_num(log_num_path):
     """현재 번호가 몇 번인지 읽어오기만 함 (업데이트 X)"""
@@ -127,6 +127,8 @@ def summarize_results(params, final_loss=None, final_acc=None):
     activation = params.get('activation', 'relu')
     weight_init = params.get('weight_init_std', 'relu')
     bn_status = 'T' if use_bn else 'F'
+    hidden_list = params.get('hidden_size_list', [])
+    fc_info = f"{len(hidden_list)} {hidden_list}" # 예: "1 [256]"
     # 1. 기본 하이퍼파라미터 필드 구성
     fields = [
         f"Optimizer: {params.get('optimizer', 'N/A'):<7}",
@@ -134,7 +136,7 @@ def summarize_results(params, final_loss=None, final_acc=None):
         f"Batch: {params.get('batch_size', 0):>4}",
         f"Epochs: {params.get('max_epochs', 0):>3}",
         f"Iters: {params.get('max_iterations', 0):>4}",
-        f"Depth(FC): {len(params.get('hidden_size_list', [])):>1}",
+        f"FC Hidden: {fc_info:<12}",
         f"Act/Init: {activation}/{weight_init:<5}",
         f"L2: {params.get('weight_decay_lambda', 0):<7}",
         f"GN: {bn_status}",
@@ -197,20 +199,28 @@ print("================ Training Started ================")
 #     {'filter_num':128, 'filter_size':3, 'pad':1, 'stride':1, 'pool':False} # 7유지
 # ]
 conv_params = [
-    {'filter_num':64, 'filter_size':3, 'pad':1, 'stride':1, 'pool':True}, 
-    {'filter_num':128, 'filter_size':3, 'pad':1, 'stride':1, 'pool':True},
-    {'filter_num':256, 'filter_size':3, 'pad':1, 'stride':1, 'pool':False}
+    # C_1: 28x28 입력 -> 64필터 추출 -> Pool(T)로 인해 14x14로 축소
+    {'filter_num': 64,  'filter_size': 3, 'pad': 1, 'stride': 1, 'pool': True},
+    # C_2: 14x14 입력 -> 128필터 추출 -> Pool(T)로 인해 7x7로 축소
+    {'filter_num': 128, 'filter_size': 3, 'pad': 1, 'stride': 1, 'pool': True},
+    # C_3: 7x7 입력 -> 256필터 추출 -> Pool(F)이므로 7x7 해상도 유지 (정보 보존)
+    {'filter_num': 256, 'filter_size': 3, 'pad': 1, 'stride': 1, 'pool': False}
 ]
-learning_rate = 0.0005 
+"""
+
+"""
+learning_rate = 0.0003
 hidden_size_list = [256] 
 batch_size = 240
-max_epochs = 100
+max_epochs = 1000
 optimizer_type = 'AdamW'
 weight_decay = 0.01
-min_lr = 1e-6
-lr_floor = 5e-6# lr의 마지노선
 groupnorm=True
-fc_dropout_ratio=0.3;conv_dropout_ratio=0
+fc_dropout_ratio=0.4;conv_dropout_ratio=0
+min_lr = 1e-6
+lr_lower_bound = 5e-6# lr의 마지노선
+floor_stop_threshold , floor_counter = 5 , 0 
+end_flag=False
 # Optimizer 가중치 감쇠(Weight Decay) 처리 분기
 if optimizer_type.lower() == 'adamw':
     net_weight_decay = 0
@@ -305,7 +315,7 @@ if os.path.exists(checkpoint_path):
         prev_epoch_loss = checkpoint['prev_epoch_loss']
         loss_stagnant_cnt = checkpoint['loss_stagnant_cnt']
     
-    print(f"==> 체크포인트를 발견했습니다! Epoch {start_epoch}부터 학습을 재개합니다.(정체 카운트: {loss_stagnant_cnt}")
+    print(f"==> 체크포인트를 발견했습니다! Epoch {start_epoch + 1}부터 학습을 재개합니다.(정체 카운트: {loss_stagnant_cnt})")
 #하이퍼파라미터 요약 출력
 else: 
     current_config = {#code 시작시 Hyperparameter 요약용
@@ -362,11 +372,17 @@ for epoch in range(start_epoch, max_epochs):
         #lr전략1) Loss Spike 감지 (학습 도중 갑자기 튀는 경우)
         if len(epoch_batch_losses) > 10: # 초반 10번은 통계 확보를 위해 대기
             avg_recent_loss = np.mean(epoch_batch_losses[-10:])#10동안
-            if loss > avg_recent_loss * 2.0 and optimizer.lr>lr_floor : # 최근 평균보다 2배 이상 튀면
+            if loss > avg_recent_loss * 2.0 and optimizer.lr>lr_lower_bound : # 최근 평균보다 2배 이상 튀면
                 current_base_lr = max(current_base_lr * 0.8, min_lr) # 전체 기준점 하향
                 optimizer.lr *= 0.5 # 현재 보폭 즉시 반토막
-                print(f"  [Spike Brake] Iter {i}: Loss {loss:.4f} 튀어오름! LR 긴급 제어 {optimizer.lr*2}->{optimizer.lr}")
-
+                print(f"  [Spike Brake] Iter {i}: Loss {loss:.4f} 튀어오름! LR 긴급 제어 {optimizer.lr}")
+            elif optimizer.lr <= lr_lower_bound:
+                print(f"  [floor] Iter {i}: Loss {loss:.4f} but, lr이 floor에 도달했습니다.")
+                floor_counter += 1
+                if floor_counter >= floor_stop_threshold:
+                    end_flag=True
+                    break
+        
         # https://dhhwang89.tistory.com/90 https://nmarkou.blogspot.com/2017/07/deep-learning-why-you-should-use.html
         # Gradient Clipping: 기울기 폭주 방지, 비선형 함수에서 미분 값이 매우 크거나 작아지면 마치 가파른 언덕임, 이 결과는 여러개의 큰 가중치값을 곱할때 생기며 이에 다다르면 역전파시에 파라미터들이 크게 움직일 수 있으며 학습을 망침
         #모든 가중치(W,b)의 기울의 L2 Norm을 계산해 너무 크면 방향은 유지하고 길이를 1로 줄임
@@ -402,12 +418,20 @@ for epoch in range(start_epoch, max_epochs):
     else:
         loss_stagnant_cnt = 0 # 잘 내려가면 초기화
     # [핵심 추가] 3에폭 동안 정체 시 실제 조치
-    if loss_stagnant_cnt >= 3 and optimizer.lr>lr_floor:
+    if loss_stagnant_cnt >= 3 and optimizer.lr>lr_lower_bound:
         current_base_lr = max(current_base_lr * 0.5, min_lr)
         print(f"  [Dynamic Scheduler] Loss 정체 {loss_stagnant_cnt}회 발생! Base LR 50% 삭감 → {current_base_lr:.6f}")
         loss_stagnant_cnt = 0 # 조치 후 초기화
+    elif optimizer.lr <= lr_lower_bound:
+        print(f"  [floor] Iter {i}: Loss {loss:.4f} but, lr이 floor에 도달했습니다.")
+        floor_counter += 1
+        if floor_counter >= floor_stop_threshold:
+            end_flag=True
+            break
     prev_epoch_loss = avg_train_loss
-
+    if end_flag:
+        print(f"  [조기 종료] LR이 최하한선에 {floor_stop_threshold}회 연속 도달하여 가중치 업데이트가 불가능합니다.")
+        print(f"-> 최적의 가중치가 확보되었으니 Epoch {epoch + 1}에서 학습을 안전하게 종료합니다.")
     # --- [ Evaluation Phase ] ---
     # 속도를 위한 샘플링 평가
     train_acc = network.accuracy(x_train[:1000], t_train[:1000]) 
@@ -444,13 +468,14 @@ for epoch in range(start_epoch, max_epochs):
             print(f"  [Early Stopping] No improvement for {patience} epochs. Training terminated.")
             break
     if 0.96 <= train_acc:
-        snap_name = f"snapshot_epoch_{epoch+1}_tacc_{train_acc:.3f}_vacc_{val_acc:.3f}_log_({log_num}).pkl"
-        network.save_params(snap_name)
-        if train_acc>=1:
+        if train_acc>=0.999:
             print(f"  [Perfect overfitting] {patience} epoch, The model has learned to account for both noise and bias.")
             break
-        if (train_acc - val_acc) >= 0.08:
-            print(f"  [Overfitting] The difference in accuracy has widened to more than {0.08*100}.")
+        if (train_acc - val_acc) >= 0.081:
+            print(f"  [Overfitting] The difference in accuracy has widened to more than {0.081*100}.")
+            break
+        snap_name = f"snapshot_epoch_{epoch+1}_tacc_{train_acc:.3f}_vacc_{val_acc:.3f}_log_({log_num}).pkl"
+        network.save_params(snap_name)
     #96-99부터는 매번 pkl저장, 100은 끝냄
     # --- [ 에폭 루프 끝자락에 추가 ] ---
     # 체크포인트 저장 (모든 동적 변수 포함)
@@ -493,7 +518,7 @@ else:
 print("============================================================")
 print(f"Total Elapsed Time: {time_str}")
 
-log_num=_increment_log_num(log_num)
+_increment_log_num(log_num_path)
 
 
 # 8. 시각화 (정확도 & 학습률)
