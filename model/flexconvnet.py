@@ -34,7 +34,7 @@ class FlexConvNet:
                      {'filter_num':32, 'filter_size':3, 'pad':1, 'stride':1, 'pool':True}
                  ],
                  hidden_size_list=[100], output_size=10, 
-                 weight_init_std='he', use_batchnorm=False, use_dropout=True, fc_dropout_ratio=0.3,conv_dropout_ratio=0.1,
+                 weight_init_std='he', use_groupnorm=False, use_dropout=True, fc_dropout_ratio=0.3,conv_dropout_ratio=0.1,
                  weight_decay_lambda=0
                  ):#
         
@@ -43,7 +43,7 @@ class FlexConvNet:
         self.conv_layer_num = len(conv_param_list)
         #self.hidden_layer_num = len(hidden_size_list)
         self.weight_decay_lambda = weight_decay_lambda
-        self.use_batchnorm=use_batchnorm
+        self.use_groupnorm=use_groupnorm
         # 1. 차원 추적 (DeepConvNet 방식)
         current_channels, current_h, current_w = input_dim
         
@@ -58,13 +58,20 @@ class FlexConvNet:
             self.params['b' + str(idx)] = np.zeros(prec['filter_num'])
             
             # 계층 추가
-            self.layers['Conv' + str(idx)] = Convolution(self.params['W' + str(idx)], self.params['b' + str(idx)], prec['stride'], prec['pad'], use_batchnorm=self.use_batchnorm)
+            self.layers['Conv' + str(idx)] = Convolution(self.params['W' + str(idx)], self.params['b' + str(idx)], prec['stride'], prec['pad'], use_batchnorm=self.use_groupnorm)
             
             # BatchNorm 선택적 흡수
-            if self.use_batchnorm:
+            if self.use_groupnorm:
+                num_groups = 4
+                if prec['filter_num'] % num_groups != 0:# 채널 수가 num_groups로 나누어 떨어지는지 확인
+                    num_groups = prec['filter_num'] # 안 나눠지면 전체를 하나로 (LayerNorm 효과)
                 self.params['gamma' + str(idx)] = np.ones(prec['filter_num'])
                 self.params['beta' + str(idx)] = np.zeros(prec['filter_num'])
-                self.layers['BatchNorm' + str(idx)] = BatchNormalization(self.params['gamma' + str(idx)], self.params['beta' + str(idx)])
+                self.layers['GroupNorm' + str(idx)] = GroupNormalization(
+                    self.params['gamma' + str(idx)], 
+                    self.params['beta' + str(idx)], 
+                    group=4
+                )
             
             self.layers['Relu_conv' + str(idx)] = Relu()
             
@@ -175,10 +182,10 @@ class FlexConvNet:
                 grads['b' + str(i)] = layer.db
             
             # --- BatchNorm 파라미터(있는 경우만) 추출 (L2 적용x) ---
-            bn_key = 'BatchNorm' + str(i)
-            if self.use_batchnorm and bn_key in self.layers:
-                grads['gamma' + str(i)] = self.layers[bn_key].dgamma
-                grads['beta' + str(i)] = self.layers[bn_key].dbeta
+            gn_key = 'GroupNorm' + str(i)
+            if self.use_groupnorm and gn_key in self.layers:
+                grads['gamma' + str(i)] = self.layers[gn_key].dgamma
+                grads['beta' + str(i)] = self.layers[gn_key].dbeta
                 
         return grads, loss
     
@@ -215,9 +222,9 @@ class FlexConvNet:
                 self.layers['Affine' + str(i)].b = self.params['b' + str(i)]
             
             # BatchNorm 동기화
-            if 'BatchNorm' + str(i) in self.layers:
-                self.layers['BatchNorm' + str(i)].gamma = self.params['gamma' + str(i)]
-                self.layers['BatchNorm' + str(i)].beta = self.params['beta' + str(i)]
+            if 'GroupNorm' + str(i) in self.layers:
+                self.layers['GroupNorm' + str(i)].gamma = self.params['gamma' + str(i)]
+                self.layers['GroupNorm' + str(i)].beta = self.params['beta' + str(i)]
     def load_params_from_dict(self, params_dict):
         """딕셔너리로부터 가중치를 받아와 실제 레이어 객체들에 주입"""
         for i in range(1, self.total_weight_layers + 1):
@@ -227,9 +234,9 @@ class FlexConvNet:
                 self.layers['Conv' + str(i)].b = params_dict['b' + str(i)]
                 
                 # BN 처리: 레이어에도 있고, '불러온 데이터'에도 있을 때만!
-                bn_key = 'BatchNorm' + str(i)
+                bn_key = 'GroupNorm' + str(i)
                 gamma_key = 'gamma' + str(i)
-                if self.use_batchnorm and bn_key in self.layers and gamma_key in params_dict:
+                if self.use_groupnorm and bn_key in self.layers and gamma_key in params_dict:
                     self.layers[bn_key].gamma = params_dict[gamma_key]
                     self.layers[bn_key].beta = params_dict['beta' + str(i)]
             
