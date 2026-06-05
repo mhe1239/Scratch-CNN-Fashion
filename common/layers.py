@@ -468,8 +468,9 @@ class GroupNormalization:
         self.beta = beta   # (C,)
         self.group = group
         self.eps = eps
-
-    def forward(self, x):
+        self.dgamma = None
+        self.dbeta = None
+    def forward(self, x, train_flg=True):
         N, C, H, W = x.shape
         G = self.group
         
@@ -494,8 +495,8 @@ class GroupNormalization:
         G = self.group
         
         # 1. 감마,베타 초기화
-        dgamma = np.sum(dout * self.xn.reshape(N, C, H, W), axis=(0, 2, 3))
-        dbeta = np.sum(dout, axis=(0, 2, 3))
+        self.dgamma = np.sum(dout * self.xn.reshape(N, C, H, W), axis=(0, 2, 3))
+        self.dbeta = np.sum(dout, axis=(0, 2, 3))
         # 2. dout을 그룹 형태로 변환하여 역전파 계산
         dout_reshaped = dout.reshape(N, G, C // G, H, W)
         dxn = dout_reshaped * self.gamma.reshape(1, G, C // G, 1, 1)
