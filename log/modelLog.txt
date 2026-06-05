@@ -1,0 +1,75 @@
+# Scratch
+Final Loss: 0.0393
+Final Val Acc (Best): 0.9307
+Final Test Acc (Real): 0.9260는 flexconvnet_fashion_best(7).pkl
+Optimizer: AdamW  , LR: 0.0003 , Batch:  240, Epochs: 1000, Iters: 200000, FC Hidden: 1 [256]     , Act/Init: relu/he   , L2: 0.01   , GN: T, ConvDrop: 0.0  , FcDrop: 0.4  
+
+  [ CNN Architecture Flow ]
+  -------------------------------------------------------
+  | Layer | Filter Num | Filter Size | Pad | Stride | Pool  |
+  -------------------------------------------------------
+  | C_1   |     64     |      3      |  1  |   1    |   T   |
+  | C_2   |    128     |      3      |  1  |   1    |   T   |
+  | C_3   |    256     |      3      |  1  |   1    |   F   |
+  -------------------------------------------------------
+Final Loss: 0.0320
+Final Val Acc (Best): 0.9315
+Final Test Acc (Real): 0.9259는 flexconvnet_fashion_best(6).pkl
+Optimizer: AdamW  , LR: 0.00025, Batch:  240, Epochs: 100, Iters: 20000, Depth(FC): 1, Act/Init: relu/he   , L2: 0.01   , GN: T, ConvDrop: 0.0  , FcDrop: 0.3  
+
+  [ CNN Architecture Flow ]
+  -------------------------------------------------------
+  | Layer | Filter Num | Filter Size | Pad | Stride | Pool  |
+  -------------------------------------------------------
+  | C_1   |     64     |      3      |  1  |   1    |   T   |
+  | C_2   |    128     |      3      |  1  |   1    |   T   |
+  | C_3   |    256     |      3      |  1  |   1    |   F   |
+  -------------------------------------------------------
+==================================================
+Final Loss: 0.0506
+Final Val Acc (Best): 0.9257
+Final Test Acc (Real): 0.9186는 flexconvnet_fashion_best(5).pkl
+Optimizer: AdamW  , LR: 0.00015, Batch:  256, Epochs: 100, Iters: 18700, Depth(FC): 1, Act/Init: relu/he   , L2: 0.01   , BN: F, ConvDrop: 0.0  , FcDrop: 0.4  
+
+  [ CNN Architecture Flow ]
+  -------------------------------------------------------
+  | Layer | Filter Num | Filter Size | Pad | Stride | Pool  |
+  -------------------------------------------------------
+  | C_1   |     32     |      3      |  1  |   1    |   F   |
+  | C_2   |     32     |      3      |  1  |   1    |   T   |
+  | C_3   |     64     |      3      |  1  |   1    |   F   |
+  | C_4   |     64     |      3      |  1  |   1    |   T   |
+  | C_5   |    128     |      3      |  1  |   1    |   F   |
+  | C_6   |    128     |      3      |  1  |   1    |   F   |
+  -------------------------------------------------------
+
+
+Final Loss: 0.0430
+Final Val Acc (Best): 0.9313
+Final Test Acc (Real): 0.9247는 flexconvnet_fashion_best(4).pkl
+Optimizer: AdamW  , LR: 0.0003 , Batch:  256, Epochs: 100, Iters: 18700, Depth(FC): 1, Act/Init: relu/he   , L2: 0.01   , BN: F, ConvDrop: 0.0  , FcDrop: 0.4  
+
+  [ CNN Architecture Flow ]
+  -------------------------------------------------------
+  | Layer | Filter Num | Filter Size | Pad | Stride | Pool  |
+  -------------------------------------------------------
+  | C_1   |     64     |      3      |  1  |   1    |   T   |
+  | C_2   |    128     |      3      |  1  |   1    |   T   |
+  | C_3   |    256     |      3      |  1  |   1    |   F   |
+  -------------------------------------------------------
+==================================================
+Final Loss: 0.0081
+Final Val Acc (Best): 0.9297
+Final Test Acc (Real): 0.9239는 flexconvnet_fashion_best(3).pkl
+Optimizer: Adam   , LR: 0.0002 , Batch:  256, Epochs: 100, Iters: 18700, Depth(FC): 1, Act/Init: relu/he   , L2: 0      , BN: T, ConvDrop: 0.0  , FcDrop: 0.2  
+
+  [ CNN Architecture Flow ]
+  -------------------------------------------------------
+  | Layer | Filter Num | Filter Size | Pad | Stride | Pool  |
+  -------------------------------------------------------
+  | C_1   |     64     |      3      |  1  |   1    |   T   |
+  | C_2   |    128     |      3      |  1  |   1    |   T   |
+  | C_3   |    256     |      3      |  1  |   1    |   F   |
+  -------------------------------------------------------
+==================================================
+# Pytroch
