@@ -15,6 +15,8 @@ DeepConvNet은 마지막 출력층 직전뿐만 아니라 은닉층 사이사이
 이에 따라 AdamW일때는 이 로직을 회피하도록 설계한다
 6. predict의 x값 수정
 x = layer.forward(x)을 x = layer.forward(x,train_flg)로 수정함으로써 추론 모드임을 명시한다
+7. GroupNormalization
+BatchNormalization이 문제였기에 사용하지 않다가 사용할 수 있지 않을까하여 로직을 바꿔봤지만 그럼에도 정확도가 나오지 않아 GroupNormalization으로 바꿈
 """
 # coding: utf-8
 import sys, os
@@ -58,9 +60,9 @@ class FlexConvNet:
             self.params['b' + str(idx)] = np.zeros(prec['filter_num'])
             
             # 계층 추가
-            self.layers['Conv' + str(idx)] = Convolution(self.params['W' + str(idx)], self.params['b' + str(idx)], prec['stride'], prec['pad'], use_batchnorm=self.use_groupnorm)
+            self.layers['Conv' + str(idx)] = Convolution(self.params['W' + str(idx)], self.params['b' + str(idx)], prec['stride'], prec['pad'], use_GroupNorm=self.use_groupnorm)
             
-            # BatchNorm 선택적 흡수
+            # GroupNorm 선택적 흡수
             if self.use_groupnorm:
                 num_groups = 4
                 if prec['filter_num'] % num_groups != 0:# 채널 수가 num_groups로 나누어 떨어지는지 확인
@@ -104,7 +106,7 @@ class FlexConvNet:
             # 마지막 출력층 직전까지만 ReLU와 Dropout 추가
             if idx < self.total_weight_layers:
                 self.layers['Relu_affine' + str(idx)] = Relu()
-                if use_dropout:
+                if use_dropout and fc_dropout_ratio > 0:
                     self.layers['Dropout' + str(idx)] = Dropout(fc_dropout_ratio)
         
         self.last_layer = SoftmaxWithLoss()
@@ -118,8 +120,8 @@ class FlexConvNet:
 
     def predict(self, x, train_flg=False):
         for layer in self.layers.values():
-            # # Dropout이나 BatchNorm처럼 train_flg가 필요한 레이어와 아닌 레이어 구분
-            # if isinstance(layer, (Dropout, BatchNormalization)):
+            # # Dropout이나 GroupNorm처럼 train_flg가 필요한 레이어와 아닌 레이어 구분
+            # if isinstance(layer, (Dropout, GroupNormalization)):
             #     x = layer.forward(x, train_flg)
             # else:
             #     x = layer.forward(x)
@@ -130,9 +132,10 @@ class FlexConvNet:
         y = self.predict(x, train_flg)
         # 모든 가중치의 제곱합 계산 (L2 penalty)
         weight_decay = 0
-        for idx in range(1, self.total_weight_layers + 1):
-            W = self.params['W' + str(idx)]
-            weight_decay += 0.5 * self.weight_decay_lambda * np.sum(W**2)
+        if self.weight_decay_lambda != 0:
+            for idx in range(1, self.total_weight_layers + 1):
+                W = self.params['W' + str(idx)]
+                weight_decay += 0.5 * self.weight_decay_lambda * np.sum(W**2)
 
         return self.last_layer.forward(y, t)+ weight_decay
         
@@ -181,7 +184,7 @@ class FlexConvNet:
                 grads['W' + str(i)] = layer.dW + self.weight_decay_lambda * self.params['W' + str(i)]
                 grads['b' + str(i)] = layer.db
             
-            # --- BatchNorm 파라미터(있는 경우만) 추출 (L2 적용x) ---
+            # --- GroupNorm 파라미터(있는 경우만) 추출 (L2 적용x) ---
             gn_key = 'GroupNorm' + str(i)
             if self.use_groupnorm and gn_key in self.layers:
                 grads['gamma' + str(i)] = self.layers[gn_key].dgamma
@@ -221,7 +224,7 @@ class FlexConvNet:
                 self.layers['Affine' + str(i)].W = self.params['W' + str(i)]
                 self.layers['Affine' + str(i)].b = self.params['b' + str(i)]
             
-            # BatchNorm 동기화
+            # GroupNorm 동기화
             if 'GroupNorm' + str(i) in self.layers:
                 self.layers['GroupNorm' + str(i)].gamma = self.params['gamma' + str(i)]
                 self.layers['GroupNorm' + str(i)].beta = self.params['beta' + str(i)]
