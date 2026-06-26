@@ -170,7 +170,7 @@ def summarize_results(params, final_loss=None, final_acc=None):
     return f"{setting_str}\n{conv_str}"
 
 def get_loss_in_batches(network, x, t, batch_size=128):
-    #Train에서는 gradient의 return값을 loss로 사용 but, val의 loss를 추척하기 위해 사용 즉, 필요한 로직임
+    #Train에서는 gradient의 return값을 loss로 사용 but, 오직 val의 loss를 추척하기 위해 사용
     """batch_size만큼 data를 쪼개서 연산이 끝나면 메모리를 비움"""
     #데이터가 클 때 배치를 나누어 Loss의 평균을 구하는 함수로 이거 없이하다가 변수가 20GB 이상을 저장해서 터졌음..
     
@@ -280,7 +280,7 @@ current_base_lr = learning_rate
 train_acc_list = []
 val_acc_list = []
 train_loss_list = []
-val_loss_list = []
+# val_loss_list = []
 lr_history = []
 best_val_acc = 0
 patience_counter = 0
@@ -320,7 +320,7 @@ if os.path.exists(checkpoint_path):
     train_acc_list = checkpoint['train_acc_list']
     val_acc_list = checkpoint['val_acc_list']
     train_loss_list = checkpoint['train_loss_list']
-    val_loss_list = checkpoint['val_loss_list']
+    # val_loss_list = checkpoint['val_loss_list']
     lr_history = checkpoint['lr_history']
     if 'prev_epoch_loss' in checkpoint:
         prev_epoch_loss = checkpoint['prev_epoch_loss']
@@ -445,12 +445,12 @@ for epoch in range(start_epoch, max_epochs):
     # 속도를 위한 샘플링 평가
     train_acc = network.accuracy(x_train[:1000], t_train[:1000]) 
     val_acc = network.accuracy(x_val, t_val)
-    val_loss = get_loss_in_batches(network, x_val, t_val, batch_size=batch_size)
+    # val_loss = get_loss_in_batches(network, x_val, t_val, batch_size=batch_size)
     
     train_acc_list.append(train_acc)
     val_acc_list.append(val_acc)
     train_loss_list.append(avg_train_loss)
-    val_loss_list.append(val_loss)
+    # val_loss_list.append(val_loss)
     
     epoch_end_time = time.time()
     epoch_duration = epoch_end_time - epoch_start_time
@@ -496,7 +496,7 @@ for epoch in range(start_epoch, max_epochs):
         'best_val_acc': best_val_acc, 'patience_counter': patience_counter, 'current_base_lr': current_base_lr,
         'prev_epoch_loss': prev_epoch_loss, 'loss_stagnant_cnt': loss_stagnant_cnt,
         'train_acc_list': train_acc_list, 'val_acc_list': val_acc_list,
-        'train_loss_list': train_loss_list, 'val_loss_list': val_loss_list, 'lr_history': lr_history,
+        'train_loss_list': train_loss_list, 'lr_history': lr_history,#'val_loss_list': val_loss_list
         'best_val_epoch': best_val_epoch, 'best_val_loss': best_val_loss, 'best_val_train_acc': best_val_train_acc,
         'floor_counter': floor_counter,'recent_losses': epoch_batch_losses[-spike_window:]
     }
@@ -511,12 +511,12 @@ if best_params is not None:
 final_test_acc = network.accuracy(x_test, t_test)
 final_loss = train_loss_list[-1]
 final_last_train_acc=train_acc_list[-1]
-final_last_val_acc=val_loss_list[-1]
+# final_last_val_acc=val_loss_list[-1]
 print("\n" + "="*40)
 print(f"1. Final State (Last Epoch: {len(train_acc_list)})")
 print(f"- Final Loss: {final_loss:.4f}")
 print(f"- Final Train Acc: {final_last_train_acc:.4f}")
-print(f"- Final Val Acc: {final_last_val_acc:.4f}")
+# print(f"- Final Val Acc: {final_last_val_acc:.4f}")
 print(f"\n2. Best State (Epoch: {best_val_epoch})")
 print(f"- Loss at Best Val: {best_val_loss:.4f}")
 print(f"- Train Acc at Best Val: {best_val_train_acc:.4f}")
