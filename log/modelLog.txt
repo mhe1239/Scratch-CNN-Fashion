@@ -135,7 +135,7 @@ Optimizer: AdamW  , LR: 0.0002 , Batch:  256, Epochs: 100, Iters: 18700, Depth(F
 
 # Pytroch
 ## flex_best_model_pt(6).pt
-Test Acc: 0.9994
+Train Acc (Best): 0.9994
 Final Val Acc (Best): 0.9528
 Final Test Acc (Real): 0.9499
 Optimizer: AdamW  , Peak LR: 0.002  , Batch:  256, Epochs: 100, Depth(FC): 1, BN: T, ConvDrop: 0.0  , FcDrop: 0.5  , WD: 0.05   
@@ -153,7 +153,7 @@ Optimizer: AdamW  , Peak LR: 0.002  , Batch:  256, Epochs: 100, Depth(FC): 1, BN
   -------------------------------------------------------
 ==================================================
 ## flex_best_model_pt(5).pt
-Test Acc: 0.9963
+Train Acc (Best): 0.9963
 Final Val Acc (Best): 0.9534
 Final Test Acc (Real): 0.9489
 Optimizer: AdamW  , Peak LR: 0.003  , Batch:  256, Epochs:  60, Depth(FC): 1, BN: T, ConvDrop: 0.0  , FcDrop: 0.5  , WD: 0.1    
@@ -170,7 +170,7 @@ Optimizer: AdamW  , Peak LR: 0.003  , Batch:  256, Epochs:  60, Depth(FC): 1, BN
   | C_6   |    512     |      3      |  1  |   1    |   T   |
   -------------------------------------------------------
 ## flex_best_model_pt(4).pt
-Test Acc: 0.9920
+Train Acc (Best): 0.9920
 Final Val Acc (Best): 0.9496
 Final Test Acc (Real): 0.9441
 Optimizer: AdamW  , Peak LR: 0.003  , Batch:  256, Epochs: 100, Depth(FC): 1, BN: T, ConvDrop: 0.0  , FcDrop: 0.5  , WD: 0.05   
