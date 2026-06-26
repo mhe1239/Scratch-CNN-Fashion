@@ -1,6 +1,6 @@
 # Scratch
 ## flexconvnet_fashion_best(7).pkl
-Test Acc: 0.9930
+Train Acc (Best): 0.9930
 Final Loss: 0.0393
 Final Val Acc (Best): 0.9307
 Final Test Acc (Real): 0.9260
@@ -14,7 +14,7 @@ Optimizer: AdamW  , LR: 0.0003 , Batch:  240, Epochs: 1000, Iters: 200000, FC Hi
   | C_3   |    256     |      3      |  1  |   1    |   F   |
   -------------------------------------------------------
 ## flexconvnet_fashion_best(6).pkl
-Test Acc: 0.9910
+Train Acc (Best): 0.9910
 Final Loss: 0.0320
 Final Val Acc (Best): 0.9315
 Final Test Acc (Real): 0.9259
@@ -29,7 +29,7 @@ Optimizer: AdamW  , LR: 0.00025, Batch:  240, Epochs: 100, Iters: 20000, Depth(F
   -------------------------------------------------------
 ==================================================
 ## flexconvnet_fashion_best(5).pkl
-Test Acc: 0.9810
+Train Acc (Best): 0.9810
 Final Loss: 0.0506
 Final Val Acc (Best): 0.9257
 Final Test Acc (Real): 0.9186
@@ -46,7 +46,7 @@ Optimizer: AdamW  , LR: 0.00015, Batch:  256, Epochs: 100, Iters: 18700, Depth(F
   | C_6   |    128     |      3      |  1  |   1    |   F   |
   -------------------------------------------------------
 ## flexconvnet_fashion_best(4).pkl
-Test Acc: 0.9820
+Train Acc (Best): 0.9820
 Final Loss: 0.0430
 Final Val Acc (Best): 0.9313
 Final Test Acc (Real): 0.9247
@@ -62,11 +62,11 @@ Optimizer: AdamW  , LR: 0.0003 , Batch:  256, Epochs: 100, Iters: 18700, Depth(F
 ==================================================
 ## flexconvnet_fashion_best(3).pkl
 3번은 log파일 보면 BN이 T인데 이때부터 BN을 F로 했었음(그럼에도 log에는 T라 남은 이유는 True라 하드코딩되어있었기 때문)
-Test Acc: 0.9970
+Train Acc (Best): 0.9970
 Final Loss: 0.0081
 Final Val Acc (Best): 0.9297
 Final Test Acc (Real): 0.9239
-Optimizer: Adam   , LR: 0.0002 , Batch:  256, Epochs: 100, Iters: 18700, Depth(FC): 1, Act/Init: relu/he   , L2: 0      , BN: F, ConvDrop: 0.0  , FcDrop: 0.2 
+Optimizer: Adam   , LR: 0.0002 , Batch:  256, Epochs: 100, Iters: 18700, Depth(FC): 1, Act/Init: relu/he   , L2: 0      , BN: T, ConvDrop: 0.0  , FcDrop: 0.2 
 
   [ CNN Architecture Flow ]
   -------------------------------------------------------
@@ -79,6 +79,7 @@ Optimizer: Adam   , LR: 0.0002 , Batch:  256, Epochs: 100, Iters: 18700, Depth(F
 ==================================================
 
 ## flexconvnet_fashion_best(2).pkl
+Train Acc (Best): 0.3730
 Final Loss: 1.7823
 Final Val Acc (Best): 0.3753
 Final Test Acc (Real): 0.3034
@@ -97,6 +98,7 @@ Optimizer: Adam   , LR: 0.001  , Batch:  256, Epochs: 100, Iters: 18700, Depth(F
   -------------------------------------------------------
 ==================================================
 ## flexconvnet_fashion_best(1).pkl
+Train Acc (Best): 0.6730
 Final Loss: 0.9275
 Final Val Acc (Best): 0.6975
 Final Test Acc (Real): 0.6819
@@ -112,6 +114,7 @@ Optimizer: AdamW  , LR: 0.0002 , Batch:  256, Epochs: 100, Iters: 18700, Depth(F
   -------------------------------------------------------
 ==================================================
 ## flexconvnet_fashion_best(0).pkl
+Train Acc (Best): 0.6400
 Final Loss: 1.6738
 Final Val Acc (Best): 0.6071
 Final Test Acc (Real): 0.4139
