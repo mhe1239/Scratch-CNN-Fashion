@@ -222,8 +222,14 @@ weight_decay = 0.01
 groupnorm=True
 fc_dropout_ratio=0.4;conv_dropout_ratio=0
 min_lr = 1e-6
+# lr의 floor 관련 로직
 lr_lower_bound = 5e-6# lr의 마지노선
-floor_stop_threshold , floor_counter = 5 , 0 
+floor_stop_threshold , floor_counter = 5 , 0
+spike_window=10# Spike를 감지하기 위한 최근 손실 통계 범위
+spike_threshold=2.0# 최근 평균보다 몇 배 높을 때 브레이크를 밟을지 (2.0 = 200%)
+stagnation_patience=3# 몇 에폭 동안 정체되면 LR을 삭감할지
+stagnation_margin=0.005# 정체로 판단할 최소 개선 폭 (0.005 이상 안 줄어들면 정체)
+
 end_flag=False
 # Optimizer 가중치 감쇠(Weight Decay) 처리 분기
 if optimizer_type.lower() == 'adamw':
@@ -378,18 +384,12 @@ for epoch in range(start_epoch, max_epochs):
         grads, loss = network.gradient(x_batch, t_batch)
 
         #lr전략1) Loss Spike 감지 (학습 도중 갑자기 튀는 경우)
-        if len(epoch_batch_losses) > 10: # 초반 10번은 통계 확보를 위해 대기
-            avg_recent_loss = np.mean(epoch_batch_losses[-10:])#10동안
-            if loss > avg_recent_loss * 2.0 and optimizer.lr>lr_lower_bound : # 최근 평균보다 2배 이상 튀면
+        if len(epoch_batch_losses) > spike_window: # 초반 10번은 통계 확보를 위해 대기
+            avg_recent_loss = np.mean(epoch_batch_losses[-spike_window:])#10동안
+            if loss > avg_recent_loss * spike_threshold and optimizer.lr>lr_lower_bound : # 최근 평균보다 2배 이상 튀면
                 current_base_lr = max(current_base_lr * 0.8, min_lr) # 전체 기준점 하향
                 optimizer.lr *= 0.5 # 현재 보폭 즉시 반토막
                 print(f"  [Spike Brake] Iter {i}: Loss {loss:.4f} 튀어오름! LR 긴급 제어 {optimizer.lr}")
-            elif optimizer.lr <= lr_lower_bound:
-                print(f"  [floor] Iter {i}: Loss {loss:.4f} but, lr이 floor에 도달했습니다.")
-                floor_counter += 1
-                if floor_counter >= floor_stop_threshold:
-                    end_flag=True
-                    break
         
         # https://dhhwang89.tistory.com/90 https://nmarkou.blogspot.com/2017/07/deep-learning-why-you-should-use.html
         # Gradient Clipping: 기울기 폭주 방지, 비선형 함수에서 미분 값이 매우 크거나 작아지면 마치 가파른 언덕임, 이 결과는 여러개의 큰 가중치값을 곱할때 생기며 이에 다다르면 역전파시에 파라미터들이 크게 움직일 수 있으며 학습을 망침
@@ -417,16 +417,16 @@ for epoch in range(start_epoch, max_epochs):
         if (i + 1) % 50 == 0 or (i + 1) == iter_per_epoch:
             print(f"  [Iter {i+1:03d}/{iter_per_epoch}] Current Batch Loss: {loss:.4f}")
     # [  에폭 종료 후 정체 판정 및 조치  ]
-    # lr전략2) Loss 정체 기반 동적 LR 제어
+    #lr전략2) Loss 정체 기반 동적 LR 제어
     avg_train_loss = np.mean(epoch_batch_losses)
     
     # 기준: 0.005 이상 줄어들지 않으면 정체로 판단 (Fashion-MNIST 기준)
-    if avg_train_loss >= prev_epoch_loss - 0.005:
+    if avg_train_loss >= prev_epoch_loss - stagnation_margin:
         loss_stagnant_cnt += 1
     else:
         loss_stagnant_cnt = 0 # 잘 내려가면 초기화
-    # [핵심 추가] 3에폭 동안 정체 시 실제 조치
-    if loss_stagnant_cnt >= 3 and optimizer.lr>lr_lower_bound:
+    # 3에폭 동안 정체 시 실제 조치
+    if loss_stagnant_cnt >= stagnation_patience and optimizer.lr>lr_lower_bound:
         current_base_lr = max(current_base_lr * 0.5, min_lr)
         print(f"  [Dynamic Scheduler] Loss 정체 {loss_stagnant_cnt}회 발생! Base LR 50% 삭감 → {current_base_lr:.6f}")
         loss_stagnant_cnt = 0 # 조치 후 초기화
@@ -444,7 +444,6 @@ for epoch in range(start_epoch, max_epochs):
     # 속도를 위한 샘플링 평가
     train_acc = network.accuracy(x_train[:1000], t_train[:1000]) 
     val_acc = network.accuracy(x_val, t_val)
-    avg_train_loss = np.mean(epoch_batch_losses)
     val_loss = get_loss_in_batches(network, x_val, t_val, batch_size=batch_size)
     
     train_acc_list.append(train_acc)
@@ -497,7 +496,8 @@ for epoch in range(start_epoch, max_epochs):
         'prev_epoch_loss': prev_epoch_loss, 'loss_stagnant_cnt': loss_stagnant_cnt,
         'train_acc_list': train_acc_list, 'val_acc_list': val_acc_list,
         'train_loss_list': train_loss_list, 'val_loss_list': val_loss_list, 'lr_history': lr_history,
-        'best_val_epoch': best_val_epoch, 'best_val_loss': best_val_loss, 'best_val_train_acc': best_val_train_acc
+        'best_val_epoch': best_val_epoch, 'best_val_loss': best_val_loss, 'best_val_train_acc': best_val_train_acc,
+        'floor_counter': floor_counter,'recent_losses': epoch_batch_losses[-spike_window:]
     }
     with open(checkpoint_path, 'wb') as f:
         pickle.dump(checkpoint_data, f)
