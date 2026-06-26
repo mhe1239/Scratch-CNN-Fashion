@@ -61,11 +61,12 @@ Optimizer: AdamW  , LR: 0.0003 , Batch:  256, Epochs: 100, Iters: 18700, Depth(F
   -------------------------------------------------------
 ==================================================
 ## flexconvnet_fashion_best(3).pkl
+3번은 log파일 보면 BN이 T인데 이때부터 BN을 F로 했었음(그럼에도 log에는 T라 남은 이유는 True라 하드코딩되어있었기 때문)
 Test Acc: 0.9970
 Final Loss: 0.0081
 Final Val Acc (Best): 0.9297
 Final Test Acc (Real): 0.9239
-Optimizer: Adam   , LR: 0.0002 , Batch:  256, Epochs: 100, Iters: 18700, Depth(FC): 1, Act/Init: relu/he   , L2: 0      , BN: T, ConvDrop: 0.0  , FcDrop: 0.2  
+Optimizer: Adam   , LR: 0.0002 , Batch:  256, Epochs: 100, Iters: 18700, Depth(FC): 1, Act/Init: relu/he   , L2: 0      , BN: F, ConvDrop: 0.0  , FcDrop: 0.2 
 
   [ CNN Architecture Flow ]
   -------------------------------------------------------
@@ -80,7 +81,7 @@ Optimizer: Adam   , LR: 0.0002 , Batch:  256, Epochs: 100, Iters: 18700, Depth(F
 ## flexconvnet_fashion_best(2).pkl
 Final Loss: 1.7823
 Final Val Acc (Best): 0.3753
-Final Test Acc (Real): 0.3034는
+Final Test Acc (Real): 0.3034
 Optimizer: Adam   , LR: 0.001  , Batch:  256, Epochs: 100, Iters: 18700, Depth(FC): 1, Act/Init: relu/he   , L2: 0      , BN: T, ConvDrop: 0.0  , FcDrop: 0.5  
 
   [ CNN Architecture Flow ]
