@@ -170,6 +170,7 @@ def summarize_results(params, final_loss=None, final_acc=None):
     return f"{setting_str}\n{conv_str}"
 
 def get_loss_in_batches(network, x, t, batch_size=128):
+    #Train에서는 gradient의 return값을 loss로 사용 but, val의 loss를 추척하기 위해 사용 즉, 필요한 로직임
     """batch_size만큼 data를 쪼개서 연산이 끝나면 메모리를 비움"""
     #데이터가 클 때 배치를 나누어 Loss의 평균을 구하는 함수로 이거 없이하다가 변수가 20GB 이상을 저장해서 터졌음..
     
