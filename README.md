@@ -48,15 +48,16 @@ root/
 └── model/          #구현한 model과 pt 모델
 └── common/         #Scratch로 구현한 model을 위한 code
 └── log/            #코드를 돌린 log, pkl파일
-제출 물 목록 (PDF 파일 포함)
-조원 정보: 참여 인원 및 역할 분담.
-실험 결과: PyTorch 및 Scratch 각각의 훈련/테스트 Acc & Loss 그래프.
-로그 기록: 학습 종료 직전 마지막 20줄의 로그 캡쳐.
-최종 모델: 발표 당일 교수자 평가용 학습 완료 모델 코드.
-제출 형식
-주소 형식: https://github.com/AIIntro/MiniPrj#1
-제출 메시지: Github 주소 - 본인 이름_(조원 이름)
 ```
+### 제출물 목록 (PDF 파일 포함)
+* 조원 정보: 참여 인원 및 역할 분담.
+* 실험 결과: PyTorch 및 Scratch 각각의 훈련/테스트 Acc & Loss 그래프.
+* 로그 기록: 학습 종료 직전 마지막 20줄의 로그 캡쳐.
+* 최종 모델: 발표 당일 교수자 평가용 학습 완료 모델 코드.
+### 제출 형식
+* 주소 형식: https://github.com/AIIntro/MiniPrj#1
+* 제출 메시지: Github 주소 - 본인 이름_(조원 이름)
+
 
 ## 🛠️ 5. 개발 프로세스 및 협업 규칙
 ### ⬆️ Git 커밋규칙 (최종 모델 선정 이후부터 적용)
