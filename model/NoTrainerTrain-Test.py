@@ -315,7 +315,9 @@ current_base_lr = learning_rate
 train_acc_list = []
 val_acc_list = []
 train_loss_list = []
-# val_loss_list = []
+# val의 최저 손실값 추적용 변수
+min_val_loss = float('inf') 
+best_val_loss_epoch = 0
 lr_history = []
 best_val_acc = 0
 patience_counter = 0
@@ -365,6 +367,9 @@ if os.path.exists(checkpoint_path):
         best_val_epoch = checkpoint['best_val_epoch']
         best_val_loss = checkpoint['best_val_loss']
         best_val_train_acc = checkpoint['best_val_train_acc']
+    #체크포인트에서 최저 손실값 복구 (없으면 무한대로 설정)
+    min_val_loss = checkpoint.get('min_val_loss', float('inf'))
+    best_val_loss_epoch = checkpoint.get('best_val_loss_epoch', 0)
     print(f"==> 체크포인트를 발견했습니다! Epoch {start_epoch + 1}부터 학습을 재개합니다.(정체 카운트: {loss_stagnant_cnt})")
 #하이퍼파라미터 요약 출력
 else: 
@@ -481,7 +486,7 @@ for epoch in range(start_epoch, max_epochs):
     train_acc = network.accuracy(x_train[:1000], t_train[:1000]) 
     val_acc = network.accuracy(x_val, t_val)
     # val_loss = get_loss_in_batches(network, x_val, t_val, batch_size=batch_size)
-    
+    current_val_loss, current_val_acc = evaluate_model(network, x_val, t_val)
     train_acc_list.append(train_acc)
     val_acc_list.append(val_acc)
     train_loss_list.append(avg_train_loss)
@@ -513,6 +518,11 @@ for epoch in range(start_epoch, max_epochs):
         if patience_counter >= patience:
             print(f"  [Early Stopping] No improvement for {patience} epochs. Training terminated.")
             break
+        if current_val_loss < min_val_loss:
+            min_val_loss = current_val_loss
+            best_val_loss_epoch = epoch + 1
+            network.save_params("best_loss_model.pkl") # <--- 이게 '진짜' 최고의 모델일 확률이 높음
+            print(f"  [Gold] New Minimum Val Loss: {min_val_loss:.4f} - Snapshot saved.")
     if 0.96 <= train_acc:
         if train_acc>=0.999:
             print(f"  [Perfect overfitting] {patience} epoch, The model has learned to account for both noise and bias.")
@@ -533,7 +543,8 @@ for epoch in range(start_epoch, max_epochs):
         'train_acc_list': train_acc_list, 'val_acc_list': val_acc_list,
         'train_loss_list': train_loss_list, 'lr_history': lr_history,#'val_loss_list': val_loss_list
         'best_val_epoch': best_val_epoch, 'best_val_loss': best_val_loss, 'best_val_train_acc': best_val_train_acc,
-        'floor_counter': floor_counter,'recent_losses': epoch_batch_losses[-spike_window:]
+        'floor_counter': floor_counter,'recent_losses': epoch_batch_losses[-spike_window:],
+        'min_val_loss':min_val_loss,'best_val_loss_epoch': best_val_loss_epoch
     }
     with open(checkpoint_path, 'wb') as f:
         pickle.dump(checkpoint_data, f)
