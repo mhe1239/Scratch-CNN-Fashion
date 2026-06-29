@@ -8,7 +8,7 @@ lr과 Batch는 비례 관계이다
 전체 데이터를 배치 사이즈로 나눈 몫이 1에폭당 필요한 이터레이션(Iteration) 횟수가 되는데 이게 완전히 나눠 떨어져야한다 즉, train data의 갯수가 배치 사이즈로 나눠 떨어져야한다
 iter_per_epoch = max(train_size // batch_size==0이어야한다, 1)
 이에 따라 batchNorm도 문제가 생긴다 배치 사이즈가 256일 때 최적화되도록 가중치 감쇠(Weight Decay)나 배치 정규화(BatchNorm)를 세팅해 놨는데, 갑자기 마지막에 232개짜리 족보 없는 사이즈가 들어오면 그라디언트의 크기가 요동치거나 통계치가 왜곡되어 학습이 불안정해질 수 있기 때문 
-#TODO: get_loss_in_batches을 .loss를 로직적으로 더 좋게 바꿀 순 없는가?>val_loss를 지표로 사실 Early Stopping이나 Best Params 저장 기준은 valAcc이니까 빼도 됨, 필요한 경우는 ValLoss 그래프를 그리거나 val_loss가 다시 올라가는 시점(오버피팅의 시작)을 정확히 알고 싶을때인데 현재 로직에서는 학습을 마친 후에 val_loss를 출력하는 용도로만 사용중이긴 함
+해결)#TODO: get_loss_in_batches을 .loss를 로직적으로 더 좋게 바꿀 순 없는가?>val_loss를 지표로 사실 Early Stopping이나 Best Params 저장 기준은 valAcc이니까 빼도 됨, 필요한 경우는 ValLoss 그래프를 그리거나 val_loss가 다시 올라가는 시점(오버피팅의 시작)을 정확히 알고 싶을때인데 현재 로직에서는 학습을 마친 후에 val_loss를 출력하는 용도로만 사용중이긴 함
 =>현재 로직 기준에서는 필요는 없음 
-#TODO: 다 끝나면 Train_acc를 val이 가장 높았을때(Best)와 epoch다 했을때(Real?)도 함께 출력하도록 변경
+해결)#TODO: 다 끝나면 Train_acc를 val이 가장 높았을때(Best)와 epoch다 했을때(Real?)도 함께 출력하도록 변경
 #TODO: val_loss가 다시 올라가는 시점(오버피팅의 시작)이 학습 시에 중요한 지표가 될 수 있을거같은데 써먹을 수 있나?
